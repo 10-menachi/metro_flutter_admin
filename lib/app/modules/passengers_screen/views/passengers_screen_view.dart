@@ -39,12 +39,16 @@ class PassengersScreenView extends GetView<PassengersScreenController> {
       init: PassengersScreenController(),
       builder: (controller) {
         return Scaffold(
-          backgroundColor: themeChange.isDarkTheme() ? AppThemData.greyShade950 : AppThemData.greyShade50,
+          backgroundColor: themeChange.isDarkTheme()
+              ? AppThemData.greyShade950
+              : AppThemData.greyShade50,
           appBar: AppBar(
             elevation: 0.0,
             toolbarHeight: 70,
             automaticallyImplyLeading: false,
-            backgroundColor: themeChange.isDarkTheme() ? AppThemData.primaryBlack : AppThemData.primaryWhite,
+            backgroundColor: themeChange.isDarkTheme()
+                ? AppThemData.primaryBlack
+                : AppThemData.primaryWhite,
             leadingWidth: 200,
             // title: title,
             leading: Builder(
@@ -63,31 +67,25 @@ class PassengersScreenView extends GetView<PassengersScreenController> {
                             child: Icon(
                               Icons.menu,
                               size: 30,
-                              color: themeChange.isDarkTheme() ? AppThemData.primary500 : AppThemData.primary500,
+                              color: themeChange.isDarkTheme()
+                                  ? AppThemData.primary500
+                                  : AppThemData.primary500,
                             ),
                           )
                         : SizedBox(
-                      height: 45,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            "assets/image/logo.png",
                             height: 45,
-                            color: AppThemData.primary500,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  "assets/image/logo.png",
+                                  height: 45,
+                                  color: AppThemData.primary500,
+                                ),
+                              ],
+                            ),
                           ),
-                          spaceW(),
-                          const TextCustom(
-                            title: 'My Taxi',
-                            color: AppThemData.primary500,
-                            fontSize: 30,
-                            fontFamily: AppThemeData.semiBold,
-                            fontWeight: FontWeight.w700,
-                          )
-                        ],
-                      ),
-                    ),
                   ),
                 );
               },
@@ -128,7 +126,9 @@ class PassengersScreenView extends GetView<PassengersScreenController> {
           drawer: Drawer(
             // key: scaffoldKey,
             width: 270,
-            backgroundColor: themeChange.isDarkTheme() ? AppThemData.primaryBlack : AppThemData.primaryWhite,
+            backgroundColor: themeChange.isDarkTheme()
+                ? AppThemData.primaryBlack
+                : AppThemData.primaryWhite,
             child: const MenuWidget(),
           ),
           body: Row(
@@ -140,374 +140,709 @@ class PassengersScreenView extends GetView<PassengersScreenController> {
                     padding: paddingEdgeInsets(),
                     child: SingleChildScrollView(
                       physics: const AlwaysScrollableScrollPhysics(),
-                      child: Column(mainAxisSize: MainAxisSize.min, mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.start, children: [
-                        ContainerCustom(
-                          child: Column(children: [
-                            ResponsiveWidget.isDesktop(context)
-                                ? Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                                        TextCustom(title: controller.title.value, fontSize: 20, fontFamily: AppThemeData.bold),
-                                        spaceH(height: 2),
-                                        Row(children: [
-                                          GestureDetector(
-                                              onTap: () => Get.offAllNamed(Routes.DASHBOARD_SCREEN),
-                                              child: TextCustom(title: 'Dashboard'.tr, fontSize: 14, fontFamily: AppThemeData.medium, color: AppThemData.greyShade500)),
-                                          const TextCustom(title: ' / ', fontSize: 14, fontFamily: AppThemeData.medium, color: AppThemData.greyShade500),
-                                          TextCustom(title: ' ${controller.title.value} ', fontSize: 14, fontFamily: AppThemeData.medium, color: AppThemData.primary500)
-                                        ])
-                                      ]),
-                                      spaceH(),
-                                      Row(
+                      child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ContainerCustom(
+                              child: Column(children: [
+                                ResponsiveWidget.isDesktop(context)
+                                    ? Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        mainAxisSize: MainAxisSize.max,
                                         children: [
+                                          Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                TextCustom(
+                                                    title:
+                                                        controller.title.value,
+                                                    fontSize: 20,
+                                                    fontFamily:
+                                                        AppThemeData.bold),
+                                                spaceH(height: 2),
+                                                Row(children: [
+                                                  GestureDetector(
+                                                      onTap: () =>
+                                                          Get.offAllNamed(Routes
+                                                              .DASHBOARD_SCREEN),
+                                                      child: TextCustom(
+                                                          title: 'Dashboard'.tr,
+                                                          fontSize: 14,
+                                                          fontFamily:
+                                                              AppThemeData
+                                                                  .medium,
+                                                          color: AppThemData
+                                                              .greyShade500)),
+                                                  const TextCustom(
+                                                      title: ' / ',
+                                                      fontSize: 14,
+                                                      fontFamily:
+                                                          AppThemeData.medium,
+                                                      color: AppThemData
+                                                          .greyShade500),
+                                                  TextCustom(
+                                                      title:
+                                                          ' ${controller.title.value} ',
+                                                      fontSize: 14,
+                                                      fontFamily:
+                                                          AppThemeData.medium,
+                                                      color: AppThemData
+                                                          .primary500)
+                                                ])
+                                              ]),
+                                          spaceH(),
+                                          Row(
+                                            children: [
+                                              SizedBox(
+                                                width: 120,
+                                                child: Obx(
+                                                  () => DropdownButtonFormField(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            15),
+                                                    isExpanded: true,
+                                                    style: TextStyle(
+                                                      fontFamily:
+                                                          AppThemeData.medium,
+                                                      color: themeChange
+                                                              .isDarkTheme()
+                                                          ? AppThemData
+                                                              .textBlack
+                                                          : AppThemData
+                                                              .textGrey,
+                                                    ),
+                                                    onChanged:
+                                                        (String? searchType) {
+                                                      controller
+                                                              .selectedSearchType
+                                                              .value =
+                                                          searchType ?? "Name";
+                                                      controller
+                                                          .getSearchType();
+                                                    },
+                                                    value: controller
+                                                        .selectedSearchType
+                                                        .value,
+                                                    items: controller.searchType
+                                                        .map<
+                                                            DropdownMenuItem<
+                                                                String>>((String
+                                                            value) {
+                                                      return DropdownMenuItem(
+                                                        value: value,
+                                                        child: TextCustom(
+                                                          title: value,
+                                                          fontFamily:
+                                                              AppThemeData
+                                                                  .regular,
+                                                          fontSize: 16,
+                                                          color: themeChange
+                                                                  .isDarkTheme()
+                                                              ? AppThemData
+                                                                  .greyShade500
+                                                              : AppThemData
+                                                                  .greyShade800,
+                                                        ),
+                                                      );
+                                                    }).toList(),
+                                                    decoration: Constant
+                                                        .DefaultInputDecoration(
+                                                            context),
+                                                  ),
+                                                ),
+                                              ),
+                                              spaceW(),
+                                              SizedBox(
+                                                height: 41,
+                                                width:
+                                                    ResponsiveWidget.isDesktop(
+                                                            context)
+                                                        ? MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.15
+                                                        : 200,
+                                                child: CustomTextFormField(
+                                                  bottom: 0,
+                                                  hintText: "Search here",
+                                                  controller: controller
+                                                      .searchController.value,
+                                                  onSubmit: (value) async {
+                                                    if (controller
+                                                        .isSearchEnable.value) {
+                                                      await FireStoreUtils
+                                                          .countSearchUsers(
+                                                              controller
+                                                                  .searchController
+                                                                  .value
+                                                                  .text,
+                                                              controller
+                                                                  .selectedSearchTypeForData
+                                                                  .value);
+                                                      controller.setPagination(
+                                                          controller
+                                                              .totalItemPerPage
+                                                              .value);
+                                                      controller.isSearchEnable
+                                                          .value = false;
+                                                    } else {
+                                                      controller
+                                                          .searchController
+                                                          .value
+                                                          .text = "";
+                                                      controller.getUser();
+                                                      controller.isSearchEnable
+                                                          .value = true;
+                                                    }
+                                                  },
+                                                  suffix: IconButton(
+                                                    onPressed: () async {
+                                                      if (controller
+                                                          .isSearchEnable
+                                                          .value) {
+                                                        await FireStoreUtils
+                                                            .countSearchUsers(
+                                                                controller
+                                                                    .searchController
+                                                                    .value
+                                                                    .text,
+                                                                controller
+                                                                    .selectedSearchTypeForData
+                                                                    .value);
+                                                        controller.setPagination(
+                                                            controller
+                                                                .totalItemPerPage
+                                                                .value);
+                                                        controller
+                                                            .isSearchEnable
+                                                            .value = false;
+                                                      } else {
+                                                        controller
+                                                            .searchController
+                                                            .value
+                                                            .text = "";
+                                                        controller.getUser();
+                                                        controller
+                                                            .isSearchEnable
+                                                            .value = true;
+                                                      }
+                                                    },
+                                                    icon: Icon(
+                                                      controller.isSearchEnable
+                                                              .value
+                                                          ? Icons.search
+                                                          : Icons.clear,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              spaceW(),
+                                              NumberOfRowsDropDown(
+                                                controller: controller,
+                                              )
+                                            ],
+                                          )
+                                        ],
+                                      )
+                                    : Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                TextCustom(
+                                                    title:
+                                                        controller.title.value,
+                                                    fontSize: 20,
+                                                    fontFamily:
+                                                        AppThemeData.bold),
+                                                spaceH(height: 2),
+                                                Row(children: [
+                                                  GestureDetector(
+                                                      onTap: () =>
+                                                          Get.offAllNamed(Routes
+                                                              .DASHBOARD_SCREEN),
+                                                      child: TextCustom(
+                                                          title: 'Dashboard'.tr,
+                                                          fontSize: 14,
+                                                          fontFamily:
+                                                              AppThemeData
+                                                                  .medium,
+                                                          color: AppThemData
+                                                              .greyShade500)),
+                                                  const TextCustom(
+                                                      title: ' / ',
+                                                      fontSize: 14,
+                                                      fontFamily:
+                                                          AppThemeData.medium,
+                                                      color: AppThemData
+                                                          .greyShade500),
+                                                  TextCustom(
+                                                      title:
+                                                          ' ${controller.title.value} ',
+                                                      fontSize: 14,
+                                                      fontFamily:
+                                                          AppThemeData.medium,
+                                                      color: AppThemData
+                                                          .primary500)
+                                                ])
+                                              ]),
+                                          spaceH(),
                                           SizedBox(
-                                            width: 120,
+                                            width: MediaQuery.sizeOf(context)
+                                                    .width *
+                                                0.8,
                                             child: Obx(
                                               () => DropdownButtonFormField(
-                                                borderRadius: BorderRadius.circular(15),
+                                                borderRadius:
+                                                    BorderRadius.circular(15),
                                                 isExpanded: true,
                                                 style: TextStyle(
-                                                  fontFamily: AppThemeData.medium,
-                                                  color: themeChange.isDarkTheme() ? AppThemData.textBlack : AppThemData.textGrey,
+                                                  fontFamily:
+                                                      AppThemeData.medium,
+                                                  color: themeChange
+                                                          .isDarkTheme()
+                                                      ? AppThemData.textBlack
+                                                      : AppThemData.textGrey,
                                                 ),
-                                                onChanged: (String? searchType) {
-                                                  controller.selectedSearchType.value = searchType ?? "Name";
+                                                onChanged:
+                                                    (String? searchType) {
+                                                  controller.selectedSearchType
+                                                          .value =
+                                                      searchType ?? "Name";
                                                   controller.getSearchType();
                                                 },
-                                                value: controller.selectedSearchType.value,
-                                                items: controller.searchType.map<DropdownMenuItem<String>>((String value) {
+                                                value: controller
+                                                    .selectedSearchType.value,
+                                                items: controller.searchType
+                                                    .map<
+                                                            DropdownMenuItem<
+                                                                String>>(
+                                                        (String value) {
                                                   return DropdownMenuItem(
                                                     value: value,
                                                     child: TextCustom(
                                                       title: value,
-                                                      fontFamily: AppThemeData.regular,
+                                                      fontFamily:
+                                                          AppThemeData.regular,
                                                       fontSize: 16,
-                                                      color: themeChange.isDarkTheme() ? AppThemData.greyShade500 : AppThemData.greyShade800,
                                                     ),
                                                   );
                                                 }).toList(),
-                                                decoration: Constant.DefaultInputDecoration(context),
+                                                decoration: Constant
+                                                    .DefaultInputDecoration(
+                                                        context),
                                               ),
                                             ),
                                           ),
-                                          spaceW(),
+                                          spaceH(),
                                           SizedBox(
-                                            height: 41,
-                                            width: ResponsiveWidget.isDesktop(context) ? MediaQuery.of(context).size.width * 0.15 : 200,
+                                            height: 50,
+                                            width: MediaQuery.sizeOf(context)
+                                                    .width *
+                                                0.8,
                                             child: CustomTextFormField(
                                               bottom: 0,
                                               hintText: "Search here",
-                                              controller: controller.searchController.value,
+                                              controller: controller
+                                                  .searchController.value,
                                               onSubmit: (value) async {
-                                                if (controller.isSearchEnable.value) {
-                                                  await FireStoreUtils.countSearchUsers(
-                                                      controller.searchController.value.text, controller.selectedSearchTypeForData.value);
-                                                  controller.setPagination(controller.totalItemPerPage.value);
-                                                  controller.isSearchEnable.value = false;
+                                                if (controller
+                                                    .isSearchEnable.value) {
+                                                  await FireStoreUtils
+                                                      .countSearchUsers(
+                                                          controller
+                                                              .searchController
+                                                              .value
+                                                              .text,
+                                                          controller
+                                                              .selectedSearchTypeForData
+                                                              .value);
+                                                  controller.setPagination(
+                                                      controller
+                                                          .totalItemPerPage
+                                                          .value);
+                                                  controller.isSearchEnable
+                                                      .value = false;
                                                 } else {
-                                                  controller.searchController.value.text = "";
+                                                  controller.searchController
+                                                      .value.text = "";
                                                   controller.getUser();
-                                                  controller.isSearchEnable.value = true;
+                                                  controller.isSearchEnable
+                                                      .value = true;
                                                 }
                                               },
                                               suffix: IconButton(
                                                 onPressed: () async {
-                                                  if (controller.isSearchEnable.value) {
-                                                    await FireStoreUtils.countSearchUsers(
-                                                        controller.searchController.value.text, controller.selectedSearchTypeForData.value);
-                                                    controller.setPagination(controller.totalItemPerPage.value);
-                                                    controller.isSearchEnable.value = false;
+                                                  if (controller
+                                                      .isSearchEnable.value) {
+                                                    await FireStoreUtils
+                                                        .countSearchUsers(
+                                                            controller
+                                                                .searchController
+                                                                .value
+                                                                .text,
+                                                            controller
+                                                                .selectedSearchTypeForData
+                                                                .value);
+                                                    controller.setPagination(
+                                                        controller
+                                                            .totalItemPerPage
+                                                            .value);
+                                                    controller.isSearchEnable
+                                                        .value = false;
                                                   } else {
-                                                    controller.searchController.value.text = "";
+                                                    controller.searchController
+                                                        .value.text = "";
                                                     controller.getUser();
-                                                    controller.isSearchEnable.value = true;
+                                                    controller.isSearchEnable
+                                                        .value = true;
                                                   }
                                                 },
                                                 icon: Icon(
-                                                  controller.isSearchEnable.value ? Icons.search : Icons.clear,
+                                                  controller
+                                                          .isSearchEnable.value
+                                                      ? Icons.search
+                                                      : Icons.clear,
                                                 ),
                                               ),
                                             ),
                                           ),
-                                          spaceW(),
+                                          spaceH(),
                                           NumberOfRowsDropDown(
                                             controller: controller,
                                           )
                                         ],
-                                      )
-                                    ],
-                                  )
-                                : Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                     crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                                        TextCustom(title: controller.title.value, fontSize: 20, fontFamily: AppThemeData.bold),
-                                        spaceH(height: 2),
-                                        Row(children: [
-                                          GestureDetector(
-                                              onTap: () => Get.offAllNamed(Routes.DASHBOARD_SCREEN),
-                                              child: TextCustom(title: 'Dashboard'.tr, fontSize: 14, fontFamily: AppThemeData.medium, color: AppThemData.greyShade500)),
-                                          const TextCustom(title: ' / ', fontSize: 14, fontFamily: AppThemeData.medium, color: AppThemData.greyShade500),
-                                          TextCustom(title: ' ${controller.title.value} ', fontSize: 14, fontFamily: AppThemeData.medium, color: AppThemData.primary500)
-                                        ])
-                                      ]),
-                                      spaceH(),
-                                      SizedBox(
-                                        width: MediaQuery.sizeOf(context).width *0.8,
-                                        child: Obx(
-                                          () => DropdownButtonFormField(
-                                            borderRadius: BorderRadius.circular(15),
-                                            isExpanded: true,
-                                            style: TextStyle(
-                                              fontFamily: AppThemeData.medium,
-                                              color: themeChange.isDarkTheme() ? AppThemData.textBlack : AppThemData.textGrey,
-                                            ),
-                                            onChanged: (String? searchType) {
-                                              controller.selectedSearchType.value = searchType ?? "Name";
-                                              controller.getSearchType();
-                                            },
-                                            value: controller.selectedSearchType.value,
-                                            items: controller.searchType.map<DropdownMenuItem<String>>((String value) {
-                                              return DropdownMenuItem(
-                                                value: value,
-                                                child: TextCustom(
-                                                  title: value,
-                                                  fontFamily: AppThemeData.regular,
-                                                  fontSize: 16,
+                                      ),
+                                spaceH(height: 20),
+                                SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(12),
+                                    child: controller.isLoading.value
+                                        ? Padding(
+                                            padding: paddingEdgeInsets(),
+                                            child: Constant.loader(),
+                                          )
+                                        : controller.currentPageUser.isEmpty
+                                            ? TextCustom(
+                                                title: "No Data available".tr)
+                                            : DataTable(
+                                                horizontalMargin: 20,
+                                                columnSpacing: 30,
+                                                dataRowMaxHeight: 65,
+                                                headingRowHeight: 65,
+                                                border: TableBorder.all(
+                                                  color: themeChange
+                                                          .isDarkTheme()
+                                                      ? AppThemData.greyShade800
+                                                      : AppThemData
+                                                          .greyShade100,
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
                                                 ),
-                                              );
-                                            }).toList(),
-                                            decoration: Constant.DefaultInputDecoration(context),
-                                          ),
-                                        ),
-                                      ),
-                                      spaceH(),
-                                      SizedBox(
-                                        height: 50,
-                                        width: MediaQuery.sizeOf(context).width *0.8,
-                                        child: CustomTextFormField(
-                                          bottom: 0,
-                                          hintText: "Search here",
-                                          controller: controller.searchController.value,
-                                          onSubmit: (value) async {
-                                            if (controller.isSearchEnable.value) {
-                                              await FireStoreUtils.countSearchUsers(
-                                                  controller.searchController.value.text, controller.selectedSearchTypeForData.value);
-                                              controller.setPagination(controller.totalItemPerPage.value);
-                                              controller.isSearchEnable.value = false;
-                                            } else {
-                                              controller.searchController.value.text = "";
-                                              controller.getUser();
-                                              controller.isSearchEnable.value = true;
-                                            }
-                                          },
-                                          suffix: IconButton(
-                                            onPressed: () async {
-                                              if (controller.isSearchEnable.value) {
-                                                await FireStoreUtils.countSearchUsers(
-                                                    controller.searchController.value.text, controller.selectedSearchTypeForData.value);
-                                                controller.setPagination(controller.totalItemPerPage.value);
-                                                controller.isSearchEnable.value = false;
-                                              } else {
-                                                controller.searchController.value.text = "";
-                                                controller.getUser();
-                                                controller.isSearchEnable.value = true;
-                                              }
-                                            },
-                                            icon: Icon(
-                                              controller.isSearchEnable.value ? Icons.search : Icons.clear,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      spaceH(),
-                                      NumberOfRowsDropDown(
-                                        controller: controller,
-                                      )
-                                    ],
+                                                headingRowColor:
+                                                    MaterialStateColor.resolveWith(
+                                                        (states) => themeChange
+                                                                .isDarkTheme()
+                                                            ? AppThemData
+                                                                .greyShade800
+                                                            : AppThemData
+                                                                .greyShade100),
+                                                columns: [
+                                                  CommonUI.dataColumnWidget(
+                                                      context,
+                                                      columnTitle:
+                                                          "Profile Image".tr,
+                                                      width: 150),
+                                                  CommonUI.dataColumnWidget(
+                                                      context,
+                                                      columnTitle:
+                                                          "Full Name".tr,
+                                                      width: ResponsiveWidget
+                                                              .isMobile(context)
+                                                          ? 150
+                                                          : MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              0.12),
+                                                  CommonUI.dataColumnWidget(
+                                                      context,
+                                                      columnTitle: "Gender".tr,
+                                                      width: ResponsiveWidget
+                                                              .isMobile(context)
+                                                          ? 120
+                                                          : MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              0.10),
+                                                  CommonUI.dataColumnWidget(
+                                                      context,
+                                                      columnTitle:
+                                                          "Created At".tr,
+                                                      width: 220),
+                                                  CommonUI.dataColumnWidget(
+                                                      context,
+                                                      columnTitle:
+                                                          "Wallet Amount".tr,
+                                                      width: 140),
+                                                  CommonUI.dataColumnWidget(
+                                                      context,
+                                                      columnTitle: "Status".tr,
+                                                      width: ResponsiveWidget
+                                                              .isMobile(context)
+                                                          ? 100
+                                                          : MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              0.10),
+                                                  CommonUI.dataColumnWidget(
+                                                      context,
+                                                      columnTitle: "Action".tr,
+                                                      width: ResponsiveWidget
+                                                              .isMobile(context)
+                                                          ? 100
+                                                          : MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              0.08)
+                                                ],
+                                                rows: controller.currentPageUser
+                                                    .map(
+                                                        (userModel) => DataRow(
+                                                                cells: [
+                                                                  DataCell(
+                                                                    Container(
+                                                                      alignment:
+                                                                          Alignment
+                                                                              .center,
+                                                                      padding: const EdgeInsets
+                                                                          .symmetric(
+                                                                          horizontal:
+                                                                              8,
+                                                                          vertical:
+                                                                              8),
+                                                                      child:
+                                                                          NetworkImageWidget(
+                                                                        imageUrl:
+                                                                            '${userModel.profilePic}',
+                                                                        height:
+                                                                            37,
+                                                                        width:
+                                                                            37,
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                  DataCell(
+                                                                      TextCustom(
+                                                                          title:
+                                                                              "${userModel.fullName}\n${Constant.maskMobileNumber(mobileNumber: userModel.phoneNumber, countryCode: userModel.countryCode)}")),
+                                                                  DataCell(
+                                                                      TextCustom(
+                                                                          title:
+                                                                              "${userModel.gender}")),
+                                                                  DataCell(TextCustom(
+                                                                      title: userModel.createdAt ==
+                                                                              null
+                                                                          ? ''
+                                                                          : Constant.timestampToDateTime(
+                                                                              userModel.createdAt!))),
+                                                                  DataCell(TextCustom(
+                                                                      title: Constant.amountShow(
+                                                                          amount:
+                                                                              userModel.walletAmount))),
+                                                                  DataCell(
+                                                                    Transform
+                                                                        .scale(
+                                                                      scale:
+                                                                          0.8,
+                                                                      child:
+                                                                          CupertinoSwitch(
+                                                                        activeColor:
+                                                                            AppThemData.primary500,
+                                                                        value: userModel.isActive ??
+                                                                            false,
+                                                                        onChanged:
+                                                                            (value) async {
+                                                                          userModel.isActive =
+                                                                              value;
+                                                                          await FireStoreUtils.updateUsers(
+                                                                              userModel);
+                                                                          controller
+                                                                              .getUser();
+                                                                        },
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                  DataCell(
+                                                                      Container(
+                                                                    alignment:
+                                                                        Alignment
+                                                                            .center,
+                                                                    padding: const EdgeInsets
+                                                                        .symmetric(
+                                                                        horizontal:
+                                                                            8,
+                                                                        vertical:
+                                                                            8),
+                                                                    child: Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .start,
+                                                                      children: [
+                                                                        InkWell(
+                                                                          onTap:
+                                                                              () async {
+                                                                            Get.toNamed(Routes.PASSENGERS_DETAIL_SCREEN, arguments: {
+                                                                              'userModel': userModel
+                                                                            });
+                                                                          },
+                                                                          child:
+                                                                              SvgPicture.asset(
+                                                                            "assets/icons/ic_eye.svg",
+                                                                            color:
+                                                                                AppThemData.greyShade400,
+                                                                            height:
+                                                                                16,
+                                                                            width:
+                                                                                16,
+                                                                          ),
+                                                                        ),
+                                                                        spaceW(
+                                                                            width:
+                                                                                20),
+                                                                        InkWell(
+                                                                          onTap:
+                                                                              () {
+                                                                            controller.getArgument(userModel);
+                                                                            showGlobalDrawer(
+                                                                                duration: const Duration(milliseconds: 200),
+                                                                                barrierDismissible: true,
+                                                                                context: context,
+                                                                                builder: horizontalDrawerBuilder(),
+                                                                                direction: AxisDirection.right);
+                                                                          },
+                                                                          child:
+                                                                              SvgPicture.asset(
+                                                                            "assets/icons/ic_edit.svg",
+                                                                            color:
+                                                                                AppThemData.greyShade400,
+                                                                            height:
+                                                                                16,
+                                                                            width:
+                                                                                16,
+                                                                          ),
+                                                                        ),
+                                                                        spaceW(
+                                                                            width:
+                                                                                20),
+                                                                        InkWell(
+                                                                          onTap:
+                                                                              () async {
+                                                                            if (Constant.isDemo) {
+                                                                              DialogBox.demoDialogBox();
+                                                                            } else {
+                                                                              // await controller.removePassengers(userModel);
+                                                                              // controller.getUser();
+                                                                              bool confirmDelete = await DialogBox.showConfirmationDeleteDialog(context);
+                                                                              if (confirmDelete) {
+                                                                                await controller.removePassengers(userModel);
+                                                                                controller.getUser();
+                                                                              }
+                                                                            }
+                                                                          },
+                                                                          child:
+                                                                              SvgPicture.asset(
+                                                                            "assets/icons/ic_delete.svg",
+                                                                            color:
+                                                                                AppThemData.greyShade400,
+                                                                            height:
+                                                                                16,
+                                                                            width:
+                                                                                16,
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  )),
+                                                                ]))
+                                                    .toList()),
                                   ),
-                            spaceH(height: 20),
-                            SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(12),
-                                child: controller.isLoading.value
-                                    ? Padding(
-                                        padding: paddingEdgeInsets(),
-                                        child: Constant.loader(),
-                                      )
-                                    : controller.currentPageUser.isEmpty
-                                        ? TextCustom(title: "No Data available".tr)
-                                        : DataTable(
-                                            horizontalMargin: 20,
-                                            columnSpacing: 30,
-                                            dataRowMaxHeight: 65,
-                                            headingRowHeight: 65,
-                                            border: TableBorder.all(
-                                              color: themeChange.isDarkTheme() ? AppThemData.greyShade800 : AppThemData.greyShade100,
-                                              borderRadius: BorderRadius.circular(12),
-                                            ),
-                                            headingRowColor: MaterialStateColor.resolveWith(
-                                                (states) => themeChange.isDarkTheme() ? AppThemData.greyShade800 : AppThemData.greyShade100),
-                                            columns: [
-                                              CommonUI.dataColumnWidget(context, columnTitle: "Profile Image".tr, width: 150),
-                                              CommonUI.dataColumnWidget(context,
-                                                  columnTitle: "Full Name".tr,
-                                                  width: ResponsiveWidget.isMobile(context) ? 150 : MediaQuery.of(context).size.width * 0.12),
-                                              CommonUI.dataColumnWidget(context,
-                                                  columnTitle: "Gender".tr, width: ResponsiveWidget.isMobile(context) ? 120 : MediaQuery.of(context).size.width * 0.10),
-                                              CommonUI.dataColumnWidget(context, columnTitle: "Created At".tr, width: 220),
-                                              CommonUI.dataColumnWidget(context, columnTitle: "Wallet Amount".tr, width: 140),
-                                              CommonUI.dataColumnWidget(context,
-                                                  columnTitle: "Status".tr, width: ResponsiveWidget.isMobile(context) ? 100 : MediaQuery.of(context).size.width * 0.10),
-                                              CommonUI.dataColumnWidget(context,
-                                                  columnTitle: "Action".tr, width: ResponsiveWidget.isMobile(context) ? 100 : MediaQuery.of(context).size.width * 0.08)
+                                ),
+                                spaceH(),
+                                ResponsiveWidget.isMobile(context)
+                                    ? Visibility(
+                                        visible: controller.totalPage.value > 1,
+                                        child: SingleChildScrollView(
+                                          // Wrap the Row with SingleChildScrollView
+                                          scrollDirection: Axis
+                                              .horizontal, // Enable horizontal scrolling
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            children: [
+                                              WebPagination(
+                                                currentPage: controller
+                                                    .currentPage.value,
+                                                totalPage:
+                                                    controller.totalPage.value,
+                                                displayItemCount:
+                                                    controller.pageValue("5"),
+                                                onPageChanged: (page) {
+                                                  controller.currentPage.value =
+                                                      page;
+                                                  controller.setPagination(
+                                                      controller
+                                                          .totalItemPerPage
+                                                          .value);
+                                                },
+                                              ),
                                             ],
-                                            rows: controller.currentPageUser
-                                                .map((userModel) => DataRow(cells: [
-                                                      DataCell(
-                                                        Container(
-                                                          alignment: Alignment.center,
-                                                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                                                          child: NetworkImageWidget(
-                                                            imageUrl: '${userModel.profilePic}',
-                                                            height: 37,
-                                                            width: 37,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      DataCell(TextCustom(
-                                                          title:
-                                                              "${userModel.fullName}\n${Constant.maskMobileNumber(mobileNumber: userModel.phoneNumber, countryCode: userModel.countryCode)}")),
-                                                      DataCell(TextCustom(title: "${userModel.gender}")),
-                                                      DataCell(TextCustom(title: userModel.createdAt == null ? '' : Constant.timestampToDateTime(userModel.createdAt!))),
-                                                      DataCell(TextCustom(title: Constant.amountShow(amount: userModel.walletAmount))),
-                                                      DataCell(
-                                                        Transform.scale(
-                                                          scale: 0.8,
-                                                          child: CupertinoSwitch(
-                                                            activeColor: AppThemData.primary500,
-                                                            value: userModel.isActive ?? false,
-                                                            onChanged: (value) async {
-                                                              userModel.isActive = value;
-                                                              await FireStoreUtils.updateUsers(userModel);
-                                                              controller.getUser();
-                                                            },
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      DataCell(Container(
-                                                        alignment: Alignment.center,
-                                                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                                                        child: Row(
-                                                          mainAxisAlignment: MainAxisAlignment.start,
-                                                          children: [
-                                                            InkWell(
-                                                              onTap: () async {
-                                                                Get.toNamed(Routes.PASSENGERS_DETAIL_SCREEN, arguments: {'userModel': userModel});
-                                                              },
-                                                              child: SvgPicture.asset(
-                                                                "assets/icons/ic_eye.svg",
-                                                                color: AppThemData.greyShade400,
-                                                                height: 16,
-                                                                width: 16,
-                                                              ),
-                                                            ),
-                                                            spaceW(width: 20),
-                                                            InkWell(
-                                                              onTap: () {
-                                                                controller.getArgument(userModel);
-                                                                showGlobalDrawer(
-                                                                    duration: const Duration(milliseconds: 200),
-                                                                    barrierDismissible: true,
-                                                                    context: context,
-                                                                    builder: horizontalDrawerBuilder(),
-                                                                    direction: AxisDirection.right);
-                                                              },
-                                                              child: SvgPicture.asset(
-                                                                "assets/icons/ic_edit.svg",
-                                                                color: AppThemData.greyShade400,
-                                                                height: 16,
-                                                                width: 16,
-                                                              ),
-                                                            ),
-                                                            spaceW(width: 20),
-                                                            InkWell(
-                                                              onTap: () async {
-                                                                if (Constant.isDemo) {
-                                                                  DialogBox.demoDialogBox();
-                                                                } else {
-                                                                  // await controller.removePassengers(userModel);
-                                                                  // controller.getUser();
-                                                                  bool confirmDelete = await DialogBox.showConfirmationDeleteDialog(context);
-                                                                  if (confirmDelete) {
-                                                                    await controller.removePassengers(userModel);
-                                                                    controller.getUser();
-                                                                  }
-                                                                }
-                                                              },
-                                                              child: SvgPicture.asset(
-                                                                "assets/icons/ic_delete.svg",
-                                                                color: AppThemData.greyShade400,
-                                                                height: 16,
-                                                                width: 16,
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      )),
-                                                    ]))
-                                                .toList()),
-                              ),
-                            ),
-                            spaceH(),
-                            ResponsiveWidget.isMobile(context)
-                                ? Visibility(
-                                    visible: controller.totalPage.value > 1,
-                                    child: SingleChildScrollView(
-                                      // Wrap the Row with SingleChildScrollView
-                                      scrollDirection: Axis.horizontal, // Enable horizontal scrolling
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.end,
-                                        children: [
-                                          WebPagination(
-                                            currentPage: controller.currentPage.value,
-                                            totalPage: controller.totalPage.value,
-                                            displayItemCount: controller.pageValue("5"),
-                                            onPageChanged: (page) {
-                                              controller.currentPage.value = page;
-                                              controller.setPagination(controller.totalItemPerPage.value);
-                                            },
                                           ),
-                                        ],
+                                        ),
+                                      )
+                                    : Visibility(
+                                        visible: controller.totalPage.value > 1,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            Align(
+                                              alignment: Alignment.centerRight,
+                                              child: WebPagination(
+                                                  currentPage: controller
+                                                      .currentPage.value,
+                                                  totalPage: controller
+                                                      .totalPage.value,
+                                                  displayItemCount:
+                                                      controller.pageValue("5"),
+                                                  onPageChanged: (page) {
+                                                    controller.currentPage
+                                                        .value = page;
+                                                    controller.setPagination(
+                                                        controller
+                                                            .totalItemPerPage
+                                                            .value);
+                                                  }),
+                                            )
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  )
-                                : Visibility(
-                                    visible: controller.totalPage.value > 1,
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        Align(
-                                          alignment: Alignment.centerRight,
-                                          child: WebPagination(
-                                              currentPage: controller.currentPage.value,
-                                              totalPage: controller.totalPage.value,
-                                              displayItemCount: controller.pageValue("5"),
-                                              onPageChanged: (page) {
-                                                controller.currentPage.value = page;
-                                                controller.setPagination(controller.totalItemPerPage.value);
-                                              }),
-                                        )
-                                      ],
-                                    ),
-                                  ),
+                              ]),
+                            )
                           ]),
-                        )
-                      ]),
                     )),
               ),
             ],
@@ -536,7 +871,8 @@ class PassengersScreenView extends GetView<PassengersScreenController> {
                         Navigator.pop(context);
                       },
                       child: Container(
-                          decoration: const BoxDecoration(shape: BoxShape.circle),
+                          decoration:
+                              const BoxDecoration(shape: BoxShape.circle),
                           padding: const EdgeInsets.all(10),
                           child: const Icon(Icons.arrow_back_ios_new_outlined)),
                     ),
@@ -551,7 +887,9 @@ class PassengersScreenView extends GetView<PassengersScreenController> {
                         SizedBox(
                           height: 1,
                           child: ContainerCustom(
-                            color: themeChange.isDarkTheme() ? AppThemData.greyShade900 : AppThemData.greyShade100,
+                            color: themeChange.isDarkTheme()
+                                ? AppThemData.greyShade900
+                                : AppThemData.greyShade100,
                           ),
                         ),
                         spaceH(height: 40),
@@ -563,7 +901,9 @@ class PassengersScreenView extends GetView<PassengersScreenController> {
                                   children: [
                                     NetworkImageWidget(
                                       borderRadius: 60,
-                                      imageUrl: controller.imageController.value.text.toString(),
+                                      imageUrl: controller
+                                          .imageController.value.text
+                                          .toString(),
                                       height: 100,
                                       width: 100,
                                     ),
@@ -577,7 +917,10 @@ class PassengersScreenView extends GetView<PassengersScreenController> {
                                             height: 30,
                                             width: 30,
                                             decoration: BoxDecoration(
-                                                shape: BoxShape.circle, color: themeChange.isDarkTheme() ? AppThemData.greyShade900 : AppThemData.greyShade100),
+                                                shape: BoxShape.circle,
+                                                color: themeChange.isDarkTheme()
+                                                    ? AppThemData.greyShade900
+                                                    : AppThemData.greyShade100),
                                             child: const Icon(
                                               Icons.edit,
                                               size: 20,
@@ -595,15 +938,18 @@ class PassengersScreenView extends GetView<PassengersScreenController> {
                                     child: Stack(
                                       children: [
                                         ClipRRect(
-                                          borderRadius: BorderRadius.circular(60),
+                                          borderRadius:
+                                              BorderRadius.circular(60),
                                           child: Image.memory(
-                                            controller.imagePickedFileBytes.value,
+                                            controller
+                                                .imagePickedFileBytes.value,
                                             height: 100,
                                             width: 100,
                                           ),
                                         ),
                                         Align(
-                                          alignment: AlignmentDirectional.bottomEnd,
+                                          alignment:
+                                              AlignmentDirectional.bottomEnd,
                                           child: InkWell(
                                             onTap: () {
                                               controller.pickPhoto();
@@ -612,7 +958,13 @@ class PassengersScreenView extends GetView<PassengersScreenController> {
                                                 height: 30,
                                                 width: 30,
                                                 decoration: BoxDecoration(
-                                                    shape: BoxShape.circle, color: themeChange.isDarkTheme() ? AppThemData.greyShade900 : AppThemData.greyShade100),
+                                                    shape: BoxShape.circle,
+                                                    color: themeChange
+                                                            .isDarkTheme()
+                                                        ? AppThemData
+                                                            .greyShade900
+                                                        : AppThemData
+                                                            .greyShade100),
                                                 child: const Icon(
                                                   Icons.edit,
                                                   size: 20,
@@ -635,7 +987,8 @@ class PassengersScreenView extends GetView<PassengersScreenController> {
                               isReadOnly: true,
                               title: "Phone Number *".tr,
                               hintText: "Enter phone number".tr,
-                              controller: controller.phoneNumberController.value,
+                              controller:
+                                  controller.phoneNumberController.value,
                             ),
                             const SizedBox(height: 20),
                             CustomTextFormField(
@@ -659,10 +1012,12 @@ class PassengersScreenView extends GetView<PassengersScreenController> {
                                     children: [
                                       Radio(
                                         value: 1,
-                                        groupValue: controller.selectedGender.value,
+                                        groupValue:
+                                            controller.selectedGender.value,
                                         activeColor: AppThemData.primary500,
                                         onChanged: (value) {
-                                          controller.selectedGender.value = value ?? 1;
+                                          controller.selectedGender.value =
+                                              value ?? 1;
                                           // _radioVal = 'male';
                                         },
                                       ),
@@ -676,10 +1031,12 @@ class PassengersScreenView extends GetView<PassengersScreenController> {
                                       ),
                                       Radio(
                                         value: 2,
-                                        groupValue: controller.selectedGender.value,
+                                        groupValue:
+                                            controller.selectedGender.value,
                                         activeColor: AppThemData.primary500,
                                         onChanged: (value) {
-                                          controller.selectedGender.value = value ?? 2;
+                                          controller.selectedGender.value =
+                                              value ?? 2;
                                           // _radioVal = 'female';
                                         },
                                       ),
@@ -712,21 +1069,39 @@ class PassengersScreenView extends GetView<PassengersScreenController> {
                                     DialogBox.demoDialogBox();
                                   } else {
                                     Constant.waitingLoader();
-                                    if (controller.imagePath.value.path.isNotEmpty) {
-                                      String? downloadUrl = await FireStoreUtils.uploadPic(
-                                          PickedFile(controller.imagePath.value.path), "profileImage", controller.editingId.value, controller.mimeType.value);
-                                      controller.userModel.value.profilePic = downloadUrl;
+                                    if (controller
+                                        .imagePath.value.path.isNotEmpty) {
+                                      String? downloadUrl =
+                                          await FireStoreUtils.uploadPic(
+                                              PickedFile(controller
+                                                  .imagePath.value.path),
+                                              "profileImage",
+                                              controller.editingId.value,
+                                              controller.mimeType.value);
+                                      controller.userModel.value.profilePic =
+                                          downloadUrl;
                                       log(downloadUrl.toString());
                                     }
-                                    controller.userModel.value.id = controller.editingId.value;
-                                    controller.userModel.value.fullName = controller.userNameController.value.text;
-                                    controller.userModel.value.gender = controller.selectedGender.value == 1 ? "Male" : "Female";
-                                    bool isSaved = await FireStoreUtils.updateUsers(controller.userModel.value);
+                                    controller.userModel.value.id =
+                                        controller.editingId.value;
+                                    controller.userModel.value.fullName =
+                                        controller
+                                            .userNameController.value.text;
+                                    controller.userModel.value.gender =
+                                        controller.selectedGender.value == 1
+                                            ? "Male"
+                                            : "Female";
+                                    bool isSaved =
+                                        await FireStoreUtils.updateUsers(
+                                            controller.userModel.value);
                                     if (isSaved) {
                                       Get.back();
-                                      ShowToast.successToast("Users data updated".tr);
+                                      ShowToast.successToast(
+                                          "Users data updated".tr);
                                     } else {
-                                      ShowToast.errorToast("Something went wrong, Please try later!".tr);
+                                      ShowToast.errorToast(
+                                          "Something went wrong, Please try later!"
+                                              .tr);
                                       Get.back();
                                     }
                                   }

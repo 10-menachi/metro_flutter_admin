@@ -38,12 +38,16 @@ class BannerScreenView extends GetView<BannerScreenController> {
       init: BannerScreenController(),
       builder: (controller) {
         return Scaffold(
-          backgroundColor: themeChange.isDarkTheme() ? AppThemData.greyShade950 : AppThemData.greyShade50,
+          backgroundColor: themeChange.isDarkTheme()
+              ? AppThemData.greyShade950
+              : AppThemData.greyShade50,
           appBar: AppBar(
             elevation: 0.0,
             toolbarHeight: 70,
             automaticallyImplyLeading: false,
-            backgroundColor: themeChange.isDarkTheme() ? AppThemData.primaryBlack : AppThemData.primaryWhite,
+            backgroundColor: themeChange.isDarkTheme()
+                ? AppThemData.primaryBlack
+                : AppThemData.primaryWhite,
             leadingWidth: 200,
             // title: title,
             leading: Builder(
@@ -62,7 +66,9 @@ class BannerScreenView extends GetView<BannerScreenController> {
                             child: Icon(
                               Icons.menu,
                               size: 30,
-                              color: themeChange.isDarkTheme() ? AppThemData.primary500 : AppThemData.primary500,
+                              color: themeChange.isDarkTheme()
+                                  ? AppThemData.primary500
+                                  : AppThemData.primary500,
                             ),
                           )
                         : SizedBox(
@@ -76,14 +82,6 @@ class BannerScreenView extends GetView<BannerScreenController> {
                                   height: 45,
                                   color: AppThemData.primary500,
                                 ),
-                                spaceW(),
-                                const TextCustom(
-                                  title: 'My Taxi',
-                                  color: AppThemData.primary500,
-                                  fontSize: 30,
-                                  fontFamily: AppThemeData.semiBold,
-                                  fontWeight: FontWeight.w700,
-                                )
                               ],
                             ),
                           ),
@@ -127,7 +125,9 @@ class BannerScreenView extends GetView<BannerScreenController> {
           drawer: Drawer(
             // key: scaffoldKey,
             width: 270,
-            backgroundColor: themeChange.isDarkTheme() ? AppThemData.primaryBlack : AppThemData.primaryWhite,
+            backgroundColor: themeChange.isDarkTheme()
+                ? AppThemData.primaryBlack
+                : AppThemData.primaryWhite,
             child: const MenuWidget(),
           ),
           body: Row(
@@ -137,222 +137,444 @@ class BannerScreenView extends GetView<BannerScreenController> {
               Expanded(
                 child: SingleChildScrollView(
                   physics: const AlwaysScrollableScrollPhysics(),
-                  child: Column(mainAxisSize: MainAxisSize.min, mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.start, children: [
-                    Padding(
-                      padding: paddingEdgeInsets(),
-                      child: ContainerCustom(
-                        child: controller.isLoading.value
-                            ? Padding(
-                                padding: paddingEdgeInsets(),
-                                child: Constant.loader(),
-                              )
-                            : Column(children: [
-                                ResponsiveWidget.isDesktop(context)
-                                    ? Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
-                                          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                                            TextCustom(title: controller.title.value, fontSize: 20, fontFamily: AppThemeData.bold),
-                                            spaceH(height: 2),
-                                            Row(children: [
-                                              GestureDetector(
-                                                  onTap: () => Get.offAllNamed(Routes.DASHBOARD_SCREEN),
-                                                  child:
-                                                      TextCustom(title: 'Dashboard'.tr, fontSize: 14, fontFamily: AppThemeData.medium, color: AppThemData.greyShade500)),
-                                              const TextCustom(title: ' / ', fontSize: 14, fontFamily: AppThemeData.medium, color: AppThemData.greyShade500),
-                                              TextCustom(
-                                                  title: ' ${controller.title.value} ', fontSize: 14, fontFamily: AppThemeData.medium, color: AppThemData.primary500)
-                                            ])
-                                          ]),
-                                          CustomButtonWidget(
-                                            padding: const EdgeInsets.symmetric(horizontal: 22),
-                                            buttonTitle: " + Add Banner".tr,
-                                            borderRadius: 10,
-                                            onPress: () {
-                                              controller.setDefaultData();
-                                              showDialog(context: context, builder: (context) => const BannerDialog());
-                                            },
-                                          ),
-                                        ],
-                                      )
-                                    : Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        mainAxisAlignment: MainAxisAlignment.start,
-                                        children: [
-                                          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                                            TextCustom(title: controller.title.value, fontSize: 20, fontFamily: AppThemeData.bold),
-                                            spaceH(height: 2),
-                                            Row(children: [
-                                              GestureDetector(
-                                                  onTap: () => Get.offAllNamed(Routes.DASHBOARD_SCREEN),
-                                                  child:
-                                                      TextCustom(title: 'Dashboard'.tr, fontSize: 14, fontFamily: AppThemeData.medium, color: AppThemData.greyShade500)),
-                                              const TextCustom(title: ' / ', fontSize: 14, fontFamily: AppThemeData.medium, color: AppThemData.greyShade500),
-                                              TextCustom(
-                                                  title: ' ${controller.title.value} ', fontSize: 14, fontFamily: AppThemeData.medium, color: AppThemData.primary500)
-                                            ])
-                                          ]),
-                                          spaceH(),
-                                          CustomButtonWidget(
-                                            width: MediaQuery.sizeOf(context).width * 0.7,
-                                            padding: const EdgeInsets.symmetric(horizontal: 22),
-                                            buttonTitle: " + Add Banner".tr,
-                                            borderRadius: 10,
-                                            onPress: () {
-                                              controller.setDefaultData();
-                                              showDialog(context: context, builder: (context) => const BannerDialog());
-                                            },
-                                          ),
-                                        ],
-                                      ),
-                                spaceH(height: 20),
-                                SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(12),
-                                    child: controller.isLoading.value
-                                        ? Padding(
-                                            padding: paddingEdgeInsets(),
-                                            child: Constant.loader(),
+                  child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: paddingEdgeInsets(),
+                          child: ContainerCustom(
+                            child: controller.isLoading.value
+                                ? Padding(
+                                    padding: paddingEdgeInsets(),
+                                    child: Constant.loader(),
+                                  )
+                                : Column(children: [
+                                    ResponsiveWidget.isDesktop(context)
+                                        ? Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    TextCustom(
+                                                        title: controller
+                                                            .title.value,
+                                                        fontSize: 20,
+                                                        fontFamily:
+                                                            AppThemeData.bold),
+                                                    spaceH(height: 2),
+                                                    Row(children: [
+                                                      GestureDetector(
+                                                          onTap: () => Get
+                                                              .offAllNamed(Routes
+                                                                  .DASHBOARD_SCREEN),
+                                                          child: TextCustom(
+                                                              title: 'Dashboard'
+                                                                  .tr,
+                                                              fontSize: 14,
+                                                              fontFamily:
+                                                                  AppThemeData
+                                                                      .medium,
+                                                              color: AppThemData
+                                                                  .greyShade500)),
+                                                      const TextCustom(
+                                                          title: ' / ',
+                                                          fontSize: 14,
+                                                          fontFamily:
+                                                              AppThemeData
+                                                                  .medium,
+                                                          color: AppThemData
+                                                              .greyShade500),
+                                                      TextCustom(
+                                                          title:
+                                                              ' ${controller.title.value} ',
+                                                          fontSize: 14,
+                                                          fontFamily:
+                                                              AppThemeData
+                                                                  .medium,
+                                                          color: AppThemData
+                                                              .primary500)
+                                                    ])
+                                                  ]),
+                                              CustomButtonWidget(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 22),
+                                                buttonTitle: " + Add Banner".tr,
+                                                borderRadius: 10,
+                                                onPress: () {
+                                                  controller.setDefaultData();
+                                                  showDialog(
+                                                      context: context,
+                                                      builder: (context) =>
+                                                          const BannerDialog());
+                                                },
+                                              ),
+                                            ],
                                           )
-                                        : controller.bannerList.isEmpty
-                                            ? TextCustom(title: "No Data available".tr)
-                                            : DataTable(
-                                                horizontalMargin: 20,
-                                                columnSpacing: 30,
-                                                dataRowMaxHeight: 65,
-                                                headingRowHeight: 65,
-                                                border: TableBorder.all(
-                                                  color: themeChange.isDarkTheme() ? AppThemData.greyShade900 : AppThemData.greyShade100,
-                                                  borderRadius: BorderRadius.circular(12),
-                                                ),
-                                                headingRowColor: WidgetStateColor.resolveWith(
-                                                    (states) => themeChange.isDarkTheme() ? AppThemData.greyShade900 : AppThemData.greyShade100),
-                                                columns: [
-                                                  CommonUI.dataColumnWidget(context,
-                                                      columnTitle: "Id".tr, width: ResponsiveWidget.isMobile(context) ? 15 : MediaQuery.of(context).size.width * 0.05),
-                                                  CommonUI.dataColumnWidget(context,
-                                                      columnTitle: "Banner Image".tr,
-                                                      width: ResponsiveWidget.isMobile(context) ? 120 : MediaQuery.of(context).size.width * 0.10),
-                                                  CommonUI.dataColumnWidget(context,
-                                                      columnTitle: "Banner Name".tr,
-                                                      width: ResponsiveWidget.isMobile(context) ? 150 : MediaQuery.of(context).size.width * 0.14),
-                                                  CommonUI.dataColumnWidget(context,
-                                                      columnTitle: "Banner Description".tr,
-                                                      width: ResponsiveWidget.isMobile(context) ? 150 : MediaQuery.of(context).size.width * 0.20),
-                                                  CommonUI.dataColumnWidget(context,
-                                                      columnTitle: "Banner Offer".tr,
-                                                      width: ResponsiveWidget.isMobile(context) ? 150 : MediaQuery.of(context).size.width * 0.15),
-                                                  CommonUI.dataColumnWidget(context,
-                                                      columnTitle: "Status".tr,
-                                                      width: ResponsiveWidget.isMobile(context) ? 100 : MediaQuery.of(context).size.width * 0.05),
-                                                  CommonUI.dataColumnWidget(context,
-                                                      columnTitle: "Actions".tr,
-                                                      width: ResponsiveWidget.isMobile(context) ? 70 : MediaQuery.of(context).size.width * 0.08),
-                                                ],
-                                                rows: controller.bannerList
-                                                    .map((bannerModel) => DataRow(cells: [
-                                                          DataCell(TextCustom(title: "${controller.bannerList.indexWhere((element) => element == bannerModel) + 1}")),
-                                                          DataCell(
-                                                            Container(
-                                                              alignment: Alignment.center,
-                                                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                                                              child: NetworkImageWidget(
-                                                                imageUrl: '${bannerModel.image}',
-                                                                borderRadius: 10,
-                                                                height: 40,
-                                                                width: 100,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          DataCell(TextCustom(title: bannerModel.bannerName ?? "N/A".tr)),
-                                                          DataCell(TextCustom(
-                                                            title: bannerModel.bannerDescription ?? "N/A".tr,
-                                                            maxLine: 2,
-                                                          )),
-                                                          DataCell(TextCustom(
-                                                            title: bannerModel.offerText == "" ? "N/A".tr : bannerModel.offerText.toString(),
-                                                            maxLine: 2,
-                                                          )),
-                                                          DataCell(
-                                                            Transform.scale(
-                                                              scale: 0.8,
-                                                              child: CupertinoSwitch(
-                                                                activeColor: AppThemData.primary500,
-                                                                value: bannerModel.isEnable!,
-                                                                onChanged: (value) async {
-                                                                  if (Constant.isDemo) {
-                                                                    DialogBox.demoDialogBox();
-                                                                  } else {
-                                                                    bannerModel.isEnable = value;
-                                                                    await FireStoreUtils.updateBanner(bannerModel);
-                                                                    controller.getData();
-                                                                  }
-                                                                },
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          DataCell(
-                                                            Container(
-                                                              alignment: Alignment.center,
-                                                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                                                              child: Row(
-                                                                mainAxisAlignment: MainAxisAlignment.start,
-                                                                children: [
-                                                                  InkWell(
-                                                                    onTap: () {
-                                                                      controller.bannerName.value.text = bannerModel.bannerName!;
-                                                                      controller.bannerDescription.value.text = bannerModel.bannerDescription!;
-                                                                      controller.bannerImageName.value.text = bannerModel.image!;
-                                                                      controller.bannerModel.value.id = bannerModel.id!;
-                                                                      controller.isEditing.value = true;
-                                                                      controller.imageURL.value = bannerModel.image!;
-                                                                      controller.isOfferBanner.value = bannerModel.isOfferBanner!;
-                                                                      controller.offerText.value.text = bannerModel.offerText!;
-                                                                      showDialog(context: context, builder: (context) => const BannerDialog());
-                                                                    },
-                                                                    child: SvgPicture.asset(
-                                                                      "assets/icons/ic_edit.svg",
-                                                                      color: AppThemData.greyShade400,
-                                                                      height: 16,
-                                                                      width: 16,
+                                        : Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    TextCustom(
+                                                        title: controller
+                                                            .title.value,
+                                                        fontSize: 20,
+                                                        fontFamily:
+                                                            AppThemeData.bold),
+                                                    spaceH(height: 2),
+                                                    Row(children: [
+                                                      GestureDetector(
+                                                          onTap: () => Get
+                                                              .offAllNamed(Routes
+                                                                  .DASHBOARD_SCREEN),
+                                                          child: TextCustom(
+                                                              title: 'Dashboard'
+                                                                  .tr,
+                                                              fontSize: 14,
+                                                              fontFamily:
+                                                                  AppThemeData
+                                                                      .medium,
+                                                              color: AppThemData
+                                                                  .greyShade500)),
+                                                      const TextCustom(
+                                                          title: ' / ',
+                                                          fontSize: 14,
+                                                          fontFamily:
+                                                              AppThemeData
+                                                                  .medium,
+                                                          color: AppThemData
+                                                              .greyShade500),
+                                                      TextCustom(
+                                                          title:
+                                                              ' ${controller.title.value} ',
+                                                          fontSize: 14,
+                                                          fontFamily:
+                                                              AppThemeData
+                                                                  .medium,
+                                                          color: AppThemData
+                                                              .primary500)
+                                                    ])
+                                                  ]),
+                                              spaceH(),
+                                              CustomButtonWidget(
+                                                width:
+                                                    MediaQuery.sizeOf(context)
+                                                            .width *
+                                                        0.7,
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 22),
+                                                buttonTitle: " + Add Banner".tr,
+                                                borderRadius: 10,
+                                                onPress: () {
+                                                  controller.setDefaultData();
+                                                  showDialog(
+                                                      context: context,
+                                                      builder: (context) =>
+                                                          const BannerDialog());
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                    spaceH(height: 20),
+                                    SingleChildScrollView(
+                                      scrollDirection: Axis.horizontal,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(12),
+                                        child: controller.isLoading.value
+                                            ? Padding(
+                                                padding: paddingEdgeInsets(),
+                                                child: Constant.loader(),
+                                              )
+                                            : controller.bannerList.isEmpty
+                                                ? TextCustom(
+                                                    title:
+                                                        "No Data available".tr)
+                                                : DataTable(
+                                                    horizontalMargin: 20,
+                                                    columnSpacing: 30,
+                                                    dataRowMaxHeight: 65,
+                                                    headingRowHeight: 65,
+                                                    border: TableBorder.all(
+                                                      color: themeChange
+                                                              .isDarkTheme()
+                                                          ? AppThemData
+                                                              .greyShade900
+                                                          : AppThemData
+                                                              .greyShade100,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              12),
+                                                    ),
+                                                    headingRowColor: WidgetStateColor
+                                                        .resolveWith((states) =>
+                                                            themeChange
+                                                                    .isDarkTheme()
+                                                                ? AppThemData
+                                                                    .greyShade900
+                                                                : AppThemData
+                                                                    .greyShade100),
+                                                    columns: [
+                                                      CommonUI.dataColumnWidget(
+                                                          context,
+                                                          columnTitle: "Id".tr,
+                                                          width: ResponsiveWidget
+                                                                  .isMobile(
+                                                                      context)
+                                                              ? 15
+                                                              : MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width *
+                                                                  0.05),
+                                                      CommonUI.dataColumnWidget(
+                                                          context,
+                                                          columnTitle:
+                                                              "Banner Image".tr,
+                                                          width: ResponsiveWidget
+                                                                  .isMobile(
+                                                                      context)
+                                                              ? 120
+                                                              : MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width *
+                                                                  0.10),
+                                                      CommonUI.dataColumnWidget(
+                                                          context,
+                                                          columnTitle:
+                                                              "Banner Name".tr,
+                                                          width: ResponsiveWidget
+                                                                  .isMobile(
+                                                                      context)
+                                                              ? 150
+                                                              : MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width *
+                                                                  0.14),
+                                                      CommonUI.dataColumnWidget(
+                                                          context,
+                                                          columnTitle:
+                                                              "Banner Description"
+                                                                  .tr,
+                                                          width: ResponsiveWidget
+                                                                  .isMobile(
+                                                                      context)
+                                                              ? 150
+                                                              : MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width *
+                                                                  0.20),
+                                                      CommonUI.dataColumnWidget(
+                                                          context,
+                                                          columnTitle:
+                                                              "Banner Offer".tr,
+                                                          width: ResponsiveWidget
+                                                                  .isMobile(
+                                                                      context)
+                                                              ? 150
+                                                              : MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width *
+                                                                  0.15),
+                                                      CommonUI.dataColumnWidget(
+                                                          context,
+                                                          columnTitle:
+                                                              "Status".tr,
+                                                          width: ResponsiveWidget
+                                                                  .isMobile(
+                                                                      context)
+                                                              ? 100
+                                                              : MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width *
+                                                                  0.05),
+                                                      CommonUI.dataColumnWidget(
+                                                          context,
+                                                          columnTitle:
+                                                              "Actions".tr,
+                                                          width: ResponsiveWidget
+                                                                  .isMobile(
+                                                                      context)
+                                                              ? 70
+                                                              : MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width *
+                                                                  0.08),
+                                                    ],
+                                                    rows: controller.bannerList
+                                                        .map(
+                                                            (bannerModel) =>
+                                                                DataRow(cells: [
+                                                                  DataCell(
+                                                                      TextCustom(
+                                                                          title:
+                                                                              "${controller.bannerList.indexWhere((element) => element == bannerModel) + 1}")),
+                                                                  DataCell(
+                                                                    Container(
+                                                                      alignment:
+                                                                          Alignment
+                                                                              .center,
+                                                                      padding: const EdgeInsets
+                                                                          .symmetric(
+                                                                          horizontal:
+                                                                              8,
+                                                                          vertical:
+                                                                              8),
+                                                                      child:
+                                                                          NetworkImageWidget(
+                                                                        imageUrl:
+                                                                            '${bannerModel.image}',
+                                                                        borderRadius:
+                                                                            10,
+                                                                        height:
+                                                                            40,
+                                                                        width:
+                                                                            100,
+                                                                      ),
                                                                     ),
                                                                   ),
-                                                                  spaceW(width: 20),
-                                                                  InkWell(
-                                                                    onTap: () async {
-                                                                      if (Constant.isDemo) {
-                                                                        DialogBox.demoDialogBox();
-                                                                      } else {
-                                                                        // controller.removeBanner(bannerModel);
-                                                                        // controller.getData();
-                                                                        bool confirmDelete = await DialogBox.showConfirmationDeleteDialog(context);
-                                                                        if (confirmDelete) {
-                                                                          await controller.removeBanner(bannerModel);
-                                                                        }
-                                                                      }
-                                                                    },
-                                                                    child: SvgPicture.asset(
-                                                                      "assets/icons/ic_delete.svg",
-                                                                      color: AppThemData.greyShade400,
-                                                                      height: 16,
-                                                                      width: 16,
+                                                                  DataCell(TextCustom(
+                                                                      title: bannerModel
+                                                                              .bannerName ??
+                                                                          "N/A"
+                                                                              .tr)),
+                                                                  DataCell(
+                                                                      TextCustom(
+                                                                    title: bannerModel
+                                                                            .bannerDescription ??
+                                                                        "N/A"
+                                                                            .tr,
+                                                                    maxLine: 2,
+                                                                  )),
+                                                                  DataCell(
+                                                                      TextCustom(
+                                                                    title: bannerModel.offerText ==
+                                                                            ""
+                                                                        ? "N/A"
+                                                                            .tr
+                                                                        : bannerModel
+                                                                            .offerText
+                                                                            .toString(),
+                                                                    maxLine: 2,
+                                                                  )),
+                                                                  DataCell(
+                                                                    Transform
+                                                                        .scale(
+                                                                      scale:
+                                                                          0.8,
+                                                                      child:
+                                                                          CupertinoSwitch(
+                                                                        activeColor:
+                                                                            AppThemData.primary500,
+                                                                        value: bannerModel
+                                                                            .isEnable!,
+                                                                        onChanged:
+                                                                            (value) async {
+                                                                          if (Constant
+                                                                              .isDemo) {
+                                                                            DialogBox.demoDialogBox();
+                                                                          } else {
+                                                                            bannerModel.isEnable =
+                                                                                value;
+                                                                            await FireStoreUtils.updateBanner(bannerModel);
+                                                                            controller.getData();
+                                                                          }
+                                                                        },
+                                                                      ),
                                                                     ),
                                                                   ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ]))
-                                                    .toList()),
-                                  ),
-                                ),
-                                spaceH(),
-                              ]),
-                      ),
-                    )
-                  ]),
+                                                                  DataCell(
+                                                                    Container(
+                                                                      alignment:
+                                                                          Alignment
+                                                                              .center,
+                                                                      padding: const EdgeInsets
+                                                                          .symmetric(
+                                                                          horizontal:
+                                                                              8,
+                                                                          vertical:
+                                                                              8),
+                                                                      child:
+                                                                          Row(
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.start,
+                                                                        children: [
+                                                                          InkWell(
+                                                                            onTap:
+                                                                                () {
+                                                                              controller.bannerName.value.text = bannerModel.bannerName!;
+                                                                              controller.bannerDescription.value.text = bannerModel.bannerDescription!;
+                                                                              controller.bannerImageName.value.text = bannerModel.image!;
+                                                                              controller.bannerModel.value.id = bannerModel.id!;
+                                                                              controller.isEditing.value = true;
+                                                                              controller.imageURL.value = bannerModel.image!;
+                                                                              controller.isOfferBanner.value = bannerModel.isOfferBanner!;
+                                                                              controller.offerText.value.text = bannerModel.offerText!;
+                                                                              showDialog(context: context, builder: (context) => const BannerDialog());
+                                                                            },
+                                                                            child:
+                                                                                SvgPicture.asset(
+                                                                              "assets/icons/ic_edit.svg",
+                                                                              color: AppThemData.greyShade400,
+                                                                              height: 16,
+                                                                              width: 16,
+                                                                            ),
+                                                                          ),
+                                                                          spaceW(
+                                                                              width: 20),
+                                                                          InkWell(
+                                                                            onTap:
+                                                                                () async {
+                                                                              if (Constant.isDemo) {
+                                                                                DialogBox.demoDialogBox();
+                                                                              } else {
+                                                                                // controller.removeBanner(bannerModel);
+                                                                                // controller.getData();
+                                                                                bool confirmDelete = await DialogBox.showConfirmationDeleteDialog(context);
+                                                                                if (confirmDelete) {
+                                                                                  await controller.removeBanner(bannerModel);
+                                                                                }
+                                                                              }
+                                                                            },
+                                                                            child:
+                                                                                SvgPicture.asset(
+                                                                              "assets/icons/ic_delete.svg",
+                                                                              color: AppThemData.greyShade400,
+                                                                              height: 16,
+                                                                              width: 16,
+                                                                            ),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ]))
+                                                        .toList()),
+                                      ),
+                                    ),
+                                    spaceH(),
+                                  ]),
+                          ),
+                        )
+                      ]),
                 ),
               ),
             ],
@@ -402,7 +624,9 @@ class BannerDialog extends StatelessWidget {
                     height: 0.18.sh,
                     width: 0.30.sw,
                     decoration: BoxDecoration(
-                      color: themeChange.isDarkTheme() ? AppThemData.greyShade900 : AppThemData.greyShade100,
+                      color: themeChange.isDarkTheme()
+                          ? AppThemData.greyShade900
+                          : AppThemData.greyShade100,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Stack(
@@ -413,7 +637,9 @@ class BannerDialog extends StatelessWidget {
                             fit: BoxFit.contain,
                             height: 0.18.sh,
                             width: 0.30.sw,
-                            imageUrl: controller.imageFile.value.path.isEmpty ? controller.imageURL.value : controller.imageFile.value.path,
+                            imageUrl: controller.imageFile.value.path.isEmpty
+                                ? controller.imageURL.value
+                                : controller.imageFile.value.path,
                           ),
                         ),
                         Center(
@@ -423,10 +649,13 @@ class BannerDialog extends StatelessWidget {
                                 DialogBox.demoDialogBox();
                               } else {
                                 ImagePicker picker = ImagePicker();
-                                final img = await picker.pickImage(source: ImageSource.gallery, imageQuality: 80);
+                                final img = await picker.pickImage(
+                                    source: ImageSource.gallery,
+                                    imageQuality: 80);
                                 if (img != null) {
                                   File imageFile = File(img.path);
-                                  controller.bannerImageName.value.text = img.name;
+                                  controller.bannerImageName.value.text =
+                                      img.name;
                                   controller.imageFile.value = imageFile;
                                   controller.mimeType.value = "${img.mimeType}";
                                   controller.isImageUpdated.value = true;
@@ -448,7 +677,9 @@ class BannerDialog extends StatelessWidget {
                     height: 0.18.sh,
                     width: 0.30.sw,
                     decoration: BoxDecoration(
-                      color: themeChange.isDarkTheme() ? AppThemData.greyShade900 : AppThemData.greyShade100,
+                      color: themeChange.isDarkTheme()
+                          ? AppThemData.greyShade900
+                          : AppThemData.greyShade100,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Stack(
@@ -470,10 +701,13 @@ class BannerDialog extends StatelessWidget {
                                 DialogBox.demoDialogBox();
                               } else {
                                 ImagePicker picker = ImagePicker();
-                                final img = await picker.pickImage(source: ImageSource.gallery, imageQuality: 80);
+                                final img = await picker.pickImage(
+                                    source: ImageSource.gallery,
+                                    imageQuality: 80);
                                 if (img != null) {
                                   File imageFile = File(img.path);
-                                  controller.bannerImageName.value.text = img.name;
+                                  controller.bannerImageName.value.text =
+                                      img.name;
                                   controller.imageFile.value = imageFile;
                                   controller.mimeType.value = "${img.mimeType}";
                                   controller.isImageUpdated.value = true;
@@ -487,7 +721,10 @@ class BannerDialog extends StatelessWidget {
                                       Expanded(
                                         child: Text(
                                           'upload image'.tr,
-                                          style: const TextStyle(fontSize: 16, color: AppThemData.greyShade500, fontFamily: AppThemeData.medium),
+                                          style: const TextStyle(
+                                              fontSize: 16,
+                                              color: AppThemData.greyShade500,
+                                              fontFamily: AppThemeData.medium),
                                         ),
                                       ),
                                       const SizedBox(
@@ -507,7 +744,10 @@ class BannerDialog extends StatelessWidget {
                   ),
             spaceH(height: 16),
             SizedBox(
-              child: CustomTextFormField(title: "Title".tr, hintText: "Enter Title".tr, controller: controller.bannerName.value),
+              child: CustomTextFormField(
+                  title: "Title".tr,
+                  hintText: "Enter Title".tr,
+                  controller: controller.bannerName.value),
             ),
             spaceH(),
             SizedBox(
@@ -544,7 +784,10 @@ class BannerDialog extends StatelessWidget {
                 Expanded(
                     child: Visibility(
                         visible: controller.isOfferBanner.value == true,
-                        child: CustomTextFormField(hintText: 'Enter offer Text'.tr, controller: controller.offerText.value, title: 'Offer Text *'.tr))),
+                        child: CustomTextFormField(
+                            hintText: 'Enter offer Text'.tr,
+                            controller: controller.offerText.value,
+                            title: 'Offer Text *'.tr))),
               ],
             ),
           ],
@@ -554,7 +797,9 @@ class BannerDialog extends StatelessWidget {
               children: [
                 CustomButtonWidget(
                   buttonTitle: "Close".tr,
-                  buttonColor: themeChange.isDarkTheme() ? AppThemData.greyShade900 : AppThemData.greyShade100,
+                  buttonColor: themeChange.isDarkTheme()
+                      ? AppThemData.greyShade900
+                      : AppThemData.greyShade100,
                   onPress: () {
                     controller.setDefaultData();
                     Navigator.pop(context);
@@ -562,7 +807,8 @@ class BannerDialog extends StatelessWidget {
                 ),
                 spaceW(),
                 CustomButtonWidget(
-                  buttonTitle: controller.isEditing.value ? "Edit".tr : "Save".tr,
+                  buttonTitle:
+                      controller.isEditing.value ? "Edit".tr : "Save".tr,
                   onPress: () {
                     if (Constant.isDemo) {
                       DialogBox.demoDialogBox();
@@ -570,8 +816,12 @@ class BannerDialog extends StatelessWidget {
                       if (controller.bannerName.value.text.isNotEmpty &&
                           controller.bannerImageName.value.text.isNotEmpty &&
                           controller.bannerDescription.value.text.isNotEmpty) {
-                        controller.isEditing.value ? controller.isEditing(true) : controller.isLoading(true);
-                        controller.isEditing.value ? controller.updateBanner(context) : controller.addBanner(context);
+                        controller.isEditing.value
+                            ? controller.isEditing(true)
+                            : controller.isLoading(true);
+                        controller.isEditing.value
+                            ? controller.updateBanner(context)
+                            : controller.addBanner(context);
                       } else {
                         ShowToastDialog.toast("All Fields are Required...".tr);
                       }

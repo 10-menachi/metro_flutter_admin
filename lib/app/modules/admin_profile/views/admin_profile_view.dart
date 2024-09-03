@@ -28,12 +28,16 @@ class AdminProfileView extends GetView<AdminProfileController> {
       init: AdminProfileController(),
       builder: (controller) {
         return Scaffold(
-            backgroundColor: themeChange.isDarkTheme() ? AppThemData.greyShade950 : AppThemData.greyShade50,
+            backgroundColor: themeChange.isDarkTheme()
+                ? AppThemData.greyShade950
+                : AppThemData.greyShade50,
             appBar: AppBar(
               elevation: 0.0,
               toolbarHeight: 70,
               automaticallyImplyLeading: false,
-              backgroundColor: themeChange.isDarkTheme() ? AppThemData.primaryBlack : AppThemData.primaryWhite,
+              backgroundColor: themeChange.isDarkTheme()
+                  ? AppThemData.primaryBlack
+                  : AppThemData.primaryWhite,
               leadingWidth: 200,
               // title: title,
               leading: Builder(
@@ -52,7 +56,9 @@ class AdminProfileView extends GetView<AdminProfileController> {
                               child: Icon(
                                 Icons.menu,
                                 size: 30,
-                                color: themeChange.isDarkTheme() ? AppThemData.primary500 : AppThemData.primary500,
+                                color: themeChange.isDarkTheme()
+                                    ? AppThemData.primary500
+                                    : AppThemData.primary500,
                               ),
                             )
                           : SizedBox(
@@ -66,14 +72,6 @@ class AdminProfileView extends GetView<AdminProfileController> {
                                     height: 50,
                                     color: AppThemData.primary500,
                                   ),
-                                  spaceW(),
-                                  const TextCustom(
-                                    title: 'My Taxi',
-                                    color: AppThemData.primary500,
-                                    fontSize: 30,
-                                    fontFamily: AppThemeData.semiBold,
-                                    fontWeight: FontWeight.w700,
-                                  )
                                 ],
                               ),
                             ),
@@ -116,13 +114,17 @@ class AdminProfileView extends GetView<AdminProfileController> {
             ),
             drawer: Drawer(
               width: 270,
-              backgroundColor: themeChange.isDarkTheme() ? AppThemData.primaryBlack : AppThemData.primaryWhite,
+              backgroundColor: themeChange.isDarkTheme()
+                  ? AppThemData.primaryBlack
+                  : AppThemData.primaryWhite,
               child: const MenuWidget(),
             ),
             body: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                if (ResponsiveWidget.isDesktop(context)) ...{const MenuWidget()},
+                if (ResponsiveWidget.isDesktop(context)) ...{
+                  const MenuWidget()
+                },
                 Expanded(
                   child: Padding(
                       padding: const EdgeInsets.all(20),

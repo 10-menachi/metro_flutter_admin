@@ -1,11 +1,12 @@
 const Map<String, String> hiIN = {
   "Alert..!": "चेतावनी..!",
-  "You have no right to add, edit and delete.": "आपको जोड़ने, संपादित करने और हटाने का अधिकार नहीं है।",
+  "You have no right to add, edit and delete.":
+      "आपको जोड़ने, संपादित करने और हटाने का अधिकार नहीं है।",
   "Ok": "ठीक है",
   "Are you sure?": "क्या आप सुनिश्चित हैं?",
   "Cancel": "रद्द करें",
   "Delete": "हटाएं",
-  "My Taxi": "मेरा टैक्सी",
+  "MetroBerry": "मेरा टैक्सी",
   "Your Fast Track to City Exploration": "शहर की खोज के लिए आपका फास्ट ट्रैक",
   "About App": "ऐप के बारे में",
   "profile": "प्रोफ़ाइल",
@@ -36,11 +37,14 @@ const Map<String, String> hiIN = {
   "Inactive": "निष्क्रिय",
   "Wallet Settings": "वॉलेट सेटिंग्स",
   "Minimum wallet amount to deposit": "जमा करने के लिए न्यूनतम वॉलेट राशि",
-  "Enter minimum wallet amount to deposit": "जमा करने के लिए न्यूनतम वॉलेट राशि दर्ज करें",
+  "Enter minimum wallet amount to deposit":
+      "जमा करने के लिए न्यूनतम वॉलेट राशि दर्ज करें",
   "Minimum wallet amount to withdrawal": "निकासी के लिए न्यूनतम वॉलेट राशि",
-  "Enter minimum wallet amount to withdrawal": "निकासी के लिए न्यूनतम वॉलेट राशि दर्ज करें",
+  "Enter minimum wallet amount to withdrawal":
+      "निकासी के लिए न्यूनतम वॉलेट राशि दर्ज करें",
   "Minimum amount to accept ride": "सवारी स्वीकार करने के लिए न्यूनतम राशि",
-  "Enter minimum amount to accept ride": "सवारी स्वीकार करने के लिए न्यूनतम राशि दर्ज करें",
+  "Enter minimum amount to accept ride":
+      "सवारी स्वीकार करने के लिए न्यूनतम राशि दर्ज करें",
   "Distance Settings": "दूरी सेटिंग्स",
   "Minimum Distance": "न्यूनतम दूरी",
   "Enter minimum distance": "न्यूनतम दूरी दर्ज करें",
@@ -214,7 +218,8 @@ const Map<String, String> hiIN = {
   "Phone Number *": "फोन नंबर *",
   "Email Address *": "ईमेल पता *",
   "Users data updated": "उपयोगकर्ता डेटा अपडेट किया गया",
-  "Something went wrong, Please try later!": "कुछ गलत हो गया, कृपया बाद में प्रयास करें!",
+  "Something went wrong, Please try later!":
+      "कुछ गलत हो गया, कृपया बाद में प्रयास करें!",
   "General Setting": "सामान्य सेटिंग",
   "Google Map Key": "Google मानचित्र कुंजी",
   "Enter google map key": "Google मानचित्र कुंजी दर्ज करें",
@@ -250,10 +255,12 @@ const Map<String, String> hiIN = {
   "Please Add Razorpay Key": "कृपया Razorpay कुंजी जोड़ें",
   "Please Add Razorpay Secret Key": "कृपया Razorpay गुप्त कुंजी जोड़ें",
   "Please Add Stripe Name": "कृपया Stripe नाम जोड़ें",
-  "Please Add Stripe Client Publishable Key": "कृपया Stripe क्लाइंट प्रकाशनीय कुंजी जोड़ें",
+  "Please Add Stripe Client Publishable Key":
+      "कृपया Stripe क्लाइंट प्रकाशनीय कुंजी जोड़ें",
   "Please Add Stripe Secret Key": "कृपया Stripe गुप्त कुंजी जोड़ें",
   "Please Add Mercado Pago Name": "कृपया Mercado Pago नाम जोड़ें",
-  "Please Add Mercado Pago Access Token": "कृपया Mercado Pago एक्सेस टोकन जोड़ें",
+  "Please Add Mercado Pago Access Token":
+      "कृपया Mercado Pago एक्सेस टोकन जोड़ें",
   "Please Add PayFast Name": "कृपया PayFast नाम जोड़ें",
   "Please Add PayFast Merchant Key": "कृपया PayFast व्यापारी कुंजी जोड़ें",
   "Please Add PayFast Merchant ID": "कृपया PayFast व्यापारी आईडी जोड़ें",
@@ -261,7 +268,8 @@ const Map<String, String> hiIN = {
   "Please Add PayFast Notify URL": "कृपया PayFast सूचित URL जोड़ें",
   "Please Add PayFast Cancel URL": "कृपया PayFast रद्द URL जोड़ें",
   "Please Add FlutterWave Name": "कृपया FlutterWave नाम जोड़ें",
-  "Please Add FlutterWave Public Key": "कृपया FlutterWave सार्वजनिक कुंजी जोड़ें",
+  "Please Add FlutterWave Public Key":
+      "कृपया FlutterWave सार्वजनिक कुंजी जोड़ें",
   "Please Add Cash Name": "कृपया Cash नाम जोड़ें",
   "Please Add Wallet Name": "कृपया Wallet नाम जोड़ें",
   "Payment status updated": "भुगतान स्थिति अपडेट की गई है",
@@ -286,7 +294,8 @@ const Map<String, String> hiIN = {
   "Enter Razorpay secret id": "Razorpay गुप्त आईडी दर्ज करें",
   "Stripe": "स्ट्राइप",
   "Stripe Client Publishable Key": "स्ट्राइप क्लाइंट प्रकाशनीय कुंजी",
-  "Enter Stripe Client Publishable Key": "स्ट्राइप क्लाइंट प्रकाशनीय कुंजी दर्ज करें",
+  "Enter Stripe Client Publishable Key":
+      "स्ट्राइप क्लाइंट प्रकाशनीय कुंजी दर्ज करें",
   "Stripe Secret Key": "स्ट्राइप गुप्त कुंजी",
   "Enter Stripe secret key": "स्ट्राइप गुप्त कुंजी दर्ज करें",
   "MercadoPogo": "MercadoPogo",

@@ -1,11 +1,12 @@
 const Map<String, String> enUS = {
   "Alert..!": "Alert..!",
-  "You have no right to add, edit and delete.": "You have no right to add, edit and delete.",
+  "You have no right to add, edit and delete.":
+      "You have no right to add, edit and delete.",
   "Ok": "Ok",
   "Are you sure?": "Are you sure?",
   "Cancel": "Cancel",
   "Delete": "Delete",
-  "My Taxi": "My Taxi",
+  "MetroBerry": "MetroBerry",
   "Your Fast Track to City Exploration": "Your Fast Track to City Exploration",
   "About App": "About App",
   "profile": "profile",
@@ -13,7 +14,8 @@ const Map<String, String> enUS = {
   "Profile": "Profile",
   "Profile updated successfully": "Profile updated successfully",
   "Old password is not correct": "Old password is not correct",
-  "Confirmation password does not match": "Confirmation password does not match",
+  "Confirmation password does not match":
+      "Confirmation password does not match",
   "Password updated successfully": "Password updated successfully",
   "Dashboard": "Dashboard",
   "Enter admin name": "Enter admin name",
@@ -36,9 +38,11 @@ const Map<String, String> enUS = {
   "Inactive": "Inactive",
   "Wallet Settings": "Wallet Settings",
   "Minimum wallet amount to deposit": "Minimum wallet amount to deposit",
-  "Enter minimum wallet amount to deposit": "Enter minimum wallet amount to deposit",
+  "Enter minimum wallet amount to deposit":
+      "Enter minimum wallet amount to deposit",
   "Minimum wallet amount to withdrawal": "Minimum wallet amount to withdrawal",
-  "Enter minimum wallet amount to withdrawal": "Enter minimum wallet amount to withdrawal",
+  "Enter minimum wallet amount to withdrawal":
+      "Enter minimum wallet amount to withdrawal",
   "Minimum amount to accept ride": "Minimum amount to accept ride",
   "Enter minimum amount to accept ride": "Enter minimum amount to accept ride",
   "Distance Settings": "Distance Settings",
@@ -214,7 +218,8 @@ const Map<String, String> enUS = {
   "Phone Number *": "Phone Number *",
   "Email Address *": "Email Address *",
   "Users data updated": "Users data updated",
-  "Something went wrong, Please try later!": "Something went wrong, Please try later!",
+  "Something went wrong, Please try later!":
+      "Something went wrong, Please try later!",
   "General Setting": "General Setting",
   "Google Map Key": "Google Map Key",
   "Enter google map key": "Enter google map key",
@@ -250,10 +255,12 @@ const Map<String, String> enUS = {
   "Please Add Razorpay Key": "Please Add Razorpay Key",
   "Please Add Razorpay Secret Key": "Please Add Razorpay Secret Key",
   "Please Add Stripe Name": "Please Add Stripe Name",
-  "Please Add Stripe Client Publishable Key": "Please Add Stripe Client Publishable Key",
+  "Please Add Stripe Client Publishable Key":
+      "Please Add Stripe Client Publishable Key",
   "Please Add Stripe Secret Key": "Please Add Stripe Secret Key",
   "Please Add Mercado Pago Name": "Please Add Mercado Pago Name",
-  "Please Add Mercado Pago Access Token": "Please Add Mercado Pago Access Token",
+  "Please Add Mercado Pago Access Token":
+      "Please Add Mercado Pago Access Token",
   "Please Add PayFast Name": "Please Add PayFast Name",
   "Please Add PayFast Merchant Key": "Please Add PayFast Merchant Key",
   "Please Add PayFast Merchant ID": "Please Add PayFast Merchant ID",

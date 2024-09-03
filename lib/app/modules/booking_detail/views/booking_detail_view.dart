@@ -31,13 +31,17 @@ class BookingDetailView extends GetView<BookingDetailController> {
       init: BookingDetailController(),
       builder: (controller) {
         return Scaffold(
-          backgroundColor: themeChange.isDarkTheme() ? AppThemData.greyShade950 : AppThemData.greyShade50,
+          backgroundColor: themeChange.isDarkTheme()
+              ? AppThemData.greyShade950
+              : AppThemData.greyShade50,
           // appBar: CommonUI.appBarCustom(themeChange: themeChange, scaffoldKey: controller.scaffoldKey),
           appBar: AppBar(
             elevation: 0.0,
             toolbarHeight: 70,
             automaticallyImplyLeading: false,
-            backgroundColor: themeChange.isDarkTheme() ? AppThemData.primaryBlack : AppThemData.primaryWhite,
+            backgroundColor: themeChange.isDarkTheme()
+                ? AppThemData.primaryBlack
+                : AppThemData.primaryWhite,
             leadingWidth: 200,
             // title: title,
             leading: Builder(
@@ -56,7 +60,9 @@ class BookingDetailView extends GetView<BookingDetailController> {
                             child: Icon(
                               Icons.menu,
                               size: 30,
-                              color: themeChange.isDarkTheme() ? AppThemData.primary500 : AppThemData.primary500,
+                              color: themeChange.isDarkTheme()
+                                  ? AppThemData.primary500
+                                  : AppThemData.primary500,
                             ),
                           )
                         : SizedBox(
@@ -70,14 +76,6 @@ class BookingDetailView extends GetView<BookingDetailController> {
                                   height: 45,
                                   color: AppThemData.primary500,
                                 ),
-                                spaceW(),
-                                const TextCustom(
-                                  title: 'My Taxi',
-                                  color: AppThemData.primary500,
-                                  fontSize: 30,
-                                  fontFamily: AppThemeData.semiBold,
-                                  fontWeight: FontWeight.w700,
-                                )
                               ],
                             ),
                           ),
@@ -120,7 +118,9 @@ class BookingDetailView extends GetView<BookingDetailController> {
           ),
           drawer: Drawer(
             width: 270,
-            backgroundColor: themeChange.isDarkTheme() ? AppThemData.primaryBlack : AppThemData.primaryWhite,
+            backgroundColor: themeChange.isDarkTheme()
+                ? AppThemData.primaryBlack
+                : AppThemData.primaryWhite,
             child: const MenuWidget(),
           ),
           // drawer: CommonUI.drawerCustom(scaffoldKey: controller.scaffoldKey, themeChange: themeChange),
@@ -136,560 +136,1159 @@ class BookingDetailView extends GetView<BookingDetailController> {
                         )
                       : SingleChildScrollView(
                           physics: const AlwaysScrollableScrollPhysics(),
-                          child:
-                              Column(mainAxisSize: MainAxisSize.min, mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.start, children: [
-                            Padding(
-                              padding: paddingEdgeInsets(horizontal: 24, vertical: 24),
-                              child: ContainerCustom(
-                                child: Column(children: [
-                                  Row(
-                                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      10.width,
+                          child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: paddingEdgeInsets(
+                                      horizontal: 24, vertical: 24),
+                                  child: ContainerCustom(
+                                    child: Column(children: [
                                       Row(
-                                        mainAxisAlignment: MainAxisAlignment.start,
-                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        mainAxisSize: MainAxisSize.max,
                                         children: [
-                                          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                                            TextCustom(title: controller.title.value, fontSize: 20, fontFamily: AppThemeData.bold),
-                                            spaceH(height: 2),
-                                            Row(children: [
-                                              GestureDetector(
-                                                  onTap: () => Get.offAllNamed(Routes.DASHBOARD_SCREEN),
-                                                  child:
-                                                      TextCustom(title: 'Dashboard'.tr, fontSize: 14, fontFamily: AppThemeData.medium, color: AppThemData.greyShade500)),
-                                              const TextCustom(title: ' / ', fontSize: 14, fontFamily: AppThemeData.medium, color: AppThemData.greyShade500),
-                                              GestureDetector(
-                                                  onTap: () => Get.back(),
-                                                  child: TextCustom(
-                                                      title: 'Booking History'.tr, fontSize: 14, fontFamily: AppThemeData.medium, color: AppThemData.greyShade500)),
-                                              const TextCustom(title: ' / ', fontSize: 14, fontFamily: AppThemeData.medium, color: AppThemData.greyShade500),
-                                              TextCustom(
-                                                  title: ' ${controller.title.value} ', fontSize: 14, fontFamily: AppThemeData.medium, color: AppThemData.primary500)
-                                            ])
-                                          ]),
+                                          10.width,
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    TextCustom(
+                                                        title: controller
+                                                            .title.value,
+                                                        fontSize: 20,
+                                                        fontFamily:
+                                                            AppThemeData.bold),
+                                                    spaceH(height: 2),
+                                                    Row(children: [
+                                                      GestureDetector(
+                                                          onTap: () => Get
+                                                              .offAllNamed(Routes
+                                                                  .DASHBOARD_SCREEN),
+                                                          child: TextCustom(
+                                                              title: 'Dashboard'
+                                                                  .tr,
+                                                              fontSize: 14,
+                                                              fontFamily:
+                                                                  AppThemeData
+                                                                      .medium,
+                                                              color: AppThemData
+                                                                  .greyShade500)),
+                                                      const TextCustom(
+                                                          title: ' / ',
+                                                          fontSize: 14,
+                                                          fontFamily:
+                                                              AppThemeData
+                                                                  .medium,
+                                                          color: AppThemData
+                                                              .greyShade500),
+                                                      GestureDetector(
+                                                          onTap: () =>
+                                                              Get.back(),
+                                                          child: TextCustom(
+                                                              title:
+                                                                  'Booking History'
+                                                                      .tr,
+                                                              fontSize: 14,
+                                                              fontFamily:
+                                                                  AppThemeData
+                                                                      .medium,
+                                                              color: AppThemData
+                                                                  .greyShade500)),
+                                                      const TextCustom(
+                                                          title: ' / ',
+                                                          fontSize: 14,
+                                                          fontFamily:
+                                                              AppThemeData
+                                                                  .medium,
+                                                          color: AppThemData
+                                                              .greyShade500),
+                                                      TextCustom(
+                                                          title:
+                                                              ' ${controller.title.value} ',
+                                                          fontSize: 14,
+                                                          fontFamily:
+                                                              AppThemeData
+                                                                  .medium,
+                                                          color: AppThemData
+                                                              .primary500)
+                                                    ])
+                                                  ]),
+                                            ],
+                                          ),
                                         ],
                                       ),
-                                    ],
-                                  ),
-                                  spaceH(height: 20),
-                                  ResponsiveWidget(
-                                    mobile: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            color: themeChange.isDarkTheme() ? AppThemData.greyShade950 : AppThemData.greyShade50,
-                                            borderRadius: BorderRadius.circular(10),
-                                          ),
-                                          child: Padding(
-                                            padding: paddingEdgeInsets(horizontal: 20, vertical: 20),
-                                            child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                      spaceH(height: 20),
+                                      ResponsiveWidget(
+                                        mobile: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                color: themeChange.isDarkTheme()
+                                                    ? AppThemData.greyShade950
+                                                    : AppThemData.greyShade50,
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                              ),
+                                              child: Padding(
+                                                padding: paddingEdgeInsets(
+                                                    horizontal: 20,
+                                                    vertical: 20),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
                                                   children: [
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        TextCustom(
+                                                            title:
+                                                                "Order ID # ${controller.bookingModel.value.id!.substring(0, 8)}",
+                                                            fontSize: 18,
+                                                            fontFamily:
+                                                                AppThemeData
+                                                                    .bold),
+                                                        spaceH(height: 2),
+                                                        TextCustom(
+                                                            title:
+                                                                "${Constant.timestampToDate(controller.bookingModel.value.createAt!)} at ${Constant.timestampToTime(controller.bookingModel.value.createAt!)}",
+                                                            fontSize: 14,
+                                                            fontFamily:
+                                                                AppThemeData
+                                                                    .medium),
+                                                      ],
+                                                    ),
+                                                    spaceH(),
+                                                    Container(
+                                                      child: Constant
+                                                          .bookingStatusText(
+                                                              context,
+                                                              controller
+                                                                  .bookingModel
+                                                                  .value
+                                                                  .bookingStatus
+                                                                  .toString()),
+                                                    ),
+                                                    spaceH(height: 40),
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      children: [
+                                                        TextCustom(
+                                                          title:
+                                                              "Customer Details"
+                                                                  .tr,
+                                                          fontSize: 16,
+                                                          fontFamily:
+                                                              AppThemeData.bold,
+                                                        ),
+                                                        spaceH(height: 16),
+                                                        rowDataWidget(
+                                                            name: "Name",
+                                                            value: controller
+                                                                .userModel
+                                                                .value
+                                                                .fullName
+                                                                .toString(),
+                                                            themeChange:
+                                                                themeChange),
+                                                        rowDataWidget(
+                                                            name: "Phone No.",
+                                                            value: Constant.maskMobileNumber(
+                                                                mobileNumber: controller
+                                                                    .userModel
+                                                                    .value
+                                                                    .phoneNumber
+                                                                    .toString(),
+                                                                countryCode: controller
+                                                                    .userModel
+                                                                    .value
+                                                                    .countryCode
+                                                                    .toString()),
+                                                            themeChange:
+                                                                themeChange),
+                                                      ],
+                                                    ),
+                                                    spaceH(height: 24),
+                                                    if (controller.driverModel
+                                                            .value.id !=
+                                                        null)
+                                                      Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        mainAxisSize:
+                                                            MainAxisSize.min,
+                                                        children: [
+                                                          TextCustom(
+                                                            title:
+                                                                "Driver Details"
+                                                                    .tr,
+                                                            fontSize: 16,
+                                                            fontFamily:
+                                                                AppThemeData
+                                                                    .bold,
+                                                          ),
+                                                          spaceH(height: 16),
+                                                          rowDataWidget(
+                                                              name: "ID",
+                                                              value:
+                                                                  "# ${controller.driverModel.value.id.toString().substring(0, 6)}",
+                                                              themeChange:
+                                                                  themeChange),
+                                                          rowDataWidget(
+                                                              name: "Name",
+                                                              value: controller
+                                                                  .driverModel
+                                                                  .value
+                                                                  .fullName
+                                                                  .toString(),
+                                                              themeChange:
+                                                                  themeChange),
+                                                          rowDataWidget(
+                                                              name: "Phone No.",
+                                                              value: Constant.maskMobileNumber(
+                                                                  mobileNumber: controller
+                                                                      .driverModel
+                                                                      .value
+                                                                      .phoneNumber
+                                                                      .toString(),
+                                                                  countryCode: controller
+                                                                      .driverModel
+                                                                      .value
+                                                                      .countryCode
+                                                                      .toString()),
+                                                              themeChange:
+                                                                  themeChange),
+                                                        ],
+                                                      ),
+                                                    spaceH(height: 24),
                                                     TextCustom(
-                                                        title: "Order ID # ${controller.bookingModel.value.id!.substring(0, 8)}",
-                                                        fontSize: 18,
-                                                        fontFamily: AppThemeData.bold),
-                                                    spaceH(height: 2),
-                                                    TextCustom(
-                                                        title:
-                                                            "${Constant.timestampToDate(controller.bookingModel.value.createAt!)} at ${Constant.timestampToTime(controller.bookingModel.value.createAt!)}",
-                                                        fontSize: 14,
-                                                        fontFamily: AppThemeData.medium),
-                                                  ],
-                                                ),
-                                                spaceH(),
-                                                Container(
-                                                  child: Constant.bookingStatusText(context, controller.bookingModel.value.bookingStatus.toString()),
-                                                ),
-                                                spaceH(height: 40),
-                                                Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  mainAxisSize: MainAxisSize.min,
-                                                  children: [
-                                                    TextCustom(
-                                                      title: "Customer Details".tr,
+                                                      title:
+                                                          "Address Details".tr,
                                                       fontSize: 16,
-                                                      fontFamily: AppThemeData.bold,
+                                                      fontFamily:
+                                                          AppThemeData.bold,
                                                     ),
                                                     spaceH(height: 16),
-                                                    rowDataWidget(name: "Name", value: controller.userModel.value.fullName.toString(), themeChange: themeChange),
-                                                    rowDataWidget(
-                                                        name: "Phone No.",
-                                                        value: Constant.maskMobileNumber(
-                                                            mobileNumber: controller.userModel.value.phoneNumber.toString(),
-                                                            countryCode: controller.userModel.value.countryCode.toString()),
-                                                        themeChange: themeChange),
+                                                    PickDropPointView(
+                                                      dropAddress: controller
+                                                          .bookingModel
+                                                          .value
+                                                          .dropLocationAddress
+                                                          .toString(),
+                                                      pickUpAddress: controller
+                                                          .bookingModel
+                                                          .value
+                                                          .pickUpLocationAddress
+                                                          .toString(),
+                                                    ),
                                                   ],
                                                 ),
-                                                spaceH(height: 24),
-                                                if (controller.driverModel.value.id != null)
-                                                  Column(
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    mainAxisSize: MainAxisSize.min,
-                                                    children: [
-                                                      TextCustom(
-                                                        title: "Driver Details".tr,
-                                                        fontSize: 16,
-                                                        fontFamily: AppThemeData.bold,
-                                                      ),
-                                                      spaceH(height: 16),
-                                                      rowDataWidget(
-                                                          name: "ID", value: "# ${controller.driverModel.value.id.toString().substring(0, 6)}", themeChange: themeChange),
-                                                      rowDataWidget(name: "Name", value: controller.driverModel.value.fullName.toString(), themeChange: themeChange),
-                                                      rowDataWidget(
-                                                          name: "Phone No.",
-                                                          value: Constant.maskMobileNumber(
-                                                              mobileNumber: controller.driverModel.value.phoneNumber.toString(),
-                                                              countryCode: controller.driverModel.value.countryCode.toString()),
-                                                          themeChange: themeChange),
-                                                    ],
-                                                  ),
-                                                spaceH(height: 24),
-                                                TextCustom(
-                                                  title: "Address Details".tr,
-                                                  fontSize: 16,
-                                                  fontFamily: AppThemeData.bold,
-                                                ),
-                                                spaceH(height: 16),
-                                                PickDropPointView(
-                                                  dropAddress: controller.bookingModel.value.dropLocationAddress.toString(),
-                                                  pickUpAddress: controller.bookingModel.value.pickUpLocationAddress.toString(),
-                                                ),
-                                              ],
+                                              ),
                                             ),
-                                          ),
+                                            spaceH(height: 16),
+                                            Container(
+                                              // width: Responsive.width(100, context),
+                                              padding: const EdgeInsets.all(20),
+                                              margin: const EdgeInsets.only(
+                                                  top: 12),
+                                              decoration: ShapeDecoration(
+                                                color: themeChange.isDarkTheme()
+                                                    ? AppThemData.greyShade900
+                                                    : AppThemData.greyShade50,
+                                                // themeChange.getTheme() ? AppColors.primaryBlack : AppColors.primaryWhite,
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                ),
+                                              ),
+                                              child: Obx(
+                                                () => Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    PriceRowView(
+                                                      price: controller
+                                                          .bookingModel
+                                                          .value
+                                                          .subTotal
+                                                          .toString(),
+                                                      title: "Amount".tr,
+                                                      priceColor: themeChange
+                                                              .isDarkTheme()
+                                                          ? AppThemData
+                                                              .greyShade25
+                                                          : AppThemData
+                                                              .greyShade950,
+                                                      titleColor: themeChange
+                                                              .isDarkTheme()
+                                                          ? AppThemData
+                                                              .greyShade25
+                                                          : AppThemData
+                                                              .greyShade950,
+                                                    ),
+                                                    const SizedBox(height: 16),
+                                                    PriceRowView(
+                                                        price: Constant.amountToShow(
+                                                            amount: controller
+                                                                    .bookingModel
+                                                                    .value
+                                                                    .discount ??
+                                                                '0.0'),
+                                                        title: "Discount".tr,
+                                                        priceColor: themeChange
+                                                                .isDarkTheme()
+                                                            ? AppThemData
+                                                                .greyShade25
+                                                            : AppThemData
+                                                                .greyShade950,
+                                                        titleColor: themeChange
+                                                                .isDarkTheme()
+                                                            ? AppThemData
+                                                                .greyShade25
+                                                            : AppThemData
+                                                                .greyShade950),
+                                                    const SizedBox(height: 16),
+                                                    ListView.builder(
+                                                      physics:
+                                                          const NeverScrollableScrollPhysics(),
+                                                      itemCount: controller
+                                                          .bookingModel
+                                                          .value
+                                                          .taxList!
+                                                          .length,
+                                                      shrinkWrap: true,
+                                                      itemBuilder:
+                                                          (context, index) {
+                                                        TaxModel taxModel =
+                                                            controller
+                                                                .bookingModel
+                                                                .value
+                                                                .taxList![index];
+                                                        return Column(
+                                                          children: [
+                                                            PriceRowView(
+                                                                price: Constant
+                                                                    .amountToShow(
+                                                                        amount:
+                                                                            Constant.calculateTax(amount: Constant.amountBeforeTax(controller.bookingModel.value).toString(), taxModel: taxModel)
+                                                                                .toString()),
+                                                                title:
+                                                                    "${taxModel.name!} (${taxModel.isFix == true ? Constant.amountToShow(amount: taxModel.value) : "${taxModel.value}%"})",
+                                                                priceColor: themeChange
+                                                                        .isDarkTheme()
+                                                                    ? AppThemData
+                                                                        .greyShade25
+                                                                    : AppThemData
+                                                                        .greyShade950,
+                                                                titleColor: themeChange
+                                                                        .isDarkTheme()
+                                                                    ? AppThemData
+                                                                        .greyShade25
+                                                                    : AppThemData
+                                                                        .greyShade950),
+                                                            const SizedBox(
+                                                                height: 16),
+                                                          ],
+                                                        );
+                                                      },
+                                                    ),
+                                                    const SizedBox(height: 8),
+                                                    Divider(
+                                                        color: themeChange
+                                                                .isDarkTheme()
+                                                            ? AppThemData
+                                                                .greyShade800
+                                                            : AppThemData
+                                                                .greyShade100),
+                                                    const SizedBox(height: 12),
+                                                    PriceRowView(
+                                                      price: Constant.amountShow(
+                                                          amount: Constant
+                                                                  .calculateFinalAmount(
+                                                                      controller
+                                                                          .bookingModel
+                                                                          .value)
+                                                              .toString()),
+                                                      title: "Total Amount".tr,
+                                                      priceColor: AppThemData
+                                                          .primary500,
+                                                      titleColor: themeChange
+                                                              .isDarkTheme()
+                                                          ? AppThemData
+                                                              .greyShade25
+                                                          : AppThemData
+                                                              .greyShade950,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                        spaceH(height: 16),
-                                        Container(
-                                          // width: Responsive.width(100, context),
-                                          padding: const EdgeInsets.all(20),
-                                          margin: const EdgeInsets.only(top: 12),
-                                          decoration: ShapeDecoration(
-                                            color: themeChange.isDarkTheme() ? AppThemData.greyShade900 : AppThemData.greyShade50,
-                                            // themeChange.getTheme() ? AppColors.primaryBlack : AppColors.primaryWhite,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.circular(12),
-                                            ),
-                                          ),
-                                          child: Obx(
-                                            () => Column(
-                                              mainAxisAlignment: MainAxisAlignment.start,
-                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                        tablet: Column(
+                                          children: [
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              mainAxisSize: MainAxisSize.max,
                                               children: [
-                                                PriceRowView(
-                                                  price: controller.bookingModel.value.subTotal.toString(),
-                                                  title: "Amount".tr,
-                                                  priceColor: themeChange.isDarkTheme() ? AppThemData.greyShade25 : AppThemData.greyShade950,
-                                                  titleColor: themeChange.isDarkTheme() ? AppThemData.greyShade25 : AppThemData.greyShade950,
-                                                ),
-                                                const SizedBox(height: 16),
-                                                PriceRowView(
-                                                    price: Constant.amountToShow(amount: controller.bookingModel.value.discount ?? '0.0'),
-                                                    title: "Discount".tr,
-                                                    priceColor: themeChange.isDarkTheme() ? AppThemData.greyShade25 : AppThemData.greyShade950,
-                                                    titleColor: themeChange.isDarkTheme() ? AppThemData.greyShade25 : AppThemData.greyShade950),
-                                                const SizedBox(height: 16),
-                                                ListView.builder(
-                                                  physics: const NeverScrollableScrollPhysics(),
-                                                  itemCount: controller.bookingModel.value.taxList!.length,
-                                                  shrinkWrap: true,
-                                                  itemBuilder: (context, index) {
-                                                    TaxModel taxModel = controller.bookingModel.value.taxList![index];
-                                                    return Column(
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                    color: themeChange
+                                                            .isDarkTheme()
+                                                        ? AppThemData
+                                                            .greyShade950
+                                                        : AppThemData
+                                                            .greyShade50,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                  ),
+                                                  child: Padding(
+                                                    padding: paddingEdgeInsets(
+                                                        horizontal: 20,
+                                                        vertical: 20),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                TextCustom(
+                                                                    title:
+                                                                        "Order ID # ${controller.bookingModel.value.id!.substring(0, 8)}",
+                                                                    fontSize:
+                                                                        18,
+                                                                    fontFamily:
+                                                                        AppThemeData
+                                                                            .bold),
+                                                                spaceH(
+                                                                    height: 2),
+                                                                TextCustom(
+                                                                    title:
+                                                                        "${Constant.timestampToDate(controller.bookingModel.value.createAt!)} at ${Constant.timestampToTime(controller.bookingModel.value.createAt!)}",
+                                                                    fontSize:
+                                                                        14,
+                                                                    fontFamily:
+                                                                        AppThemeData
+                                                                            .medium),
+                                                              ],
+                                                            ),
+                                                            Container(
+                                                              child: Constant.bookingStatusText(
+                                                                  context,
+                                                                  controller
+                                                                      .bookingModel
+                                                                      .value
+                                                                      .bookingStatus
+                                                                      .toString()),
+                                                            )
+                                                          ],
+                                                        ),
+                                                        spaceH(height: 40),
+                                                        Row(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            SizedBox(
+                                                              width: ScreenSize
+                                                                  .width(20,
+                                                                      context),
+                                                              child: Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .min,
+                                                                children: [
+                                                                  TextCustom(
+                                                                    title:
+                                                                        "Customer Details"
+                                                                            .tr,
+                                                                    fontSize:
+                                                                        16,
+                                                                    fontFamily:
+                                                                        AppThemeData
+                                                                            .bold,
+                                                                  ),
+                                                                  spaceH(
+                                                                      height:
+                                                                          16),
+                                                                  rowDataWidget(
+                                                                      name:
+                                                                          "Name",
+                                                                      value: controller
+                                                                          .userModel
+                                                                          .value
+                                                                          .fullName
+                                                                          .toString(),
+                                                                      themeChange:
+                                                                          themeChange),
+                                                                  rowDataWidget(
+                                                                      name:
+                                                                          "Phone No.",
+                                                                      value: Constant.maskMobileNumber(
+                                                                          mobileNumber: controller
+                                                                              .userModel
+                                                                              .value
+                                                                              .phoneNumber
+                                                                              .toString(),
+                                                                          countryCode: controller
+                                                                              .userModel
+                                                                              .value
+                                                                              .countryCode
+                                                                              .toString()),
+                                                                      themeChange:
+                                                                          themeChange),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            if (controller
+                                                                    .driverModel
+                                                                    .value
+                                                                    .id !=
+                                                                null)
+                                                              SizedBox(
+                                                                width: ScreenSize
+                                                                    .width(20,
+                                                                        context),
+                                                                child: Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .min,
+                                                                  children: [
+                                                                    TextCustom(
+                                                                      title:
+                                                                          "Driver Details"
+                                                                              .tr,
+                                                                      fontSize:
+                                                                          16,
+                                                                      fontFamily:
+                                                                          AppThemeData
+                                                                              .bold,
+                                                                    ),
+                                                                    spaceH(
+                                                                        height:
+                                                                            16),
+                                                                    rowDataWidget(
+                                                                        name:
+                                                                            "ID",
+                                                                        value:
+                                                                            "# ${controller.driverModel.value.id!.substring(0, 6)}",
+                                                                        themeChange:
+                                                                            themeChange),
+                                                                    rowDataWidget(
+                                                                        name:
+                                                                            "Name",
+                                                                        value: controller
+                                                                            .driverModel
+                                                                            .value
+                                                                            .fullName
+                                                                            .toString(),
+                                                                        themeChange:
+                                                                            themeChange),
+                                                                    rowDataWidget(
+                                                                        name:
+                                                                            "Phone No.",
+                                                                        value: Constant.maskMobileNumber(
+                                                                            mobileNumber: controller.driverModel.value.phoneNumber
+                                                                                .toString(),
+                                                                            countryCode: controller.driverModel.value.countryCode
+                                                                                .toString()),
+                                                                        themeChange:
+                                                                            themeChange),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                          ],
+                                                        ),
+                                                        spaceH(height: 40),
+                                                        PickDropPointView(
+                                                          dropAddress: controller
+                                                              .bookingModel
+                                                              .value
+                                                              .dropLocationAddress
+                                                              .toString(),
+                                                          pickUpAddress: controller
+                                                              .bookingModel
+                                                              .value
+                                                              .pickUpLocationAddress
+                                                              .toString(),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ).expand(flex: 2),
+                                                spaceW(width: 20),
+                                                Container(
+                                                  // width: Responsive.width(100, context),
+                                                  padding:
+                                                      const EdgeInsets.all(20),
+                                                  margin: const EdgeInsets.only(
+                                                      top: 12),
+                                                  decoration: ShapeDecoration(
+                                                    color: themeChange
+                                                            .isDarkTheme()
+                                                        ? AppThemData
+                                                            .greyShade900
+                                                        : AppThemData
+                                                            .greyShade50,
+                                                    // themeChange.getTheme() ? AppColors.primaryBlack : AppColors.primaryWhite,
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              12),
+                                                    ),
+                                                  ),
+                                                  child: Obx(
+                                                    () => Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
                                                       children: [
                                                         PriceRowView(
+                                                          price: controller
+                                                              .bookingModel
+                                                              .value
+                                                              .subTotal
+                                                              .toString(),
+                                                          title: "Amount".tr,
+                                                          priceColor: themeChange
+                                                                  .isDarkTheme()
+                                                              ? AppThemData
+                                                                  .greyShade25
+                                                              : AppThemData
+                                                                  .greyShade950,
+                                                          titleColor: themeChange
+                                                                  .isDarkTheme()
+                                                              ? AppThemData
+                                                                  .greyShade25
+                                                              : AppThemData
+                                                                  .greyShade950,
+                                                        ),
+                                                        const SizedBox(
+                                                            height: 16),
+                                                        PriceRowView(
                                                             price: Constant.amountToShow(
-                                                                amount: Constant.calculateTax(
-                                                                        amount: Constant.amountBeforeTax(controller.bookingModel.value).toString(), taxModel: taxModel)
-                                                                    .toString()),
+                                                                amount: controller
+                                                                        .bookingModel
+                                                                        .value
+                                                                        .discount ??
+                                                                    '0.0'),
                                                             title:
-                                                                "${taxModel.name!} (${taxModel.isFix == true ? Constant.amountToShow(amount: taxModel.value) : "${taxModel.value}%"})",
-                                                            priceColor: themeChange.isDarkTheme() ? AppThemData.greyShade25 : AppThemData.greyShade950,
-                                                            titleColor: themeChange.isDarkTheme() ? AppThemData.greyShade25 : AppThemData.greyShade950),
-                                                        const SizedBox(height: 16),
+                                                                "Discount".tr,
+                                                            priceColor: themeChange
+                                                                    .isDarkTheme()
+                                                                ? AppThemData
+                                                                    .greyShade25
+                                                                : AppThemData
+                                                                    .greyShade950,
+                                                            titleColor: themeChange
+                                                                    .isDarkTheme()
+                                                                ? AppThemData
+                                                                    .greyShade25
+                                                                : AppThemData
+                                                                    .greyShade950),
+                                                        const SizedBox(
+                                                            height: 16),
+                                                        ListView.builder(
+                                                          physics:
+                                                              const NeverScrollableScrollPhysics(),
+                                                          itemCount: controller
+                                                              .bookingModel
+                                                              .value
+                                                              .taxList!
+                                                              .length,
+                                                          shrinkWrap: true,
+                                                          itemBuilder:
+                                                              (context, index) {
+                                                            TaxModel taxModel =
+                                                                controller
+                                                                    .bookingModel
+                                                                    .value
+                                                                    .taxList![index];
+                                                            return Column(
+                                                              children: [
+                                                                PriceRowView(
+                                                                    price: Constant.amountToShow(
+                                                                        amount:
+                                                                            Constant.calculateTax(amount: Constant.amountBeforeTax(controller.bookingModel.value).toString(), taxModel: taxModel)
+                                                                                .toString()),
+                                                                    title:
+                                                                        "${taxModel.name!} (${taxModel.isFix == true ? Constant.amountToShow(amount: taxModel.value) : "${taxModel.value}%"})",
+                                                                    priceColor: themeChange
+                                                                            .isDarkTheme()
+                                                                        ? AppThemData
+                                                                            .greyShade25
+                                                                        : AppThemData
+                                                                            .greyShade950,
+                                                                    titleColor: themeChange.isDarkTheme()
+                                                                        ? AppThemData
+                                                                            .greyShade25
+                                                                        : AppThemData
+                                                                            .greyShade950),
+                                                                const SizedBox(
+                                                                    height: 16),
+                                                              ],
+                                                            );
+                                                          },
+                                                        ),
+                                                        const SizedBox(
+                                                            height: 8),
+                                                        Divider(
+                                                            color: themeChange
+                                                                    .isDarkTheme()
+                                                                ? AppThemData
+                                                                    .greyShade800
+                                                                : AppThemData
+                                                                    .greyShade100),
+                                                        const SizedBox(
+                                                            height: 12),
+                                                        PriceRowView(
+                                                          price: Constant.amountShow(
+                                                              amount: Constant.calculateFinalAmount(
+                                                                      controller
+                                                                          .bookingModel
+                                                                          .value)
+                                                                  .toString()),
+                                                          title:
+                                                              "Total Amount".tr,
+                                                          priceColor:
+                                                              AppThemData
+                                                                  .primary500,
+                                                          titleColor: themeChange
+                                                                  .isDarkTheme()
+                                                              ? AppThemData
+                                                                  .greyShade25
+                                                              : AppThemData
+                                                                  .greyShade950,
+                                                        ),
                                                       ],
-                                                    );
-                                                  },
-                                                ),
-                                                const SizedBox(height: 8),
-                                                Divider(color: themeChange.isDarkTheme() ? AppThemData.greyShade800 : AppThemData.greyShade100),
-                                                const SizedBox(height: 12),
-                                                PriceRowView(
-                                                  price: Constant.amountShow(amount: Constant.calculateFinalAmount(controller.bookingModel.value).toString()),
-                                                  title: "Total Amount".tr,
-                                                  priceColor: AppThemData.primary500,
-                                                  titleColor: themeChange.isDarkTheme() ? AppThemData.greyShade25 : AppThemData.greyShade950,
-                                                ),
+                                                    ),
+                                                  ),
+                                                ).expand(flex: 1),
                                               ],
                                             ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    tablet: Column(
-                                      children: [
-                                        Row(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                color: themeChange.isDarkTheme() ? AppThemData.greyShade950 : AppThemData.greyShade50,
-                                                borderRadius: BorderRadius.circular(10),
-                                              ),
-                                              child: Padding(
-                                                padding: paddingEdgeInsets(horizontal: 20, vertical: 20),
-                                                child: Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                    Row(
-                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                      children: [
-                                                        Column(
-                                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                                          children: [
-                                                            TextCustom(
-                                                                title: "Order ID # ${controller.bookingModel.value.id!.substring(0, 8)}",
-                                                                fontSize: 18,
-                                                                fontFamily: AppThemeData.bold),
-                                                            spaceH(height: 2),
-                                                            TextCustom(
-                                                                title:
-                                                                    "${Constant.timestampToDate(controller.bookingModel.value.createAt!)} at ${Constant.timestampToTime(controller.bookingModel.value.createAt!)}",
-                                                                fontSize: 14,
-                                                                fontFamily: AppThemeData.medium),
-                                                          ],
-                                                        ),
-                                                        Container(
-                                                          child: Constant.bookingStatusText(context, controller.bookingModel.value.bookingStatus.toString()),
-                                                        )
-                                                      ],
-                                                    ),
-                                                    spaceH(height: 40),
-                                                    Row(
-                                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                      children: [
-                                                        SizedBox(
-                                                          width: ScreenSize.width(20, context),
-                                                          child: Column(
-                                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                                            mainAxisSize: MainAxisSize.min,
-                                                            children: [
-                                                              TextCustom(
-                                                                title: "Customer Details".tr,
-                                                                fontSize: 16,
-                                                                fontFamily: AppThemeData.bold,
-                                                              ),
-                                                              spaceH(height: 16),
-                                                              rowDataWidget(
-                                                                  name: "Name", value: controller.userModel.value.fullName.toString(), themeChange: themeChange),
-                                                              rowDataWidget(
-                                                                  name: "Phone No.",
-                                                                  value: Constant.maskMobileNumber(
-                                                                      mobileNumber: controller.userModel.value.phoneNumber.toString(),
-                                                                      countryCode: controller.userModel.value.countryCode.toString()),
-                                                                  themeChange: themeChange),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        if (controller.driverModel.value.id != null)
-                                                          SizedBox(
-                                                            width: ScreenSize.width(20, context),
-                                                            child: Column(
-                                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                                              mainAxisSize: MainAxisSize.min,
-                                                              children: [
-                                                                TextCustom(
-                                                                  title: "Driver Details".tr,
-                                                                  fontSize: 16,
-                                                                  fontFamily: AppThemeData.bold,
-                                                                ),
-                                                                spaceH(height: 16),
-                                                                rowDataWidget(
-                                                                    name: "ID", value: "# ${controller.driverModel.value.id!.substring(0, 6)}", themeChange: themeChange),
-                                                                rowDataWidget(
-                                                                    name: "Name", value: controller.driverModel.value.fullName.toString(), themeChange: themeChange),
-                                                                rowDataWidget(
-                                                                    name: "Phone No.",
-                                                                    value: Constant.maskMobileNumber(
-                                                                        mobileNumber: controller.driverModel.value.phoneNumber.toString(),
-                                                                        countryCode: controller.driverModel.value.countryCode.toString()),
-                                                                    themeChange: themeChange),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                      ],
-                                                    ),
-                                                    spaceH(height: 40),
-                                                    PickDropPointView(
-                                                      dropAddress: controller.bookingModel.value.dropLocationAddress.toString(),
-                                                      pickUpAddress: controller.bookingModel.value.pickUpLocationAddress.toString(),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ).expand(flex: 2),
-                                            spaceW(width: 20),
-                                            Container(
-                                              // width: Responsive.width(100, context),
-                                              padding: const EdgeInsets.all(20),
-                                              margin: const EdgeInsets.only(top: 12),
-                                              decoration: ShapeDecoration(
-                                                color: themeChange.isDarkTheme() ? AppThemData.greyShade900 : AppThemData.greyShade50,
-                                                // themeChange.getTheme() ? AppColors.primaryBlack : AppColors.primaryWhite,
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius: BorderRadius.circular(12),
-                                                ),
-                                              ),
-                                              child: Obx(
-                                                () => Column(
-                                                  mainAxisAlignment: MainAxisAlignment.start,
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                    PriceRowView(
-                                                      price: controller.bookingModel.value.subTotal.toString(),
-                                                      title: "Amount".tr,
-                                                      priceColor: themeChange.isDarkTheme() ? AppThemData.greyShade25 : AppThemData.greyShade950,
-                                                      titleColor: themeChange.isDarkTheme() ? AppThemData.greyShade25 : AppThemData.greyShade950,
-                                                    ),
-                                                    const SizedBox(height: 16),
-                                                    PriceRowView(
-                                                        price: Constant.amountToShow(amount: controller.bookingModel.value.discount ?? '0.0'),
-                                                        title: "Discount".tr,
-                                                        priceColor: themeChange.isDarkTheme() ? AppThemData.greyShade25 : AppThemData.greyShade950,
-                                                        titleColor: themeChange.isDarkTheme() ? AppThemData.greyShade25 : AppThemData.greyShade950),
-                                                    const SizedBox(height: 16),
-                                                    ListView.builder(
-                                                      physics: const NeverScrollableScrollPhysics(),
-                                                      itemCount: controller.bookingModel.value.taxList!.length,
-                                                      shrinkWrap: true,
-                                                      itemBuilder: (context, index) {
-                                                        TaxModel taxModel = controller.bookingModel.value.taxList![index];
-                                                        return Column(
-                                                          children: [
-                                                            PriceRowView(
-                                                                price: Constant.amountToShow(
-                                                                    amount: Constant.calculateTax(
-                                                                            amount: Constant.amountBeforeTax(controller.bookingModel.value).toString(),
-                                                                            taxModel: taxModel)
-                                                                        .toString()),
-                                                                title:
-                                                                    "${taxModel.name!} (${taxModel.isFix == true ? Constant.amountToShow(amount: taxModel.value) : "${taxModel.value}%"})",
-                                                                priceColor: themeChange.isDarkTheme() ? AppThemData.greyShade25 : AppThemData.greyShade950,
-                                                                titleColor: themeChange.isDarkTheme() ? AppThemData.greyShade25 : AppThemData.greyShade950),
-                                                            const SizedBox(height: 16),
-                                                          ],
-                                                        );
-                                                      },
-                                                    ),
-                                                    const SizedBox(height: 8),
-                                                    Divider(color: themeChange.isDarkTheme() ? AppThemData.greyShade800 : AppThemData.greyShade100),
-                                                    const SizedBox(height: 12),
-                                                    PriceRowView(
-                                                      price: Constant.amountShow(amount: Constant.calculateFinalAmount(controller.bookingModel.value).toString()),
-                                                      title: "Total Amount".tr,
-                                                      priceColor: AppThemData.primary500,
-                                                      titleColor: themeChange.isDarkTheme() ? AppThemData.greyShade25 : AppThemData.greyShade950,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ).expand(flex: 1),
                                           ],
                                         ),
-                                      ],
-                                    ),
-                                    desktop: Column(
-                                      children: [
-                                        Row(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                          mainAxisSize: MainAxisSize.max,
+                                        desktop: Column(
                                           children: [
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                color: themeChange.isDarkTheme() ? AppThemData.greyShade950 : AppThemData.greyShade50,
-                                                borderRadius: BorderRadius.circular(10),
-                                              ),
-                                              child: Padding(
-                                                padding: paddingEdgeInsets(horizontal: 20, vertical: 20),
-                                                child: Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                    Row(
-                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Container(
+                                                  decoration: BoxDecoration(
+                                                    color: themeChange
+                                                            .isDarkTheme()
+                                                        ? AppThemData
+                                                            .greyShade950
+                                                        : AppThemData
+                                                            .greyShade50,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                  ),
+                                                  child: Padding(
+                                                    padding: paddingEdgeInsets(
+                                                        horizontal: 20,
+                                                        vertical: 20),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
                                                       children: [
-                                                        Column(
-                                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
                                                           children: [
-                                                            TextCustom(
-                                                                title: "Order ID # ${controller.bookingModel.value.id!.substring(0, 8)}",
-                                                                fontSize: 18,
-                                                                fontFamily: AppThemeData.bold),
-                                                            spaceH(height: 2),
-                                                            TextCustom(
-                                                                title:
-                                                                    "${Constant.timestampToDate(controller.bookingModel.value.createAt!)} at ${Constant.timestampToTime(controller.bookingModel.value.createAt!)}",
-                                                                fontSize: 14,
-                                                                fontFamily: AppThemeData.medium),
-                                                          ],
-                                                        ),
-                                                        Container(
-                                                          child: Constant.bookingStatusText(context, controller.bookingModel.value.bookingStatus.toString()),
-                                                        )
-                                                      ],
-                                                    ),
-                                                    spaceH(height: 40),
-                                                    Row(
-                                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                      children: [
-                                                        SizedBox(
-                                                          width: 250,
-                                                          child: Column(
-                                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                                            mainAxisSize: MainAxisSize.min,
-                                                            children: [
-                                                              TextCustom(
-                                                                title: "Customer Details".tr,
-                                                                fontSize: 16,
-                                                                fontFamily: AppThemeData.bold,
-                                                              ),
-                                                              spaceH(height: 16),
-                                                              rowDataWidget(
-                                                                  name: "Name", value: controller.userModel.value.fullName.toString(), themeChange: themeChange),
-                                                              rowDataWidget(
-                                                                  name: "Phone Number",
-                                                                  value: Constant.maskMobileNumber(
-                                                                      mobileNumber: controller.userModel.value.phoneNumber.toString(),
-                                                                      countryCode: controller.userModel.value.countryCode.toString()),
-                                                                  themeChange: themeChange),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        if (controller.driverModel.value.id != null)
-                                                          SizedBox(
-                                                            width: 250,
-                                                            child: Column(
-                                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                                              mainAxisSize: MainAxisSize.min,
+                                                            Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
                                                               children: [
                                                                 TextCustom(
-                                                                  title: "Driver Details".tr,
-                                                                  fontSize: 16,
-                                                                  fontFamily: AppThemeData.bold,
-                                                                ),
-                                                                spaceH(height: 16),
-                                                                rowDataWidget(
-                                                                    name: "ID", value: "# ${controller.driverModel.value.id!.substring(0, 6)}", themeChange: themeChange),
-                                                                rowDataWidget(
-                                                                    name: "Name", value: controller.driverModel.value.fullName.toString(), themeChange: themeChange),
-                                                                rowDataWidget(
-                                                                    name: "Phone Number",
-                                                                    value: Constant.maskMobileNumber(
-                                                                        mobileNumber: controller.driverModel.value.phoneNumber.toString(),
-                                                                        countryCode: controller.driverModel.value.countryCode.toString()),
-                                                                    themeChange: themeChange),
+                                                                    title:
+                                                                        "Order ID # ${controller.bookingModel.value.id!.substring(0, 8)}",
+                                                                    fontSize:
+                                                                        18,
+                                                                    fontFamily:
+                                                                        AppThemeData
+                                                                            .bold),
+                                                                spaceH(
+                                                                    height: 2),
+                                                                TextCustom(
+                                                                    title:
+                                                                        "${Constant.timestampToDate(controller.bookingModel.value.createAt!)} at ${Constant.timestampToTime(controller.bookingModel.value.createAt!)}",
+                                                                    fontSize:
+                                                                        14,
+                                                                    fontFamily:
+                                                                        AppThemeData
+                                                                            .medium),
                                                               ],
                                                             ),
-                                                          ),
+                                                            Container(
+                                                              child: Constant.bookingStatusText(
+                                                                  context,
+                                                                  controller
+                                                                      .bookingModel
+                                                                      .value
+                                                                      .bookingStatus
+                                                                      .toString()),
+                                                            )
+                                                          ],
+                                                        ),
+                                                        spaceH(height: 40),
+                                                        Row(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          children: [
+                                                            SizedBox(
+                                                              width: 250,
+                                                              child: Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .min,
+                                                                children: [
+                                                                  TextCustom(
+                                                                    title:
+                                                                        "Customer Details"
+                                                                            .tr,
+                                                                    fontSize:
+                                                                        16,
+                                                                    fontFamily:
+                                                                        AppThemeData
+                                                                            .bold,
+                                                                  ),
+                                                                  spaceH(
+                                                                      height:
+                                                                          16),
+                                                                  rowDataWidget(
+                                                                      name:
+                                                                          "Name",
+                                                                      value: controller
+                                                                          .userModel
+                                                                          .value
+                                                                          .fullName
+                                                                          .toString(),
+                                                                      themeChange:
+                                                                          themeChange),
+                                                                  rowDataWidget(
+                                                                      name:
+                                                                          "Phone Number",
+                                                                      value: Constant.maskMobileNumber(
+                                                                          mobileNumber: controller
+                                                                              .userModel
+                                                                              .value
+                                                                              .phoneNumber
+                                                                              .toString(),
+                                                                          countryCode: controller
+                                                                              .userModel
+                                                                              .value
+                                                                              .countryCode
+                                                                              .toString()),
+                                                                      themeChange:
+                                                                          themeChange),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            if (controller
+                                                                    .driverModel
+                                                                    .value
+                                                                    .id !=
+                                                                null)
+                                                              SizedBox(
+                                                                width: 250,
+                                                                child: Column(
+                                                                  crossAxisAlignment:
+                                                                      CrossAxisAlignment
+                                                                          .start,
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .min,
+                                                                  children: [
+                                                                    TextCustom(
+                                                                      title:
+                                                                          "Driver Details"
+                                                                              .tr,
+                                                                      fontSize:
+                                                                          16,
+                                                                      fontFamily:
+                                                                          AppThemeData
+                                                                              .bold,
+                                                                    ),
+                                                                    spaceH(
+                                                                        height:
+                                                                            16),
+                                                                    rowDataWidget(
+                                                                        name:
+                                                                            "ID",
+                                                                        value:
+                                                                            "# ${controller.driverModel.value.id!.substring(0, 6)}",
+                                                                        themeChange:
+                                                                            themeChange),
+                                                                    rowDataWidget(
+                                                                        name:
+                                                                            "Name",
+                                                                        value: controller
+                                                                            .driverModel
+                                                                            .value
+                                                                            .fullName
+                                                                            .toString(),
+                                                                        themeChange:
+                                                                            themeChange),
+                                                                    rowDataWidget(
+                                                                        name:
+                                                                            "Phone Number",
+                                                                        value: Constant.maskMobileNumber(
+                                                                            mobileNumber: controller.driverModel.value.phoneNumber
+                                                                                .toString(),
+                                                                            countryCode: controller.driverModel.value.countryCode
+                                                                                .toString()),
+                                                                        themeChange:
+                                                                            themeChange),
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                          ],
+                                                        ),
+                                                        spaceH(height: 20),
+                                                        PickDropPointView(
+                                                          dropAddress: controller
+                                                              .bookingModel
+                                                              .value
+                                                              .dropLocationAddress
+                                                              .toString(),
+                                                          pickUpAddress: controller
+                                                              .bookingModel
+                                                              .value
+                                                              .pickUpLocationAddress
+                                                              .toString(),
+                                                        ),
                                                       ],
                                                     ),
-                                                    spaceH(height: 20),
-                                                    PickDropPointView(
-                                                      dropAddress: controller.bookingModel.value.dropLocationAddress.toString(),
-                                                      pickUpAddress: controller.bookingModel.value.pickUpLocationAddress.toString(),
+                                                  ),
+                                                ).expand(flex: 2),
+                                                spaceW(width: 20),
+                                                Container(
+                                                  // width: Responsive.width(100, context),
+                                                  padding:
+                                                      const EdgeInsets.all(20),
+                                                  margin: const EdgeInsets.only(
+                                                      top: 12),
+                                                  decoration: ShapeDecoration(
+                                                    color: themeChange
+                                                            .isDarkTheme()
+                                                        ? AppThemData
+                                                            .greyShade900
+                                                        : AppThemData
+                                                            .greyShade50,
+                                                    // themeChange.getTheme() ? AppColors.primaryBlack : AppColors.primaryWhite,
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              12),
                                                     ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ).expand(flex: 2),
-                                            spaceW(width: 20),
-                                            Container(
-                                              // width: Responsive.width(100, context),
-                                              padding: const EdgeInsets.all(20),
-                                              margin: const EdgeInsets.only(top: 12),
-                                              decoration: ShapeDecoration(
-                                                color: themeChange.isDarkTheme() ? AppThemData.greyShade900 : AppThemData.greyShade50,
-                                                // themeChange.getTheme() ? AppColors.primaryBlack : AppColors.primaryWhite,
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius: BorderRadius.circular(12),
-                                                ),
-                                              ),
-                                              child: Obx(
-                                                () => Column(
-                                                  mainAxisAlignment: MainAxisAlignment.start,
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  children: [
-                                                    PriceRowView(
-                                                      price: controller.bookingModel.value.subTotal.toString(),
-                                                      title: "Amount".tr,
-                                                      priceColor: themeChange.isDarkTheme() ? AppThemData.greyShade25 : AppThemData.greyShade950,
-                                                      titleColor: themeChange.isDarkTheme() ? AppThemData.greyShade25 : AppThemData.greyShade950,
+                                                  ),
+                                                  child: Obx(
+                                                    () => Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        PriceRowView(
+                                                          price: controller
+                                                              .bookingModel
+                                                              .value
+                                                              .subTotal
+                                                              .toString(),
+                                                          title: "Amount".tr,
+                                                          priceColor: themeChange
+                                                                  .isDarkTheme()
+                                                              ? AppThemData
+                                                                  .greyShade25
+                                                              : AppThemData
+                                                                  .greyShade950,
+                                                          titleColor: themeChange
+                                                                  .isDarkTheme()
+                                                              ? AppThemData
+                                                                  .greyShade25
+                                                              : AppThemData
+                                                                  .greyShade950,
+                                                        ),
+                                                        const SizedBox(
+                                                            height: 16),
+                                                        PriceRowView(
+                                                            price: Constant.amountToShow(
+                                                                amount: controller
+                                                                        .bookingModel
+                                                                        .value
+                                                                        .discount ??
+                                                                    '0.0'),
+                                                            title:
+                                                                "Discount".tr,
+                                                            priceColor: themeChange
+                                                                    .isDarkTheme()
+                                                                ? AppThemData
+                                                                    .greyShade25
+                                                                : AppThemData
+                                                                    .greyShade950,
+                                                            titleColor: themeChange
+                                                                    .isDarkTheme()
+                                                                ? AppThemData
+                                                                    .greyShade25
+                                                                : AppThemData
+                                                                    .greyShade950),
+                                                        const SizedBox(
+                                                            height: 16),
+                                                        ListView.builder(
+                                                          physics:
+                                                              const NeverScrollableScrollPhysics(),
+                                                          itemCount: controller
+                                                              .bookingModel
+                                                              .value
+                                                              .taxList!
+                                                              .length,
+                                                          shrinkWrap: true,
+                                                          itemBuilder:
+                                                              (context, index) {
+                                                            TaxModel taxModel =
+                                                                controller
+                                                                    .bookingModel
+                                                                    .value
+                                                                    .taxList![index];
+                                                            return Column(
+                                                              children: [
+                                                                PriceRowView(
+                                                                    price: Constant.amountToShow(
+                                                                        amount:
+                                                                            Constant.calculateTax(amount: Constant.amountBeforeTax(controller.bookingModel.value).toString(), taxModel: taxModel)
+                                                                                .toString()),
+                                                                    title:
+                                                                        "${taxModel.name!} (${taxModel.isFix == true ? Constant.amountToShow(amount: taxModel.value) : "${taxModel.value}%"})",
+                                                                    priceColor: themeChange
+                                                                            .isDarkTheme()
+                                                                        ? AppThemData
+                                                                            .greyShade25
+                                                                        : AppThemData
+                                                                            .greyShade950,
+                                                                    titleColor: themeChange.isDarkTheme()
+                                                                        ? AppThemData
+                                                                            .greyShade25
+                                                                        : AppThemData
+                                                                            .greyShade950),
+                                                                const SizedBox(
+                                                                    height: 16),
+                                                              ],
+                                                            );
+                                                          },
+                                                        ),
+                                                        const SizedBox(
+                                                            height: 8),
+                                                        Divider(
+                                                            color: themeChange
+                                                                    .isDarkTheme()
+                                                                ? AppThemData
+                                                                    .greyShade800
+                                                                : AppThemData
+                                                                    .greyShade100),
+                                                        const SizedBox(
+                                                            height: 12),
+                                                        PriceRowView(
+                                                          price: Constant.amountShow(
+                                                              amount: Constant.calculateFinalAmount(
+                                                                      controller
+                                                                          .bookingModel
+                                                                          .value)
+                                                                  .toString()),
+                                                          title:
+                                                              "Total Amount".tr,
+                                                          priceColor:
+                                                              AppThemData
+                                                                  .primary500,
+                                                          titleColor: themeChange
+                                                                  .isDarkTheme()
+                                                              ? AppThemData
+                                                                  .greyShade25
+                                                              : AppThemData
+                                                                  .greyShade950,
+                                                        ),
+                                                      ],
                                                     ),
-                                                    const SizedBox(height: 16),
-                                                    PriceRowView(
-                                                        price: Constant.amountToShow(amount: controller.bookingModel.value.discount ?? '0.0'),
-                                                        title: "Discount".tr,
-                                                        priceColor: themeChange.isDarkTheme() ? AppThemData.greyShade25 : AppThemData.greyShade950,
-                                                        titleColor: themeChange.isDarkTheme() ? AppThemData.greyShade25 : AppThemData.greyShade950),
-                                                    const SizedBox(height: 16),
-                                                    ListView.builder(
-                                                      physics: const NeverScrollableScrollPhysics(),
-                                                      itemCount: controller.bookingModel.value.taxList!.length,
-                                                      shrinkWrap: true,
-                                                      itemBuilder: (context, index) {
-                                                        TaxModel taxModel = controller.bookingModel.value.taxList![index];
-                                                        return Column(
-                                                          children: [
-                                                            PriceRowView(
-                                                                price: Constant.amountToShow(
-                                                                    amount: Constant.calculateTax(
-                                                                            amount: Constant.amountBeforeTax(controller.bookingModel.value).toString(),
-                                                                            taxModel: taxModel)
-                                                                        .toString()),
-                                                                title:
-                                                                    "${taxModel.name!} (${taxModel.isFix == true ? Constant.amountToShow(amount: taxModel.value) : "${taxModel.value}%"})",
-                                                                priceColor: themeChange.isDarkTheme() ? AppThemData.greyShade25 : AppThemData.greyShade950,
-                                                                titleColor: themeChange.isDarkTheme() ? AppThemData.greyShade25 : AppThemData.greyShade950),
-                                                            const SizedBox(height: 16),
-                                                          ],
-                                                        );
-                                                      },
-                                                    ),
-                                                    const SizedBox(height: 8),
-                                                    Divider(color: themeChange.isDarkTheme() ? AppThemData.greyShade800 : AppThemData.greyShade100),
-                                                    const SizedBox(height: 12),
-                                                    PriceRowView(
-                                                      price: Constant.amountShow(amount: Constant.calculateFinalAmount(controller.bookingModel.value).toString()),
-                                                      title: "Total Amount".tr,
-                                                      priceColor: AppThemData.primary500,
-                                                      titleColor: themeChange.isDarkTheme() ? AppThemData.greyShade25 : AppThemData.greyShade950,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ).expand(flex: 1),
+                                                  ),
+                                                ).expand(flex: 1),
+                                              ],
+                                            ),
+                                            20.height,
                                           ],
                                         ),
-                                        20.height,
-                                      ],
-                                    ),
-                                  )
-                                ]),
-                              ),
-                            )
-                          ]),
+                                      )
+                                    ]),
+                                  ),
+                                )
+                              ]),
                         )),
             ],
           ),
@@ -705,7 +1304,8 @@ priceDetailWidget({required String name, required String value}) {
     child: Row(
       children: [
         Expanded(
-          child: TextCustom(title: name.tr, fontSize: 14, fontFamily: AppThemeData.medium),
+          child: TextCustom(
+              title: name.tr, fontSize: 14, fontFamily: AppThemeData.medium),
         ),
         TextCustom(
           title: (value.length > 35) ? value.substring(0, 30) : value,
@@ -717,11 +1317,14 @@ priceDetailWidget({required String name, required String value}) {
   );
 }
 
-rowDataWidget({required String name, required String value, required themeChange}) {
+rowDataWidget(
+    {required String name, required String value, required themeChange}) {
   return Row(
     children: [
-      TextCustom(title: name.tr, fontSize: 14, fontFamily: AppThemeData.medium).expand(flex: 1),
-      const TextCustom(title: ":   ", fontSize: 14, fontFamily: AppThemeData.medium),
+      TextCustom(title: name.tr, fontSize: 14, fontFamily: AppThemeData.medium)
+          .expand(flex: 1),
+      const TextCustom(
+          title: ":   ", fontSize: 14, fontFamily: AppThemeData.medium),
       TextCustom(
         title: value,
         fontSize: 14,

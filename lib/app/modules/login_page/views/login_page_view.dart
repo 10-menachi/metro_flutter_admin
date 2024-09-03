@@ -1,7 +1,6 @@
 import 'package:admin/app/utils/app_colors.dart';
 import 'package:admin/app/utils/app_them_data.dart';
 import 'package:admin/app/utils/responsive.dart';
-import 'package:admin/widget/global_widgets.dart';
 import 'package:admin/widget/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -26,16 +25,6 @@ class LoginPageView extends GetView<LoginPageController> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // 40.height,
-                // Container(
-                //   height: 300,
-                //   width: MediaQuery.of(context).size.width * 0.8,
-                //   decoration: const BoxDecoration(
-                //       color: Color(0xFFfff8f0),
-                //       image: DecorationImage(
-                //         image: AssetImage('assets/image/login.png'),
-                //       )),
-                // ),
                 50.height,
                 SizedBox(
                   height: 50,
@@ -45,17 +34,9 @@ class LoginPageView extends GetView<LoginPageController> {
                     children: [
                       Image.asset(
                         "assets/image/logo.png",
-                        height: 50,
+                        width: 225,
                         color: AppThemData.primary500,
                       ),
-                      spaceW(),
-                      const TextCustom(
-                        title: 'My Taxi',
-                        color: AppThemData.primary500,
-                        fontSize: 30,
-                        fontFamily: AppThemeData.semiBold,
-                        fontWeight: FontWeight.w700,
-                      )
                     ],
                   ),
                 ),
@@ -83,7 +64,10 @@ class LoginPageView extends GetView<LoginPageController> {
                       height: MediaQuery.of(context).size.height * 0.04,
                       width: MediaQuery.of(context).size.width * 0.7,
                       child: TextFormField(
-                          style: TextStyle(color: AppThemData.primaryBlack, fontFamily: AppThemeData.medium, fontWeight: FontWeight.w500),
+                          style: TextStyle(
+                              color: AppThemData.primaryBlack,
+                              fontFamily: AppThemeData.medium,
+                              fontWeight: FontWeight.w500),
                           autofocus: false,
                           controller: controller.emailController,
                           keyboardType: TextInputType.emailAddress,
@@ -92,7 +76,9 @@ class LoginPageView extends GetView<LoginPageController> {
                               return ("Please enter your email".tr);
                             }
                             // reg expression for email validatio
-                            if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]").hasMatch(value)) {
+                            if (!RegExp(
+                                    "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                                .hasMatch(value)) {
                               return ("Please enter a valid email".tr);
                             }
                             return null;
@@ -108,9 +94,13 @@ class LoginPageView extends GetView<LoginPageController> {
                               size: 18,
                               color: AppThemData.primaryBlack,
                             ),
-                            contentPadding: const EdgeInsets.fromLTRB(1, 1, 1, 1),
+                            contentPadding:
+                                const EdgeInsets.fromLTRB(1, 1, 1, 1),
                             hintText: "Enter your email".tr,
-                            hintStyle: const TextStyle(color: AppThemData.gallery950, fontFamily: AppThemeData.medium, fontWeight: FontWeight.w500),
+                            hintStyle: const TextStyle(
+                                color: AppThemData.gallery950,
+                                fontFamily: AppThemeData.medium,
+                                fontWeight: FontWeight.w500),
                             fillColor: AppThemData.primaryWhite,
                             filled: true,
                             isDense: true,
@@ -144,7 +134,10 @@ class LoginPageView extends GetView<LoginPageController> {
                       width: MediaQuery.of(context).size.width * 0.7,
                       child: Obx(
                         () => TextFormField(
-                            style: TextStyle(color: AppThemData.primaryBlack, fontFamily: AppThemeData.medium, fontWeight: FontWeight.w500),
+                            style: TextStyle(
+                                color: AppThemData.primaryBlack,
+                                fontFamily: AppThemeData.medium,
+                                fontWeight: FontWeight.w500),
                             cursorColor: AppThemData.appColor,
                             autofocus: false,
                             controller: controller.passwordController,
@@ -155,7 +148,8 @@ class LoginPageView extends GetView<LoginPageController> {
                                 return ("Please enter your password".tr);
                               }
                               if (!regex.hasMatch(value)) {
-                                return ("Enter valid password(Min. 6 Character)".tr);
+                                return ("Enter valid password(Min. 6 Character)"
+                                    .tr);
                               }
                               return null;
                             },
@@ -168,10 +162,13 @@ class LoginPageView extends GetView<LoginPageController> {
                             decoration: InputDecoration(
                               suffixIcon: InkWell(
                                   onTap: () {
-                                    controller.isPasswordVisible.value = !controller.isPasswordVisible.value;
+                                    controller.isPasswordVisible.value =
+                                        !controller.isPasswordVisible.value;
                                   },
                                   child: Icon(
-                                    controller.isPasswordVisible.value ? Icons.visibility_off : Icons.visibility,
+                                    controller.isPasswordVisible.value
+                                        ? Icons.visibility_off
+                                        : Icons.visibility,
                                     color: AppThemData.lightGrey01,
                                   )),
                               prefixIcon: Icon(
@@ -179,8 +176,12 @@ class LoginPageView extends GetView<LoginPageController> {
                                 color: AppThemData.primaryBlack,
                               ),
                               isDense: true,
-                              hintStyle: const TextStyle(color: AppThemData.gallery950, fontFamily: AppThemeData.medium, fontWeight: FontWeight.w500),
-                              contentPadding: const EdgeInsets.fromLTRB(1, 1, 1, 1),
+                              hintStyle: const TextStyle(
+                                  color: AppThemData.gallery950,
+                                  fontFamily: AppThemeData.medium,
+                                  fontWeight: FontWeight.w500),
+                              contentPadding:
+                                  const EdgeInsets.fromLTRB(1, 1, 1, 1),
                               hintText: "Enter your password".tr,
                               fillColor: AppThemData.primaryWhite,
                               filled: true,
@@ -209,8 +210,15 @@ class LoginPageView extends GetView<LoginPageController> {
                     margin: const EdgeInsets.only(left: 10),
                     height: MediaQuery.of(context).size.height * 0.05,
                     width: MediaQuery.of(context).size.width * 0.7,
-                    decoration: BoxDecoration(color: AppThemData.primary500, borderRadius: BorderRadius.circular(16)),
-                    child: Center(child: Text('LOGIN'.tr, style: const TextStyle(fontWeight: FontWeight.bold, fontFamily: AppThemeData.bold), textAlign: TextAlign.center)),
+                    decoration: BoxDecoration(
+                        color: AppThemData.primary500,
+                        borderRadius: BorderRadius.circular(16)),
+                    child: Center(
+                        child: Text('LOGIN'.tr,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontFamily: AppThemeData.bold),
+                            textAlign: TextAlign.center)),
                   ),
                 ),
                 30.height,
@@ -238,13 +246,18 @@ class LoginPageView extends GetView<LoginPageController> {
                               Obx(
                                 () => Text(
                                   "Email : ${controller.email.value}",
-                                  style: const TextStyle(fontFamily: AppThemeData.medium, fontSize: 14, color: Colors.black),
+                                  style: const TextStyle(
+                                      fontFamily: AppThemeData.medium,
+                                      fontSize: 14,
+                                      color: Colors.black),
                                 ),
                               ),
                               InkWell(
                                   onTap: () async {
-                                    controller.emailController.text = controller.email.value;
-                                    controller.passwordController.text = controller.password.value;
+                                    controller.emailController.text =
+                                        controller.email.value;
+                                    controller.passwordController.text =
+                                        controller.password.value;
                                   },
                                   child: const Icon(
                                     Icons.copy,
@@ -259,13 +272,18 @@ class LoginPageView extends GetView<LoginPageController> {
                               Obx(
                                 () => Text(
                                   "Password : ${controller.password.value}",
-                                  style: const TextStyle(fontFamily: AppThemeData.medium, fontSize: 14, color: Colors.black),
+                                  style: const TextStyle(
+                                      fontFamily: AppThemeData.medium,
+                                      fontSize: 14,
+                                      color: Colors.black),
                                 ),
                               ),
                               InkWell(
                                   onTap: () async {
-                                    controller.emailController.text = controller.email.value;
-                                    controller.passwordController.text = controller.password.value;
+                                    controller.emailController.text =
+                                        controller.email.value;
+                                    controller.passwordController.text =
+                                        controller.password.value;
                                   },
                                   child: const Icon(
                                     Icons.copy,
@@ -327,14 +345,6 @@ class LoginPageView extends GetView<LoginPageController> {
                             height: 50,
                             color: AppThemData.primary500,
                           ),
-                          spaceW(),
-                          const TextCustom(
-                            title: 'My Taxi',
-                            color: AppThemData.primary500,
-                            fontSize: 30,
-                            fontFamily: AppThemeData.semiBold,
-                            fontWeight: FontWeight.w700,
-                          )
                         ],
                       ),
                     ),
@@ -342,8 +352,14 @@ class LoginPageView extends GetView<LoginPageController> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextCustom(
-                        title: 'Unlock Your Admin Dashboard'.tr, fontSize: 25, fontFamily: AppThemeData.bold,
-                        // style: TextStyle(fontSize: 25, color: AppColors.appColor, fontFamily: AppThemeData.bold, fontWeight: FontWeight.bold),
+                        title: 'Unlock Your Admin Dashboard'.tr,
+                        fontSize: 25,
+                        fontFamily: AppThemeData.bold,
+                        style: TextStyle(
+                            fontSize: 25,
+                            color: AppColors.appColor,
+                            fontFamily: AppThemeData.bold,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
                     Column(
@@ -362,7 +378,10 @@ class LoginPageView extends GetView<LoginPageController> {
                           height: MediaQuery.of(context).size.height * 0.06,
                           width: MediaQuery.of(context).size.width * 0.20,
                           child: TextFormField(
-                              style: TextStyle(color: AppThemData.primaryBlack, fontFamily: AppThemeData.medium, fontWeight: FontWeight.w500),
+                              style: TextStyle(
+                                  color: AppThemData.primaryBlack,
+                                  fontFamily: AppThemeData.medium,
+                                  fontWeight: FontWeight.w500),
                               autofocus: false,
                               controller: controller.emailController,
                               keyboardType: TextInputType.emailAddress,
@@ -371,7 +390,9 @@ class LoginPageView extends GetView<LoginPageController> {
                                   return ("Please enter your email".tr);
                                 }
                                 // reg expression for email validatio
-                                if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]").hasMatch(value)) {
+                                if (!RegExp(
+                                        "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                                    .hasMatch(value)) {
                                   return ("Please enter a valid email".tr);
                                 }
                                 return null;
@@ -387,9 +408,14 @@ class LoginPageView extends GetView<LoginPageController> {
                                   size: 18,
                                   color: AppThemData.primaryBlack,
                                 ),
-                                contentPadding: const EdgeInsets.fromLTRB(1, 1, 1, 1),
+                                contentPadding:
+                                    const EdgeInsets.fromLTRB(1, 1, 1, 1),
                                 hintText: "Enter your email".tr,
-                                hintStyle: const TextStyle(color: AppThemData.gallery950, fontSize: 14, fontFamily: AppThemeData.medium, fontWeight: FontWeight.w500),
+                                hintStyle: const TextStyle(
+                                    color: AppThemData.gallery950,
+                                    fontSize: 14,
+                                    fontFamily: AppThemeData.medium,
+                                    fontWeight: FontWeight.w500),
                                 fillColor: AppThemData.primaryWhite,
                                 filled: true,
                                 isDense: true,
@@ -423,7 +449,10 @@ class LoginPageView extends GetView<LoginPageController> {
                           width: MediaQuery.of(context).size.width * 0.20,
                           child: Obx(
                             () => TextFormField(
-                                style: TextStyle(color: AppThemData.primaryBlack, fontFamily: AppThemeData.medium, fontWeight: FontWeight.w500),
+                                style: TextStyle(
+                                    color: AppThemData.primaryBlack,
+                                    fontFamily: AppThemeData.medium,
+                                    fontWeight: FontWeight.w500),
                                 cursorColor: AppThemData.appColor,
                                 autofocus: false,
                                 controller: controller.passwordController,
@@ -434,7 +463,8 @@ class LoginPageView extends GetView<LoginPageController> {
                                     return ("Please enter your password".tr);
                                   }
                                   if (!regex.hasMatch(value)) {
-                                    return ("Enter valid password(Min. 6 Character)".tr);
+                                    return ("Enter valid password(Min. 6 Character)"
+                                        .tr);
                                   }
                                   return null;
                                 },
@@ -447,10 +477,13 @@ class LoginPageView extends GetView<LoginPageController> {
                                 decoration: InputDecoration(
                                   suffixIcon: InkWell(
                                       onTap: () {
-                                        controller.isPasswordVisible.value = !controller.isPasswordVisible.value;
+                                        controller.isPasswordVisible.value =
+                                            !controller.isPasswordVisible.value;
                                       },
                                       child: Icon(
-                                        controller.isPasswordVisible.value ? Icons.visibility_off : Icons.visibility,
+                                        controller.isPasswordVisible.value
+                                            ? Icons.visibility_off
+                                            : Icons.visibility,
                                         color: AppThemData.lightGrey01,
                                       )),
                                   prefixIcon: Icon(
@@ -458,8 +491,13 @@ class LoginPageView extends GetView<LoginPageController> {
                                     color: AppThemData.primaryBlack,
                                   ),
                                   isDense: true,
-                                  hintStyle: const TextStyle(color: AppThemData.gallery950, fontSize: 14, fontFamily: AppThemeData.medium, fontWeight: FontWeight.w500),
-                                  contentPadding: const EdgeInsets.fromLTRB(1, 1, 1, 1),
+                                  hintStyle: const TextStyle(
+                                      color: AppThemData.gallery950,
+                                      fontSize: 14,
+                                      fontFamily: AppThemeData.medium,
+                                      fontWeight: FontWeight.w500),
+                                  contentPadding:
+                                      const EdgeInsets.fromLTRB(1, 1, 1, 1),
                                   hintText: "Enter your password".tr,
                                   fillColor: AppThemData.primaryWhite,
                                   filled: true,
@@ -488,8 +526,15 @@ class LoginPageView extends GetView<LoginPageController> {
                         margin: const EdgeInsets.only(left: 10),
                         height: MediaQuery.of(context).size.height * 0.05,
                         width: MediaQuery.of(context).size.width * 0.20,
-                        decoration: BoxDecoration(color: AppThemData.primary500, borderRadius: BorderRadius.circular(16)),
-                        child: Center(child: Text('LOGIN'.tr, style: const TextStyle(fontWeight: FontWeight.bold, fontFamily: AppThemeData.bold), textAlign: TextAlign.center)),
+                        decoration: BoxDecoration(
+                            color: AppThemData.primary500,
+                            borderRadius: BorderRadius.circular(16)),
+                        child: Center(
+                            child: Text('LOGIN'.tr,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: AppThemeData.bold),
+                                textAlign: TextAlign.center)),
                       ),
                     ),
                     30.height,
@@ -511,19 +556,25 @@ class LoginPageView extends GetView<LoginPageController> {
                               ),
                               const SizedBox(height: 2),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Obx(
                                     () => Text(
                                       "Email : ${controller.email.value}",
-                                      style: const TextStyle(fontFamily: AppThemeData.medium, fontSize: 14, color: Colors.black),
+                                      style: const TextStyle(
+                                          fontFamily: AppThemeData.medium,
+                                          fontSize: 14,
+                                          color: Colors.black),
                                     ),
                                   ),
                                   InkWell(
                                       onTap: () async {
-                                        controller.emailController.text = controller.email.value;
-                                        controller.passwordController.text = controller.password.value;
+                                        controller.emailController.text =
+                                            controller.email.value;
+                                        controller.passwordController.text =
+                                            controller.password.value;
                                       },
                                       child: const Icon(
                                         Icons.copy,
@@ -532,19 +583,25 @@ class LoginPageView extends GetView<LoginPageController> {
                                 ],
                               ),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Obx(
                                     () => Text(
                                       "Password : ${controller.password.value}",
-                                      style: const TextStyle(fontFamily: AppThemeData.medium, fontSize: 14, color: Colors.black),
+                                      style: const TextStyle(
+                                          fontFamily: AppThemeData.medium,
+                                          fontSize: 14,
+                                          color: Colors.black),
                                     ),
                                   ),
                                   InkWell(
                                       onTap: () async {
-                                        controller.emailController.text = controller.email.value;
-                                        controller.passwordController.text = controller.password.value;
+                                        controller.emailController.text =
+                                            controller.email.value;
+                                        controller.passwordController.text =
+                                            controller.password.value;
                                       },
                                       child: const Icon(
                                         Icons.copy,
@@ -599,17 +656,9 @@ class LoginPageView extends GetView<LoginPageController> {
                         children: [
                           Image.asset(
                             "assets/image/logo.png",
-                            height: 50,
+                            width: 225,
                             color: AppThemData.primary500,
                           ),
-                          spaceW(),
-                          const TextCustom(
-                            title: 'My Taxi',
-                            color: AppThemData.primary500,
-                            fontSize: 30,
-                            fontFamily: AppThemeData.semiBold,
-                            fontWeight: FontWeight.w700,
-                          )
                         ],
                       ),
                     ),
@@ -617,7 +666,8 @@ class LoginPageView extends GetView<LoginPageController> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextCustom(
-                        title: 'Unlock Your Admin Dashboard'.tr, fontSize: 16, fontFamily: AppThemeData.bold,
+                        title: 'Unlock Your Admin Dashboard'.tr, fontSize: 16,
+                        fontFamily: AppThemeData.bold,
                         // style: TextStyle(fontSize: 25, color: AppColors.appColor, fontFamily: AppThemeData.bold, fontWeight: FontWeight.bold),
                       ),
                     ),
@@ -637,7 +687,10 @@ class LoginPageView extends GetView<LoginPageController> {
                           height: MediaQuery.of(context).size.height * 0.04,
                           width: MediaQuery.of(context).size.width * 0.28,
                           child: TextFormField(
-                              style: TextStyle(color: AppThemData.primaryBlack, fontFamily: AppThemeData.medium, fontWeight: FontWeight.w500),
+                              style: TextStyle(
+                                  color: AppThemData.primaryBlack,
+                                  fontFamily: AppThemeData.medium,
+                                  fontWeight: FontWeight.w500),
                               autofocus: false,
                               controller: controller.emailController,
                               keyboardType: TextInputType.emailAddress,
@@ -646,7 +699,9 @@ class LoginPageView extends GetView<LoginPageController> {
                                   return ("Please enter your email".tr);
                                 }
                                 // reg expression for email validatio
-                                if (!RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]").hasMatch(value)) {
+                                if (!RegExp(
+                                        "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                                    .hasMatch(value)) {
                                   return ("Please enter a valid email".tr);
                                 }
                                 return null;
@@ -662,9 +717,13 @@ class LoginPageView extends GetView<LoginPageController> {
                                   size: 18,
                                   color: AppThemData.primaryBlack,
                                 ),
-                                contentPadding: const EdgeInsets.fromLTRB(1, 1, 1, 1),
+                                contentPadding:
+                                    const EdgeInsets.fromLTRB(1, 1, 1, 1),
                                 hintText: "Enter your email".tr,
-                                hintStyle: const TextStyle(color: AppThemData.gallery950, fontFamily: AppThemeData.medium, fontWeight: FontWeight.w500),
+                                hintStyle: const TextStyle(
+                                    color: AppThemData.gallery950,
+                                    fontFamily: AppThemeData.medium,
+                                    fontWeight: FontWeight.w500),
                                 fillColor: AppThemData.primaryWhite,
                                 filled: true,
                                 isDense: true,
@@ -698,7 +757,10 @@ class LoginPageView extends GetView<LoginPageController> {
                           width: MediaQuery.of(context).size.width * 0.28,
                           child: Obx(
                             () => TextFormField(
-                                style: TextStyle(color: AppThemData.primaryBlack, fontFamily: AppThemeData.medium, fontWeight: FontWeight.w500),
+                                style: TextStyle(
+                                    color: AppThemData.primaryBlack,
+                                    fontFamily: AppThemeData.medium,
+                                    fontWeight: FontWeight.w500),
                                 cursorColor: AppThemData.appColor,
                                 autofocus: false,
                                 controller: controller.passwordController,
@@ -709,7 +771,8 @@ class LoginPageView extends GetView<LoginPageController> {
                                     return ("Please enter your password".tr);
                                   }
                                   if (!regex.hasMatch(value)) {
-                                    return ("Enter valid password(Min. 6 Character)".tr);
+                                    return ("Enter valid password(Min. 6 Character)"
+                                        .tr);
                                   }
                                   return null;
                                 },
@@ -722,10 +785,13 @@ class LoginPageView extends GetView<LoginPageController> {
                                 decoration: InputDecoration(
                                   suffixIcon: InkWell(
                                       onTap: () {
-                                        controller.isPasswordVisible.value = !controller.isPasswordVisible.value;
+                                        controller.isPasswordVisible.value =
+                                            !controller.isPasswordVisible.value;
                                       },
                                       child: Icon(
-                                        controller.isPasswordVisible.value ? Icons.visibility_off : Icons.visibility,
+                                        controller.isPasswordVisible.value
+                                            ? Icons.visibility_off
+                                            : Icons.visibility,
                                         color: AppThemData.lightGrey01,
                                       )),
                                   prefixIcon: Icon(
@@ -733,8 +799,12 @@ class LoginPageView extends GetView<LoginPageController> {
                                     color: AppThemData.primaryBlack,
                                   ),
                                   isDense: true,
-                                  hintStyle: const TextStyle(color: AppThemData.gallery950, fontFamily: AppThemeData.medium, fontWeight: FontWeight.w500),
-                                  contentPadding: const EdgeInsets.fromLTRB(1, 1, 1, 1),
+                                  hintStyle: const TextStyle(
+                                      color: AppThemData.gallery950,
+                                      fontFamily: AppThemeData.medium,
+                                      fontWeight: FontWeight.w500),
+                                  contentPadding:
+                                      const EdgeInsets.fromLTRB(1, 1, 1, 1),
                                   hintText: "Enter your password".tr,
                                   fillColor: AppThemData.primaryWhite,
                                   filled: true,
@@ -763,9 +833,15 @@ class LoginPageView extends GetView<LoginPageController> {
                         margin: const EdgeInsets.only(left: 10),
                         height: MediaQuery.of(context).size.height * 0.05,
                         width: MediaQuery.of(context).size.width * 0.28,
-                        decoration: BoxDecoration(color: AppThemData.primary500, borderRadius: BorderRadius.circular(16)),
+                        decoration: BoxDecoration(
+                            color: AppThemData.primary500,
+                            borderRadius: BorderRadius.circular(16)),
                         child: Center(
-                            child: Text('LOGIN'.tr, style: const TextStyle(fontWeight: FontWeight.bold, fontFamily: AppThemeData.bold), textAlign: TextAlign.center)),
+                            child: Text('LOGIN'.tr,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: AppThemeData.bold),
+                                textAlign: TextAlign.center)),
                       ),
                     ),
                     30.height,
@@ -787,12 +863,14 @@ class LoginPageView extends GetView<LoginPageController> {
                               ),
                               const SizedBox(height: 2),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Obx(
                                     () => TextCustom(
-                                      title: "Email : ${controller.email.value}",
+                                      title:
+                                          "Email : ${controller.email.value}",
                                       fontSize: 13,
                                       fontFamily: AppThemeData.medium,
                                       // style: const TextStyle(
@@ -804,8 +882,10 @@ class LoginPageView extends GetView<LoginPageController> {
                                   ),
                                   InkWell(
                                       onTap: () async {
-                                        controller.emailController.text = controller.email.value;
-                                        controller.passwordController.text = controller.password.value;
+                                        controller.emailController.text =
+                                            controller.email.value;
+                                        controller.passwordController.text =
+                                            controller.password.value;
                                       },
                                       child: const Icon(
                                         Icons.copy,
@@ -814,19 +894,25 @@ class LoginPageView extends GetView<LoginPageController> {
                                 ],
                               ),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Obx(
                                     () => Text(
                                       "Password : ${controller.password.value}",
-                                      style: const TextStyle(fontFamily: AppThemeData.medium, fontSize: 13, color: Colors.black),
+                                      style: const TextStyle(
+                                          fontFamily: AppThemeData.medium,
+                                          fontSize: 13,
+                                          color: Colors.black),
                                     ),
                                   ),
                                   InkWell(
                                       onTap: () async {
-                                        controller.emailController.text = controller.email.value;
-                                        controller.passwordController.text = controller.password.value;
+                                        controller.emailController.text =
+                                            controller.email.value;
+                                        controller.passwordController.text =
+                                            controller.password.value;
                                       },
                                       child: const Icon(
                                         Icons.copy,

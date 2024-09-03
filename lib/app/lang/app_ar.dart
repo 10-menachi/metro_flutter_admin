@@ -1,11 +1,12 @@
 const Map<String, String> lnAr = {
   "Alert..!": "تنبيه..!",
-  "You have no right to add, edit and delete.": "ليس لديك الحق في الإضافة والتحرير والحذف.",
+  "You have no right to add, edit and delete.":
+      "ليس لديك الحق في الإضافة والتحرير والحذف.",
   "Ok": "حسنًا",
   "Are you sure?": "هل أنت متأكد؟",
   "Cancel": "إلغاء",
   "Delete": "حذف",
-  "My Taxi": "تاكسيي",
+  "MetroBerry": "تاكسيي",
   "Your Fast Track to City Exploration": "الطريق السريع لاستكشاف المدينة",
   "About App": "حول التطبيق",
   "profile": "الملف الشخصي",
@@ -35,10 +36,14 @@ const Map<String, String> lnAr = {
   "Booking Detail": "تفاصيل الحجز",
   "Inactive": "غير نشط",
   "Wallet Settings": "إعدادات المحفظة",
-  "Minimum wallet amount to deposit": "الحد الأدنى للمبلغ المطلوب إيداعه في المحفظة",
-  "Enter minimum wallet amount to deposit": "أدخل الحد الأدنى للمبلغ المطلوب إيداعه في المحفظة",
-  "Minimum wallet amount to withdrawal": "الحد الأدنى للمبلغ المطلوب سحبه من المحفظة",
-  "Enter minimum wallet amount to withdrawal": "أدخل الحد الأدنى للمبلغ المطلوب سحبه من المحفظة",
+  "Minimum wallet amount to deposit":
+      "الحد الأدنى للمبلغ المطلوب إيداعه في المحفظة",
+  "Enter minimum wallet amount to deposit":
+      "أدخل الحد الأدنى للمبلغ المطلوب إيداعه في المحفظة",
+  "Minimum wallet amount to withdrawal":
+      "الحد الأدنى للمبلغ المطلوب سحبه من المحفظة",
+  "Enter minimum wallet amount to withdrawal":
+      "أدخل الحد الأدنى للمبلغ المطلوب سحبه من المحفظة",
   "Minimum amount to accept ride": "الحد الأدنى لقبول الرحلة",
   "Enter minimum amount to accept ride": "أدخل الحد الأدنى لقبول الرحلة",
   "Distance Settings": "إعدادات المسافة",
@@ -68,7 +73,8 @@ const Map<String, String> lnAr = {
   "Please Add App Name": "يرجى إضافة اسم التطبيق",
   "Please Add App Colors": "يرجى إضافة ألوان التطبيق",
   "Please Add App Distance": "يرجى إضافة المسافة للتطبيق",
-  "Please Add App Global Distance type": "يرجى إضافة نوع المسافة العالمي للتطبيق",
+  "Please Add App Global Distance type":
+      "يرجى إضافة نوع المسافة العالمي للتطبيق",
   "Please Add App Global Location": "يرجى إضافة موقع التطبيق العالمي",
   "Please Add App Global Type": "يرجى إضافة نوع التطبيق العالمي",
   "Please Add App Global Radius": "يرجى إضافة نصف قطر التطبيق العالمي",
@@ -214,7 +220,8 @@ const Map<String, String> lnAr = {
   "Phone Number *": "رقم الهاتف *",
   "Email Address *": "عنوان البريد الإلكتروني *",
   "Users data updated": "تم تحديث بيانات المستخدمين",
-  "Something went wrong, Please try later!": "حدث خطأ ما، يرجى المحاولة لاحقًا!",
+  "Something went wrong, Please try later!":
+      "حدث خطأ ما، يرجى المحاولة لاحقًا!",
   "General Setting": "الإعدادات العامة",
   "Google Map Key": "مفتاح خرائط جوجل",
   "Enter google map key": "أدخل مفتاح خرائط جوجل",
@@ -250,10 +257,12 @@ const Map<String, String> lnAr = {
   "Please Add Razorpay Key": "يرجى إضافة مفتاح Razorpay",
   "Please Add Razorpay Secret Key": "يرجى إضافة مفتاح سري Razorpay",
   "Please Add Stripe Name": "يرجى إضافة اسم Stripe",
-  "Please Add Stripe Client Publishable Key": "يرجى إضافة مفتاح نشر العميل Stripe",
+  "Please Add Stripe Client Publishable Key":
+      "يرجى إضافة مفتاح نشر العميل Stripe",
   "Please Add Stripe Secret Key": "يرجى إضافة مفتاح سري Stripe",
   "Please Add Mercado Pago Name": "يرجى إضافة اسم Mercado Pago",
-  "Please Add Mercado Pago Access Token": "يرجى إضافة رمز الوصول لـ Mercado Pago",
+  "Please Add Mercado Pago Access Token":
+      "يرجى إضافة رمز الوصول لـ Mercado Pago",
   "Please Add PayFast Name": "يرجى إضافة اسم PayFast",
   "Please Add PayFast Merchant Key": "يرجى إضافة مفتاح التاجر لـ PayFast",
   "Please Add PayFast Merchant ID": "يرجى إضافة معرف التاجر لـ PayFast",
@@ -261,7 +270,8 @@ const Map<String, String> lnAr = {
   "Please Add PayFast Notify URL": "يرجى إضافة عنوان URL للإشعار لـ PayFast",
   "Please Add PayFast Cancel URL": "يرجى إضافة عنوان URL للإلغاء لـ PayFast",
   "Please Add FlutterWave Name": "يرجى إضافة اسم FlutterWave",
-  "Please Add FlutterWave Public Key": "يرجى إضافة المفتاح العام لـ FlutterWave",
+  "Please Add FlutterWave Public Key":
+      "يرجى إضافة المفتاح العام لـ FlutterWave",
   "Please Add Cash Name": "يرجى إضافة اسم الدفع النقدي",
   "Please Add Wallet Name": "يرجى إضافة اسم المحفظة",
   "Payment status updated": "تم تحديث حالة الدفع",
@@ -286,7 +296,8 @@ const Map<String, String> lnAr = {
   "Enter Razorpay secret id": "أدخل معرف سري Razorpay",
   "Stripe": "Stripe",
   "Stripe Client Publishable Key": "مفتاح العميل القابل للنشر Stripe",
-  "Enter Stripe Client Publishable Key": "أدخل مفتاح العميل القابل للنشر Stripe",
+  "Enter Stripe Client Publishable Key":
+      "أدخل مفتاح العميل القابل للنشر Stripe",
   "Stripe Secret Key": "مفتاح سري Stripe",
   "Enter Stripe secret key": "أدخل مفتاح سري Stripe",
   "MercadoPogo": "MercadoPogo",

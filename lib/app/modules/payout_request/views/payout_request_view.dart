@@ -38,12 +38,16 @@ class PayoutRequestView extends GetView<PayoutRequestController> {
       init: PayoutRequestController(),
       builder: (controller) {
         return Scaffold(
-          backgroundColor: themeChange.isDarkTheme() ? AppThemData.greyShade950 : AppThemData.greyShade50,
+          backgroundColor: themeChange.isDarkTheme()
+              ? AppThemData.greyShade950
+              : AppThemData.greyShade50,
           appBar: AppBar(
             elevation: 0.0,
             toolbarHeight: 70,
             automaticallyImplyLeading: false,
-            backgroundColor: themeChange.isDarkTheme() ? AppThemData.primaryBlack : AppThemData.primaryWhite,
+            backgroundColor: themeChange.isDarkTheme()
+                ? AppThemData.primaryBlack
+                : AppThemData.primaryWhite,
             leadingWidth: 200,
             // title: title,
             leading: Builder(
@@ -62,7 +66,9 @@ class PayoutRequestView extends GetView<PayoutRequestController> {
                             child: Icon(
                               Icons.menu,
                               size: 30,
-                              color: themeChange.isDarkTheme() ? AppThemData.primary500 : AppThemData.primary500,
+                              color: themeChange.isDarkTheme()
+                                  ? AppThemData.primary500
+                                  : AppThemData.primary500,
                             ),
                           )
                         : SizedBox(
@@ -76,14 +82,6 @@ class PayoutRequestView extends GetView<PayoutRequestController> {
                                   height: 45,
                                   color: AppThemData.primary500,
                                 ),
-                                spaceW(),
-                                const TextCustom(
-                                  title: 'My Taxi',
-                                  color: AppThemData.primary500,
-                                  fontSize: 30,
-                                  fontFamily: AppThemeData.semiBold,
-                                  fontWeight: FontWeight.w700,
-                                )
                               ],
                             ),
                           ),
@@ -127,7 +125,9 @@ class PayoutRequestView extends GetView<PayoutRequestController> {
           drawer: Drawer(
             // key: scaffoldKey,
             width: 270,
-            backgroundColor: themeChange.isDarkTheme() ? AppThemData.primaryBlack : AppThemData.primaryWhite,
+            backgroundColor: themeChange.isDarkTheme()
+                ? AppThemData.primaryBlack
+                : AppThemData.primaryWhite,
             child: const MenuWidget(),
           ),
           body: Row(
@@ -139,402 +139,664 @@ class PayoutRequestView extends GetView<PayoutRequestController> {
                     padding: paddingEdgeInsets(),
                     child: SingleChildScrollView(
                       physics: const AlwaysScrollableScrollPhysics(),
-                      child: Column(mainAxisSize: MainAxisSize.min, mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.start, children: [
-                        ContainerCustom(
-                          child: Column(children: [
-                            if (ResponsiveWidget.isDesktop(context))
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                                    TextCustom(title: controller.title.value, fontSize: 20, fontFamily: AppThemeData.bold),
-                                    spaceH(height: 2),
-                                    Row(children: [
-                                      GestureDetector(
-                                          onTap: () => Get.offAllNamed(Routes.DASHBOARD_SCREEN),
-                                          child: TextCustom(title: 'Dashboard'.tr, fontSize: 14, fontFamily: AppThemeData.medium, color: AppThemData.greyShade500)),
-                                      const TextCustom(title: ' / ', fontSize: 14, fontFamily: AppThemeData.medium, color: AppThemData.greyShade500),
-                                      TextCustom(title: ' ${controller.title.value} ', fontSize: 14, fontFamily: AppThemeData.medium, color: AppThemData.primary500)
-                                    ])
-                                  ]),
+                      child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ContainerCustom(
+                              child: Column(children: [
+                                if (ResponsiveWidget.isDesktop(context))
                                   Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    mainAxisSize: MainAxisSize.max,
                                     children: [
-                                      SizedBox(
-                                        width: 120,
-                                        child: Obx(
-                                          () => DropdownButtonFormField(
-                                            borderRadius: BorderRadius.circular(15),
-                                            isExpanded: true,
-                                            style: TextStyle(
-                                              fontFamily: AppThemeData.medium,
-                                              color: themeChange.isDarkTheme() ? AppThemData.textBlack : AppThemData.textGrey,
-                                            ),
-                                            hint: TextCustom(title: 'Payment Status'.tr),
-                                            onChanged: (String? taxType) {
-                                              controller.selectedPayoutStatus.value = taxType ?? "All";
-                                              controller.getPayoutRequest();
-                                            },
-                                            value: controller.selectedPayoutStatus.value,
-                                            items: controller.payoutStatus.map<DropdownMenuItem<String>>((String value) {
-                                              return DropdownMenuItem(
-                                                value: value,
-                                                child: TextCustom(
-                                                  title: value,
-                                                  fontFamily: AppThemeData.regular,
-                                                  fontSize: 16,
-                                                  color: themeChange.isDarkTheme() ? AppThemData.greyShade500 : AppThemData.primaryBlack,
-                                                ),
-                                              );
-                                            }).toList(),
-                                            decoration: Constant.DefaultInputDecoration(context),
-                                          ),
-                                        ),
-                                      ),
-                                      NumberOfRowsDropDown(controller: controller),
-                                    ],
-                                  ),
-                                ],
-                              )
-                            else
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                                    TextCustom(title: controller.title.value, fontSize: 20, fontFamily: AppThemeData.bold),
-                                    spaceH(height: 2),
-                                    Row(children: [
-                                      GestureDetector(
-                                          onTap: () => Get.offAllNamed(Routes.DASHBOARD_SCREEN),
-                                          child: TextCustom(title: 'Dashboard'.tr, fontSize: 14, fontFamily: AppThemeData.medium, color: AppThemData.greyShade500)),
-                                      const TextCustom(title: ' / ', fontSize: 14, fontFamily: AppThemeData.medium, color: AppThemData.greyShade500),
-                                      TextCustom(title: ' ${controller.title.value} ', fontSize: 14, fontFamily: AppThemeData.medium, color: AppThemData.primary500)
-                                    ])
-                                  ]),
-                                  spaceH(height: 16),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      spaceH(),
-                                      SizedBox(
-                                        width: MediaQuery.sizeOf(context).width *0.5,
-                                        child: Obx(
-                                          () => DropdownButtonFormField(
-                                            borderRadius: BorderRadius.circular(15),
-                                            isExpanded: true,
-                                            style: TextStyle(
-                                              fontFamily: AppThemeData.medium,
-                                              color: themeChange.isDarkTheme() ? AppThemData.textBlack : AppThemData.textGrey,
-                                            ),
-                                            hint: TextCustom(title: 'Payment Status'.tr),
-                                            onChanged: (String? taxType) {
-                                              controller.selectedPayoutStatus.value = taxType ?? "All";
-                                              controller.getPayoutRequest();
-                                            },
-                                            value: controller.selectedPayoutStatus.value,
-                                            items: controller.payoutStatus.map<DropdownMenuItem<String>>((String value) {
-                                              return DropdownMenuItem(
-                                                value: value,
-                                                child: TextCustom(
-                                                  title: value,
-                                                  fontFamily: AppThemeData.regular,
-                                                  fontSize: 16,
-                                                  color: themeChange.isDarkTheme() ? AppThemData.greyShade500 : AppThemData.greyShade800,
-                                                ),
-                                              );
-                                            }).toList(),
-                                            decoration: Constant.DefaultInputDecoration(context),
-                                          ),
-                                        ),
-                                      ),
-                                      spaceH(),
-                                      NumberOfRowsDropDown(controller: controller),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            spaceH(height: 20),
-                            SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(12),
-                                child: controller.isLoading.value
-                                    ? Padding(
-                                        padding: paddingEdgeInsets(),
-                                        child: Constant.loader(),
-                                      )
-                                    : controller.currentPayoutRequest.isEmpty
-                                        ? TextCustom(title: "No Data available".tr.tr)
-                                        : DataTable(
-                                            horizontalMargin: 20,
-                                            columnSpacing: 30,
-                                            dataRowMaxHeight: 65,
-                                            headingRowHeight: 65,
-                                            border: TableBorder.all(
-                                              color: themeChange.isDarkTheme() ? AppThemData.greyShade800 : AppThemData.greyShade100,
-                                              borderRadius: BorderRadius.circular(12),
-                                            ),
-                                            headingRowColor: MaterialStateColor.resolveWith(
-                                                (states) => themeChange.isDarkTheme() ? AppThemData.greyShade800 : AppThemData.greyShade100),
-                                            columns: [
-                                              // CommonUI.dataColumnWidget(context, columnTitle: "DriverId", width:  ResponsiveWidget.isMobile(context) ?  150  :MediaQuery.of(context).size.width * 0.10 ),
-                                              CommonUI.dataColumnWidget(context,
-                                                  columnTitle: "Amount".tr, width: ResponsiveWidget.isMobile(context) ? 150 : MediaQuery.of(context).size.width * 0.06),
-                                              CommonUI.dataColumnWidget(context,
-                                                  columnTitle: "Name".tr, width: ResponsiveWidget.isMobile(context) ? 150 : MediaQuery.of(context).size.width * 0.06),
-                                              CommonUI.dataColumnWidget(context,
-                                                  columnTitle: "Email".tr, width: ResponsiveWidget.isMobile(context) ? 150 : MediaQuery.of(context).size.width * 0.06),
-                                              CommonUI.dataColumnWidget(context,
-                                                  columnTitle: "Phone Number".tr,
-                                                  width: ResponsiveWidget.isMobile(context) ? 150 : MediaQuery.of(context).size.width * 0.06),
-                                              CommonUI.dataColumnWidget(context,
-                                                  columnTitle: "Note".tr, width: ResponsiveWidget.isMobile(context) ? 150 : MediaQuery.of(context).size.width * 0.13),
-                                              CommonUI.dataColumnWidget(context,
-                                                  columnTitle: "PaymentDate".tr,
-                                                  width: ResponsiveWidget.isMobile(context) ? 220 : MediaQuery.of(context).size.width * 0.12),
-                                              CommonUI.dataColumnWidget(context,
-                                                  columnTitle: "PaymentStatus".tr,
-                                                  width: ResponsiveWidget.isMobile(context) ? 220 : MediaQuery.of(context).size.width * 0.08),
-                                              // CommonUI.dataColumnWidget(context, columnTitle: "PaymentDate", width: ResponsiveWidget.isMobile(context) ? 140 :MediaQuery.of(context).size.width * 0.10),
-                                              CommonUI.dataColumnWidget(
-                                                context,
-                                                columnTitle: "Action".tr,
-                                                width: ResponsiveWidget.isMobile(context) ? 100 : MediaQuery.of(context).size.width * 0.08,
-                                              ),
-                                            ],
-                                            rows: controller.currentPayoutRequest
-                                                .map(
-                                                  (payoutRequestModel) => DataRow(
-                                                    cells: [
-                                                      // DataCell(
-                                                      //   TextCustom(
-                                                      //     title: payoutRequestModel.driverId.toString(),
-                                                      //   ),
-                                                      // ),
-                                                      DataCell(
-                                                        TextCustom(title: payoutRequestModel.amount.toString()),
-                                                      ),
-                                                      DataCell(
-                                                        FutureBuilder<DriverUserModel?>(
-                                                            future: FireStoreUtils.getDriverByDriverID(payoutRequestModel.driverId.toString()), // async work
-                                                            builder: (BuildContext context, AsyncSnapshot<DriverUserModel?> snapshot) {
-                                                              switch (snapshot.connectionState) {
-                                                                case ConnectionState.waiting:
-                                                                  // return Center(child: Constant.loader());
-                                                                  return const SizedBox();
-                                                                default:
-                                                                  if (snapshot.hasError) {
-                                                                    return TextCustom(
-                                                                      title: 'Error: ${snapshot.error}',
-                                                                    );
-                                                                  } else {
-                                                                    DriverUserModel driverUserModel = snapshot.data!;
-                                                                    return Container(
-                                                                      alignment: Alignment.centerLeft,
-                                                                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                                                                      child: TextButton(
-                                                                        onPressed: () {},
-                                                                        child: TextCustom(
-                                                                          title: driverUserModel.fullName!.isEmpty
-                                                                              ? "N/A"
-                                                                              : driverUserModel.fullName.toString() == "Unknown User"
-                                                                                  ? "User Deleted"
-                                                                                  : driverUserModel.fullName.toString(),
-                                                                        ),
-                                                                      ),
-                                                                    );
-                                                                  }
-                                                              }
-                                                            }),
-                                                      ),
-                                                      DataCell(
-                                                        FutureBuilder<DriverUserModel?>(
-                                                            future: FireStoreUtils.getDriverByDriverID(payoutRequestModel.driverId.toString()), // async work
-                                                            builder: (BuildContext context, AsyncSnapshot<DriverUserModel?> snapshot) {
-                                                              switch (snapshot.connectionState) {
-                                                                case ConnectionState.waiting:
-                                                                  // return Center(child: Constant.loader());
-                                                                  return const SizedBox();
-                                                                default:
-                                                                  if (snapshot.hasError) {
-                                                                    return TextCustom(
-                                                                      title: 'Error: ${snapshot.error}',
-                                                                    );
-                                                                  } else {
-                                                                    DriverUserModel driverUserModel = snapshot.data!;
-                                                                    return Container(
-                                                                      alignment: Alignment.centerLeft,
-                                                                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                                                                      child: TextButton(
-                                                                        onPressed: () {},
-                                                                        child: TextCustom(
-                                                                          title: driverUserModel.email!.isEmpty
-                                                                              ? "N/A"
-                                                                              : driverUserModel.email.toString() == "Unknown User"
-                                                                                  ? "User Deleted"
-                                                                                  : Constant.maskEmail(email: driverUserModel.email.toString()),
-                                                                        ),
-                                                                      ),
-                                                                    );
-                                                                  }
-                                                              }
-                                                            }),
-                                                      ),
-                                                      DataCell(
-                                                        FutureBuilder<DriverUserModel?>(
-                                                            future: FireStoreUtils.getDriverByDriverID(payoutRequestModel.driverId.toString()), // async work
-                                                            builder: (BuildContext context, AsyncSnapshot<DriverUserModel?> snapshot) {
-                                                              switch (snapshot.connectionState) {
-                                                                case ConnectionState.waiting:
-                                                                  // return Center(child: Constant.loader());
-                                                                  return const SizedBox();
-                                                                default:
-                                                                  if (snapshot.hasError) {
-                                                                    return TextCustom(
-                                                                      title: 'Error: ${snapshot.error}',
-                                                                    );
-                                                                  } else {
-                                                                    DriverUserModel driverUserModel = snapshot.data!;
-                                                                    return Container(
-                                                                      alignment: Alignment.centerLeft,
-                                                                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                                                                      child: TextButton(
-                                                                        onPressed: () {},
-                                                                        child: TextCustom(
-                                                                          title: driverUserModel.phoneNumber!.isEmpty
-                                                                              ? "N/A"
-                                                                              : driverUserModel.phoneNumber.toString() == "Unknown User"
-                                                                                  ? "User Deleted"
-                                                                                  : Constant.maskMobileNumber(
-                                                                                      mobileNumber: driverUserModel.phoneNumber.toString(),
-                                                                                      countryCode: driverUserModel.countryCode.toString()),
-                                                                        ),
-                                                                      ),
-                                                                    );
-                                                                  }
-                                                              }
-                                                            }),
-                                                      ),
-
-                                                      // Constant.bookingStatusText(context, e.bookingStatus.toString()),
-                                                      DataCell(
-                                                        TextCustom(
-                                                            title: payoutRequestModel.note == "" || payoutRequestModel.note!.isEmpty
-                                                                ? "N/A"
-                                                                : payoutRequestModel.note.toString()),
-                                                      ),
-                                                      DataCell(
-                                                        TextCustom(
-                                                            title: payoutRequestModel.paymentDate == null
-                                                                ? 'N/A'
-                                                                : Constant.timestampToDate(payoutRequestModel.paymentDate!)),
-                                                      ),
-                                                      DataCell(
-                                                        Constant.bookingStatusText(context, payoutRequestModel.paymentStatus.toString()),
-                                                      ),
-                                                      DataCell(
-                                                        Container(
-                                                          alignment: Alignment.center,
-                                                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                                                          child: Row(
-                                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                            children: [
-                                                              // InkWell(
-                                                              //   onTap: () {
-                                                              //     controller.userSelectedPaymentStatus.value = payoutRequestModel.paymentStatus!;
-                                                              //     controller.adminNoteController.value.text = payoutRequestModel.adminNote!;
-                                                              //
-                                                              //     showDialog(
-                                                              //       context: context,
-                                                              //       builder: (context) => CouponDialog( payoutRequest: payoutRequestModel, ),
-                                                              //     );
-                                                              //   },
-                                                              //   child: SvgPicture.asset(
-                                                              //     "assets/icons/ic_eye.svg",
-                                                              //     color: AppColors.greyShade400,
-                                                              //     height: 16,
-                                                              //     width: 16,
-                                                              //   ),
-                                                              // ),
-                                                              payoutRequestModel.paymentStatus == "Pending"
-                                                                  ? CustomButtonWidget(
-                                                                      width: ResponsiveWidget.isMobile(context) ? 80 : MediaQuery.of(context).size.width * 0.07,
-                                                                      textColor: AppThemData.primaryWhite,
-                                                                      padding: const EdgeInsets.symmetric(horizontal: 22),
-                                                                      buttonTitle: "Allow",
-                                                                      // borderRadius: 14,
-                                                                      onPress: () async {
-                                                                        controller.userSelectedPaymentStatus.value = payoutRequestModel.paymentStatus.toString();
-                                                                        payoutRequestModel.adminNote == null
-                                                                            ? controller.adminNoteController.value.text = ""
-                                                                            : controller.adminNoteController.value.text = payoutRequestModel.adminNote.toString();
-
-                                                                        showDialog(
-                                                                          context: context,
-                                                                          builder: (context) => CouponDialog(
-                                                                            payoutRequest: payoutRequestModel,
-                                                                          ),
-                                                                        );
-                                                                      },
-                                                                    )
-                                                                  : TextCustom(title: 'Payment ${payoutRequestModel.paymentStatus.toString()}'),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                )
-                                                .toList()),
-                              ),
-                            ),
-                            spaceH(),
-                            ResponsiveWidget.isMobile(context)
-                                ? SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child: Visibility(
-                                      visible: controller.totalPage.value > 1,
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.end,
+                                      Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            TextCustom(
+                                                title: controller.title.value,
+                                                fontSize: 20,
+                                                fontFamily: AppThemeData.bold),
+                                            spaceH(height: 2),
+                                            Row(children: [
+                                              GestureDetector(
+                                                  onTap: () => Get.offAllNamed(
+                                                      Routes.DASHBOARD_SCREEN),
+                                                  child: TextCustom(
+                                                      title: 'Dashboard'.tr,
+                                                      fontSize: 14,
+                                                      fontFamily:
+                                                          AppThemeData.medium,
+                                                      color: AppThemData
+                                                          .greyShade500)),
+                                              const TextCustom(
+                                                  title: ' / ',
+                                                  fontSize: 14,
+                                                  fontFamily:
+                                                      AppThemeData.medium,
+                                                  color:
+                                                      AppThemData.greyShade500),
+                                              TextCustom(
+                                                  title:
+                                                      ' ${controller.title.value} ',
+                                                  fontSize: 14,
+                                                  fontFamily:
+                                                      AppThemeData.medium,
+                                                  color: AppThemData.primary500)
+                                            ])
+                                          ]),
+                                      Row(
                                         children: [
-                                          Align(
-                                            alignment: Alignment.centerRight,
-                                            child: WebPagination(
-                                                currentPage: controller.currentPage.value,
-                                                totalPage: controller.totalPage.value,
-                                                displayItemCount: controller.pageValue("5"),
-                                                onPageChanged: (page) {
-                                                  controller.currentPage.value = page;
-                                                  controller.setPagination(controller.totalItemPerPage.value);
-                                                }),
+                                          SizedBox(
+                                            width: 120,
+                                            child: Obx(
+                                              () => DropdownButtonFormField(
+                                                borderRadius:
+                                                    BorderRadius.circular(15),
+                                                isExpanded: true,
+                                                style: TextStyle(
+                                                  fontFamily:
+                                                      AppThemeData.medium,
+                                                  color: themeChange
+                                                          .isDarkTheme()
+                                                      ? AppThemData.textBlack
+                                                      : AppThemData.textGrey,
+                                                ),
+                                                hint: TextCustom(
+                                                    title: 'Payment Status'.tr),
+                                                onChanged: (String? taxType) {
+                                                  controller
+                                                      .selectedPayoutStatus
+                                                      .value = taxType ?? "All";
+                                                  controller.getPayoutRequest();
+                                                },
+                                                value: controller
+                                                    .selectedPayoutStatus.value,
+                                                items: controller.payoutStatus
+                                                    .map<
+                                                            DropdownMenuItem<
+                                                                String>>(
+                                                        (String value) {
+                                                  return DropdownMenuItem(
+                                                    value: value,
+                                                    child: TextCustom(
+                                                      title: value,
+                                                      fontFamily:
+                                                          AppThemeData.regular,
+                                                      fontSize: 16,
+                                                      color: themeChange
+                                                              .isDarkTheme()
+                                                          ? AppThemData
+                                                              .greyShade500
+                                                          : AppThemData
+                                                              .primaryBlack,
+                                                    ),
+                                                  );
+                                                }).toList(),
+                                                decoration: Constant
+                                                    .DefaultInputDecoration(
+                                                        context),
+                                              ),
+                                            ),
                                           ),
+                                          NumberOfRowsDropDown(
+                                              controller: controller),
                                         ],
                                       ),
-                                    ),
+                                    ],
                                   )
-                                : Visibility(
-                                    visible: controller.totalPage.value > 1,
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        Align(
-                                          alignment: Alignment.centerRight,
-                                          child: WebPagination(
-                                              currentPage: controller.currentPage.value,
-                                              totalPage: controller.totalPage.value,
-                                              displayItemCount: controller.pageValue("5"),
-                                              onPageChanged: (page) {
-                                                controller.currentPage.value = page;
-                                                controller.setPagination(controller.totalItemPerPage.value);
-                                              }),
+                                else
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            TextCustom(
+                                                title: controller.title.value,
+                                                fontSize: 20,
+                                                fontFamily: AppThemeData.bold),
+                                            spaceH(height: 2),
+                                            Row(children: [
+                                              GestureDetector(
+                                                  onTap: () => Get.offAllNamed(
+                                                      Routes.DASHBOARD_SCREEN),
+                                                  child: TextCustom(
+                                                      title: 'Dashboard'.tr,
+                                                      fontSize: 14,
+                                                      fontFamily:
+                                                          AppThemeData.medium,
+                                                      color: AppThemData
+                                                          .greyShade500)),
+                                              const TextCustom(
+                                                  title: ' / ',
+                                                  fontSize: 14,
+                                                  fontFamily:
+                                                      AppThemeData.medium,
+                                                  color:
+                                                      AppThemData.greyShade500),
+                                              TextCustom(
+                                                  title:
+                                                      ' ${controller.title.value} ',
+                                                  fontSize: 14,
+                                                  fontFamily:
+                                                      AppThemeData.medium,
+                                                  color: AppThemData.primary500)
+                                            ])
+                                          ]),
+                                      spaceH(height: 16),
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          spaceH(),
+                                          SizedBox(
+                                            width: MediaQuery.sizeOf(context)
+                                                    .width *
+                                                0.5,
+                                            child: Obx(
+                                              () => DropdownButtonFormField(
+                                                borderRadius:
+                                                    BorderRadius.circular(15),
+                                                isExpanded: true,
+                                                style: TextStyle(
+                                                  fontFamily:
+                                                      AppThemeData.medium,
+                                                  color: themeChange
+                                                          .isDarkTheme()
+                                                      ? AppThemData.textBlack
+                                                      : AppThemData.textGrey,
+                                                ),
+                                                hint: TextCustom(
+                                                    title: 'Payment Status'.tr),
+                                                onChanged: (String? taxType) {
+                                                  controller
+                                                      .selectedPayoutStatus
+                                                      .value = taxType ?? "All";
+                                                  controller.getPayoutRequest();
+                                                },
+                                                value: controller
+                                                    .selectedPayoutStatus.value,
+                                                items: controller.payoutStatus
+                                                    .map<
+                                                            DropdownMenuItem<
+                                                                String>>(
+                                                        (String value) {
+                                                  return DropdownMenuItem(
+                                                    value: value,
+                                                    child: TextCustom(
+                                                      title: value,
+                                                      fontFamily:
+                                                          AppThemeData.regular,
+                                                      fontSize: 16,
+                                                      color: themeChange
+                                                              .isDarkTheme()
+                                                          ? AppThemData
+                                                              .greyShade500
+                                                          : AppThemData
+                                                              .greyShade800,
+                                                    ),
+                                                  );
+                                                }).toList(),
+                                                decoration: Constant
+                                                    .DefaultInputDecoration(
+                                                        context),
+                                              ),
+                                            ),
+                                          ),
+                                          spaceH(),
+                                          NumberOfRowsDropDown(
+                                              controller: controller),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                spaceH(height: 20),
+                                SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(12),
+                                    child: controller.isLoading.value
+                                        ? Padding(
+                                            padding: paddingEdgeInsets(),
+                                            child: Constant.loader(),
+                                          )
+                                        : controller
+                                                .currentPayoutRequest.isEmpty
+                                            ? TextCustom(
+                                                title:
+                                                    "No Data available".tr.tr)
+                                            : DataTable(
+                                                horizontalMargin: 20,
+                                                columnSpacing: 30,
+                                                dataRowMaxHeight: 65,
+                                                headingRowHeight: 65,
+                                                border: TableBorder.all(
+                                                  color: themeChange
+                                                          .isDarkTheme()
+                                                      ? AppThemData.greyShade800
+                                                      : AppThemData
+                                                          .greyShade100,
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                ),
+                                                headingRowColor:
+                                                    MaterialStateColor.resolveWith(
+                                                        (states) => themeChange
+                                                                .isDarkTheme()
+                                                            ? AppThemData
+                                                                .greyShade800
+                                                            : AppThemData
+                                                                .greyShade100),
+                                                columns: [
+                                                  // CommonUI.dataColumnWidget(context, columnTitle: "DriverId", width:  ResponsiveWidget.isMobile(context) ?  150  :MediaQuery.of(context).size.width * 0.10 ),
+                                                  CommonUI.dataColumnWidget(
+                                                      context,
+                                                      columnTitle: "Amount".tr,
+                                                      width: ResponsiveWidget
+                                                              .isMobile(context)
+                                                          ? 150
+                                                          : MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              0.06),
+                                                  CommonUI.dataColumnWidget(
+                                                      context,
+                                                      columnTitle: "Name".tr,
+                                                      width: ResponsiveWidget
+                                                              .isMobile(context)
+                                                          ? 150
+                                                          : MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              0.06),
+                                                  CommonUI.dataColumnWidget(
+                                                      context,
+                                                      columnTitle: "Email".tr,
+                                                      width: ResponsiveWidget
+                                                              .isMobile(context)
+                                                          ? 150
+                                                          : MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              0.06),
+                                                  CommonUI.dataColumnWidget(
+                                                      context,
+                                                      columnTitle:
+                                                          "Phone Number".tr,
+                                                      width: ResponsiveWidget
+                                                              .isMobile(context)
+                                                          ? 150
+                                                          : MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              0.06),
+                                                  CommonUI.dataColumnWidget(
+                                                      context,
+                                                      columnTitle: "Note".tr,
+                                                      width: ResponsiveWidget
+                                                              .isMobile(context)
+                                                          ? 150
+                                                          : MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              0.13),
+                                                  CommonUI.dataColumnWidget(
+                                                      context,
+                                                      columnTitle:
+                                                          "PaymentDate".tr,
+                                                      width: ResponsiveWidget
+                                                              .isMobile(context)
+                                                          ? 220
+                                                          : MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              0.12),
+                                                  CommonUI.dataColumnWidget(
+                                                      context,
+                                                      columnTitle:
+                                                          "PaymentStatus".tr,
+                                                      width: ResponsiveWidget
+                                                              .isMobile(context)
+                                                          ? 220
+                                                          : MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              0.08),
+                                                  // CommonUI.dataColumnWidget(context, columnTitle: "PaymentDate", width: ResponsiveWidget.isMobile(context) ? 140 :MediaQuery.of(context).size.width * 0.10),
+                                                  CommonUI.dataColumnWidget(
+                                                    context,
+                                                    columnTitle: "Action".tr,
+                                                    width: ResponsiveWidget
+                                                            .isMobile(context)
+                                                        ? 100
+                                                        : MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.08,
+                                                  ),
+                                                ],
+                                                rows:
+                                                    controller
+                                                        .currentPayoutRequest
+                                                        .map(
+                                                          (payoutRequestModel) =>
+                                                              DataRow(
+                                                            cells: [
+                                                              // DataCell(
+                                                              //   TextCustom(
+                                                              //     title: payoutRequestModel.driverId.toString(),
+                                                              //   ),
+                                                              // ),
+                                                              DataCell(
+                                                                TextCustom(
+                                                                    title: payoutRequestModel
+                                                                        .amount
+                                                                        .toString()),
+                                                              ),
+                                                              DataCell(
+                                                                FutureBuilder<
+                                                                        DriverUserModel?>(
+                                                                    future: FireStoreUtils.getDriverByDriverID(payoutRequestModel
+                                                                        .driverId
+                                                                        .toString()), // async work
+                                                                    builder: (BuildContext
+                                                                            context,
+                                                                        AsyncSnapshot<DriverUserModel?>
+                                                                            snapshot) {
+                                                                      switch (snapshot
+                                                                          .connectionState) {
+                                                                        case ConnectionState
+                                                                              .waiting:
+                                                                          // return Center(child: Constant.loader());
+                                                                          return const SizedBox();
+                                                                        default:
+                                                                          if (snapshot
+                                                                              .hasError) {
+                                                                            return TextCustom(
+                                                                              title: 'Error: ${snapshot.error}',
+                                                                            );
+                                                                          } else {
+                                                                            DriverUserModel
+                                                                                driverUserModel =
+                                                                                snapshot.data!;
+                                                                            return Container(
+                                                                              alignment: Alignment.centerLeft,
+                                                                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                                                                              child: TextButton(
+                                                                                onPressed: () {},
+                                                                                child: TextCustom(
+                                                                                  title: driverUserModel.fullName!.isEmpty
+                                                                                      ? "N/A"
+                                                                                      : driverUserModel.fullName.toString() == "Unknown User"
+                                                                                          ? "User Deleted"
+                                                                                          : driverUserModel.fullName.toString(),
+                                                                                ),
+                                                                              ),
+                                                                            );
+                                                                          }
+                                                                      }
+                                                                    }),
+                                                              ),
+                                                              DataCell(
+                                                                FutureBuilder<
+                                                                        DriverUserModel?>(
+                                                                    future: FireStoreUtils.getDriverByDriverID(payoutRequestModel
+                                                                        .driverId
+                                                                        .toString()), // async work
+                                                                    builder: (BuildContext
+                                                                            context,
+                                                                        AsyncSnapshot<DriverUserModel?>
+                                                                            snapshot) {
+                                                                      switch (snapshot
+                                                                          .connectionState) {
+                                                                        case ConnectionState
+                                                                              .waiting:
+                                                                          // return Center(child: Constant.loader());
+                                                                          return const SizedBox();
+                                                                        default:
+                                                                          if (snapshot
+                                                                              .hasError) {
+                                                                            return TextCustom(
+                                                                              title: 'Error: ${snapshot.error}',
+                                                                            );
+                                                                          } else {
+                                                                            DriverUserModel
+                                                                                driverUserModel =
+                                                                                snapshot.data!;
+                                                                            return Container(
+                                                                              alignment: Alignment.centerLeft,
+                                                                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                                                                              child: TextButton(
+                                                                                onPressed: () {},
+                                                                                child: TextCustom(
+                                                                                  title: driverUserModel.email!.isEmpty
+                                                                                      ? "N/A"
+                                                                                      : driverUserModel.email.toString() == "Unknown User"
+                                                                                          ? "User Deleted"
+                                                                                          : Constant.maskEmail(email: driverUserModel.email.toString()),
+                                                                                ),
+                                                                              ),
+                                                                            );
+                                                                          }
+                                                                      }
+                                                                    }),
+                                                              ),
+                                                              DataCell(
+                                                                FutureBuilder<
+                                                                        DriverUserModel?>(
+                                                                    future: FireStoreUtils.getDriverByDriverID(payoutRequestModel
+                                                                        .driverId
+                                                                        .toString()), // async work
+                                                                    builder: (BuildContext
+                                                                            context,
+                                                                        AsyncSnapshot<DriverUserModel?>
+                                                                            snapshot) {
+                                                                      switch (snapshot
+                                                                          .connectionState) {
+                                                                        case ConnectionState
+                                                                              .waiting:
+                                                                          // return Center(child: Constant.loader());
+                                                                          return const SizedBox();
+                                                                        default:
+                                                                          if (snapshot
+                                                                              .hasError) {
+                                                                            return TextCustom(
+                                                                              title: 'Error: ${snapshot.error}',
+                                                                            );
+                                                                          } else {
+                                                                            DriverUserModel
+                                                                                driverUserModel =
+                                                                                snapshot.data!;
+                                                                            return Container(
+                                                                              alignment: Alignment.centerLeft,
+                                                                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                                                                              child: TextButton(
+                                                                                onPressed: () {},
+                                                                                child: TextCustom(
+                                                                                  title: driverUserModel.phoneNumber!.isEmpty
+                                                                                      ? "N/A"
+                                                                                      : driverUserModel.phoneNumber.toString() == "Unknown User"
+                                                                                          ? "User Deleted"
+                                                                                          : Constant.maskMobileNumber(mobileNumber: driverUserModel.phoneNumber.toString(), countryCode: driverUserModel.countryCode.toString()),
+                                                                                ),
+                                                                              ),
+                                                                            );
+                                                                          }
+                                                                      }
+                                                                    }),
+                                                              ),
+
+                                                              // Constant.bookingStatusText(context, e.bookingStatus.toString()),
+                                                              DataCell(
+                                                                TextCustom(
+                                                                    title: payoutRequestModel.note ==
+                                                                                "" ||
+                                                                            payoutRequestModel
+                                                                                .note!.isEmpty
+                                                                        ? "N/A"
+                                                                        : payoutRequestModel
+                                                                            .note
+                                                                            .toString()),
+                                                              ),
+                                                              DataCell(
+                                                                TextCustom(
+                                                                    title: payoutRequestModel.paymentDate ==
+                                                                            null
+                                                                        ? 'N/A'
+                                                                        : Constant.timestampToDate(
+                                                                            payoutRequestModel.paymentDate!)),
+                                                              ),
+                                                              DataCell(
+                                                                Constant.bookingStatusText(
+                                                                    context,
+                                                                    payoutRequestModel
+                                                                        .paymentStatus
+                                                                        .toString()),
+                                                              ),
+                                                              DataCell(
+                                                                Container(
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .center,
+                                                                  padding: const EdgeInsets
+                                                                      .symmetric(
+                                                                      horizontal:
+                                                                          8,
+                                                                      vertical:
+                                                                          8),
+                                                                  child: Row(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .spaceBetween,
+                                                                    children: [
+                                                                      // InkWell(
+                                                                      //   onTap: () {
+                                                                      //     controller.userSelectedPaymentStatus.value = payoutRequestModel.paymentStatus!;
+                                                                      //     controller.adminNoteController.value.text = payoutRequestModel.adminNote!;
+                                                                      //
+                                                                      //     showDialog(
+                                                                      //       context: context,
+                                                                      //       builder: (context) => CouponDialog( payoutRequest: payoutRequestModel, ),
+                                                                      //     );
+                                                                      //   },
+                                                                      //   child: SvgPicture.asset(
+                                                                      //     "assets/icons/ic_eye.svg",
+                                                                      //     color: AppColors.greyShade400,
+                                                                      //     height: 16,
+                                                                      //     width: 16,
+                                                                      //   ),
+                                                                      // ),
+                                                                      payoutRequestModel.paymentStatus ==
+                                                                              "Pending"
+                                                                          ? CustomButtonWidget(
+                                                                              width: ResponsiveWidget.isMobile(context) ? 80 : MediaQuery.of(context).size.width * 0.07,
+                                                                              textColor: AppThemData.primaryWhite,
+                                                                              padding: const EdgeInsets.symmetric(horizontal: 22),
+                                                                              buttonTitle: "Allow",
+                                                                              // borderRadius: 14,
+                                                                              onPress: () async {
+                                                                                controller.userSelectedPaymentStatus.value = payoutRequestModel.paymentStatus.toString();
+                                                                                payoutRequestModel.adminNote == null ? controller.adminNoteController.value.text = "" : controller.adminNoteController.value.text = payoutRequestModel.adminNote.toString();
+
+                                                                                showDialog(
+                                                                                  context: context,
+                                                                                  builder: (context) => CouponDialog(
+                                                                                    payoutRequest: payoutRequestModel,
+                                                                                  ),
+                                                                                );
+                                                                              },
+                                                                            )
+                                                                          : TextCustom(
+                                                                              title: 'Payment ${payoutRequestModel.paymentStatus.toString()}'),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        )
+                                                        .toList()),
+                                  ),
+                                ),
+                                spaceH(),
+                                ResponsiveWidget.isMobile(context)
+                                    ? SingleChildScrollView(
+                                        scrollDirection: Axis.horizontal,
+                                        child: Visibility(
+                                          visible:
+                                              controller.totalPage.value > 1,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            children: [
+                                              Align(
+                                                alignment:
+                                                    Alignment.centerRight,
+                                                child: WebPagination(
+                                                    currentPage: controller
+                                                        .currentPage.value,
+                                                    totalPage: controller
+                                                        .totalPage.value,
+                                                    displayItemCount: controller
+                                                        .pageValue("5"),
+                                                    onPageChanged: (page) {
+                                                      controller.currentPage
+                                                          .value = page;
+                                                      controller.setPagination(
+                                                          controller
+                                                              .totalItemPerPage
+                                                              .value);
+                                                    }),
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                      ],
-                                    ),
-                                  )
+                                      )
+                                    : Visibility(
+                                        visible: controller.totalPage.value > 1,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            Align(
+                                              alignment: Alignment.centerRight,
+                                              child: WebPagination(
+                                                  currentPage: controller
+                                                      .currentPage.value,
+                                                  totalPage: controller
+                                                      .totalPage.value,
+                                                  displayItemCount:
+                                                      controller.pageValue("5"),
+                                                  onPageChanged: (page) {
+                                                    controller.currentPage
+                                                        .value = page;
+                                                    controller.setPagination(
+                                                        controller
+                                                            .totalItemPerPage
+                                                            .value);
+                                                  }),
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                              ]),
+                            )
                           ]),
-                        )
-                      ]),
                     )),
               ),
             ],
@@ -565,7 +827,9 @@ class CouponDialog extends StatelessWidget {
                 spaceH(),
                 ContainerCustom(
                   padding: const EdgeInsets.all(0),
-                  borderColor: themeChange.isDarkTheme() ? AppThemData.greyShade900 : AppThemData.greyShade100,
+                  borderColor: themeChange.isDarkTheme()
+                      ? AppThemData.greyShade900
+                      : AppThemData.greyShade100,
                   child:
 
                       // controller.isLoadingVehicleDetails.value ?  Padding(
@@ -575,7 +839,8 @@ class CouponDialog extends StatelessWidget {
                       Column(
                     children: [
                       Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 12),
                           child: !ResponsiveWidget.isDesktop(context)
                               ? Column(
                                   children: [
@@ -584,7 +849,8 @@ class CouponDialog extends StatelessWidget {
                                       maxLine: 3,
                                     ),
                                     SizedBox(
-                                      width: MediaQuery.sizeOf(context).width * 0.6,
+                                      width: MediaQuery.sizeOf(context).width *
+                                          0.6,
                                       child: TextCustom(
                                         maxLine: 3,
                                         title: payoutRequest.id ?? 'N/A',
@@ -593,7 +859,8 @@ class CouponDialog extends StatelessWidget {
                                   ],
                                 )
                               : Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     TextCustom(
                                       title: 'Payment ID'.tr,
@@ -610,11 +877,14 @@ class CouponDialog extends StatelessWidget {
                         height: 1,
                         child: ContainerCustom(
                           padding: const EdgeInsets.all(0),
-                          color: themeChange.isDarkTheme() ? AppThemData.greyShade900 : AppThemData.greyShade100,
+                          color: themeChange.isDarkTheme()
+                              ? AppThemData.greyShade900
+                              : AppThemData.greyShade100,
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 12),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -622,7 +892,9 @@ class CouponDialog extends StatelessWidget {
                               title: 'HolderName'.tr,
                             ),
                             TextCustom(
-                              title: (payoutRequest.bankDetails!.holderName ?? 'N/A').toString(),
+                              title: (payoutRequest.bankDetails!.holderName ??
+                                      'N/A')
+                                  .toString(),
                             ),
                           ],
                         ),
@@ -632,19 +904,26 @@ class CouponDialog extends StatelessWidget {
                         height: 1,
                         child: ContainerCustom(
                           padding: const EdgeInsets.all(0),
-                          color: themeChange.isDarkTheme() ? AppThemData.greyShade900 : AppThemData.greyShade100,
+                          color: themeChange.isDarkTheme()
+                              ? AppThemData.greyShade900
+                              : AppThemData.greyShade100,
                         ),
                       ),
 
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 12),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             TextCustom(
                               title: 'AccountNumber'.tr,
                             ),
-                            TextCustom(title: (payoutRequest.bankDetails!.accountNumber ?? 'N/A').toString()),
+                            TextCustom(
+                                title:
+                                    (payoutRequest.bankDetails!.accountNumber ??
+                                            'N/A')
+                                        .toString()),
                           ],
                         ),
                       ),
@@ -653,19 +932,25 @@ class CouponDialog extends StatelessWidget {
                         height: 1,
                         child: ContainerCustom(
                           padding: const EdgeInsets.all(0),
-                          color: themeChange.isDarkTheme() ? AppThemData.greyShade900 : AppThemData.greyShade100,
+                          color: themeChange.isDarkTheme()
+                              ? AppThemData.greyShade900
+                              : AppThemData.greyShade100,
                         ),
                       ),
 
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 12),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             TextCustom(
                               title: 'BankName'.tr,
                             ),
-                            TextCustom(title: (payoutRequest.bankDetails!.bankName ?? 'N/A').toString()),
+                            TextCustom(
+                                title: (payoutRequest.bankDetails!.bankName ??
+                                        'N/A')
+                                    .toString()),
                           ],
                         ),
                       ),
@@ -673,19 +958,25 @@ class CouponDialog extends StatelessWidget {
                         height: 1,
                         child: ContainerCustom(
                           padding: const EdgeInsets.all(0),
-                          color: themeChange.isDarkTheme() ? AppThemData.greyShade900 : AppThemData.greyShade100,
+                          color: themeChange.isDarkTheme()
+                              ? AppThemData.greyShade900
+                              : AppThemData.greyShade100,
                         ),
                       ),
 
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 12),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             TextCustom(
                               title: 'SwiftCode'.tr,
                             ),
-                            TextCustom(title: (payoutRequest.bankDetails!.swiftCode ?? 'N/A').toString()),
+                            TextCustom(
+                                title: (payoutRequest.bankDetails!.swiftCode ??
+                                        'N/A')
+                                    .toString()),
                           ],
                         ),
                       ),
@@ -693,19 +984,25 @@ class CouponDialog extends StatelessWidget {
                         height: 1,
                         child: ContainerCustom(
                           padding: const EdgeInsets.all(0),
-                          color: themeChange.isDarkTheme() ? AppThemData.greyShade900 : AppThemData.greyShade100,
+                          color: themeChange.isDarkTheme()
+                              ? AppThemData.greyShade900
+                              : AppThemData.greyShade100,
                         ),
                       ),
 
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 12),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             TextCustom(
                               title: 'Branch City'.tr,
                             ),
-                            TextCustom(title: (payoutRequest.bankDetails!.branchCity ?? 'N/A').toString()),
+                            TextCustom(
+                                title: (payoutRequest.bankDetails!.branchCity ??
+                                        'N/A')
+                                    .toString()),
                           ],
                         ),
                       ),
@@ -713,19 +1010,26 @@ class CouponDialog extends StatelessWidget {
                         height: 1,
                         child: ContainerCustom(
                           padding: const EdgeInsets.all(0),
-                          color: themeChange.isDarkTheme() ? AppThemData.greyShade900 : AppThemData.greyShade100,
+                          color: themeChange.isDarkTheme()
+                              ? AppThemData.greyShade900
+                              : AppThemData.greyShade100,
                         ),
                       ),
 
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 12),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             TextCustom(
                               title: 'Branch Country'.tr,
                             ),
-                            TextCustom(title: (payoutRequest.bankDetails!.branchCountry ?? 'N/A').toString()),
+                            TextCustom(
+                                title:
+                                    (payoutRequest.bankDetails!.branchCountry ??
+                                            'N/A')
+                                        .toString()),
                           ],
                         ),
                       ),
@@ -751,25 +1055,33 @@ class CouponDialog extends StatelessWidget {
                               isExpanded: true,
                               style: TextStyle(
                                 fontFamily: AppThemeData.medium,
-                                color: themeChange.isDarkTheme() ? AppThemData.textBlack : AppThemData.textGrey,
+                                color: themeChange.isDarkTheme()
+                                    ? AppThemData.textBlack
+                                    : AppThemData.textGrey,
                               ),
                               hint: TextCustom(title: 'Payment Status'.tr),
                               onChanged: (String? taxType) {
-                                controller.userSelectedPaymentStatus.value = taxType ?? "Pending";
+                                controller.userSelectedPaymentStatus.value =
+                                    taxType ?? "Pending";
                               },
                               value: controller.userSelectedPaymentStatus.value,
-                              items: controller.paymentStatusType.map<DropdownMenuItem<String>>((String value) {
+                              items: controller.paymentStatusType
+                                  .map<DropdownMenuItem<String>>(
+                                      (String value) {
                                 return DropdownMenuItem(
                                   value: value,
                                   child: TextCustom(
                                     title: value,
                                     fontFamily: AppThemeData.regular,
                                     fontSize: 16,
-                                    color: themeChange.isDarkTheme() ? AppThemData.greyShade500 : AppThemData.greyShade800,
+                                    color: themeChange.isDarkTheme()
+                                        ? AppThemData.greyShade500
+                                        : AppThemData.greyShade800,
                                   ),
                                 );
                               }).toList(),
-                              decoration: Constant.DefaultInputDecoration(context),
+                              decoration:
+                                  Constant.DefaultInputDecoration(context),
                             ),
                           ),
                         ],
@@ -794,7 +1106,9 @@ class CouponDialog extends StatelessWidget {
           bottomWidgetList: [
             CustomButtonWidget(
               buttonTitle: "Close".tr,
-              buttonColor: themeChange.isDarkTheme() ? AppThemData.greyShade900 : AppThemData.greyShade100,
+              buttonColor: themeChange.isDarkTheme()
+                  ? AppThemData.greyShade900
+                  : AppThemData.greyShade100,
               onPress: () {
                 // controller.setDefaultData();
                 Navigator.pop(context);
@@ -810,12 +1124,17 @@ class CouponDialog extends StatelessWidget {
                 if (Constant.isDemo) {
                   DialogBox.demoDialogBox();
                 } else {
-                  payoutRequest.paymentStatus = controller.userSelectedPaymentStatus.value;
-                  payoutRequest.adminNote = controller.adminNoteController.value.text;
+                  payoutRequest.paymentStatus =
+                      controller.userSelectedPaymentStatus.value;
+                  payoutRequest.adminNote =
+                      controller.adminNoteController.value.text;
                   payoutRequest.paymentDate = Timestamp.now();
-                  if (controller.userSelectedPaymentStatus.value == "Rejected") {
-                    if (controller.adminNoteController.value.text.isEmpty || controller.adminNoteController.value.text == "") {
-                      return ShowToast.errorToast("Please Enter Rejected Note ".tr);
+                  if (controller.userSelectedPaymentStatus.value ==
+                      "Rejected") {
+                    if (controller.adminNoteController.value.text.isEmpty ||
+                        controller.adminNoteController.value.text == "") {
+                      return ShowToast.errorToast(
+                          "Please Enter Rejected Note ".tr);
                     }
                     Navigator.pop(context);
                     await FireStoreUtils.updatePayoutRequest(payoutRequest);

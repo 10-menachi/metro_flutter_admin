@@ -38,12 +38,16 @@ class VehicleTypeScreenView extends GetView<VehicleTypeScreenController> {
       init: VehicleTypeScreenController(),
       builder: (controller) {
         return Scaffold(
-          backgroundColor: themeChange.isDarkTheme() ? AppThemData.greyShade950 : AppThemData.greyShade50,
+          backgroundColor: themeChange.isDarkTheme()
+              ? AppThemData.greyShade950
+              : AppThemData.greyShade50,
           appBar: AppBar(
             elevation: 0.0,
             toolbarHeight: 70,
             automaticallyImplyLeading: false,
-            backgroundColor: themeChange.isDarkTheme() ? AppThemData.primaryBlack : AppThemData.primaryWhite,
+            backgroundColor: themeChange.isDarkTheme()
+                ? AppThemData.primaryBlack
+                : AppThemData.primaryWhite,
             leadingWidth: 200,
             // title: title,
             leading: Builder(
@@ -62,31 +66,25 @@ class VehicleTypeScreenView extends GetView<VehicleTypeScreenController> {
                             child: Icon(
                               Icons.menu,
                               size: 30,
-                              color: themeChange.isDarkTheme() ? AppThemData.primary500 : AppThemData.primary500,
+                              color: themeChange.isDarkTheme()
+                                  ? AppThemData.primary500
+                                  : AppThemData.primary500,
                             ),
                           )
                         : SizedBox(
-                      height: 45,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            "assets/image/logo.png",
                             height: 45,
-                            color: AppThemData.primary500,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  "assets/image/logo.png",
+                                  height: 45,
+                                  color: AppThemData.primary500,
+                                ),
+                              ],
+                            ),
                           ),
-                          spaceW(),
-                          const TextCustom(
-                            title: 'My Taxi',
-                            color: AppThemData.primary500,
-                            fontSize: 30,
-                            fontFamily: AppThemeData.semiBold,
-                            fontWeight: FontWeight.w700,
-                          )
-                        ],
-                      ),
-                    ),
                   ),
                 );
               },
@@ -127,7 +125,9 @@ class VehicleTypeScreenView extends GetView<VehicleTypeScreenController> {
           drawer: Drawer(
             // key: scaffoldKey,
             width: 270,
-            backgroundColor: themeChange.isDarkTheme() ? AppThemData.primaryBlack : AppThemData.primaryWhite,
+            backgroundColor: themeChange.isDarkTheme()
+                ? AppThemData.primaryBlack
+                : AppThemData.primaryWhite,
             child: const MenuWidget(),
           ),
           body: Row(
@@ -149,56 +149,124 @@ class VehicleTypeScreenView extends GetView<VehicleTypeScreenController> {
                             children: [
                               ResponsiveWidget.isDesktop(context)
                                   ? Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
-                                        Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                                          TextCustom(title: controller.title.value.tr, fontSize: 20, fontFamily: AppThemeData.bold),
-                                          spaceH(height: 2),
-                                          Row(children: [
-                                            GestureDetector(
-                                                onTap: () => Get.offAllNamed(Routes.DASHBOARD_SCREEN),
-                                                child: TextCustom(title: 'Dashboard'.tr, fontSize: 14, fontFamily: AppThemeData.medium, color: AppThemData.greyShade500)),
-                                            const TextCustom(title: ' / ', fontSize: 14, fontFamily: AppThemeData.medium, color: AppThemData.greyShade500),
-                                            TextCustom(
-                                                title: ' ${controller.title.value.tr} ', fontSize: 14, fontFamily: AppThemeData.medium, color: AppThemData.primary500)
-                                          ])
-                                        ]),
+                                        Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              TextCustom(
+                                                  title:
+                                                      controller.title.value.tr,
+                                                  fontSize: 20,
+                                                  fontFamily:
+                                                      AppThemeData.bold),
+                                              spaceH(height: 2),
+                                              Row(children: [
+                                                GestureDetector(
+                                                    onTap: () =>
+                                                        Get.offAllNamed(Routes
+                                                            .DASHBOARD_SCREEN),
+                                                    child: TextCustom(
+                                                        title: 'Dashboard'.tr,
+                                                        fontSize: 14,
+                                                        fontFamily:
+                                                            AppThemeData.medium,
+                                                        color: AppThemData
+                                                            .greyShade500)),
+                                                const TextCustom(
+                                                    title: ' / ',
+                                                    fontSize: 14,
+                                                    fontFamily:
+                                                        AppThemeData.medium,
+                                                    color: AppThemData
+                                                        .greyShade500),
+                                                TextCustom(
+                                                    title:
+                                                        ' ${controller.title.value.tr} ',
+                                                    fontSize: 14,
+                                                    fontFamily:
+                                                        AppThemeData.medium,
+                                                    color:
+                                                        AppThemData.primary500)
+                                              ])
+                                            ]),
                                         CustomButtonWidget(
-                                          padding: const EdgeInsets.symmetric(horizontal: 22),
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 22),
                                           buttonTitle: "+ Add Vehicle Type".tr,
                                           borderRadius: 10,
                                           onPress: () {
                                             controller.setDefaultData();
-                                            showDialog(context: context, builder: (context) => const VehicleTypeDialog());
+                                            showDialog(
+                                                context: context,
+                                                builder: (context) =>
+                                                    const VehicleTypeDialog());
                                           },
                                         ),
                                       ],
                                     )
                                   : Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                                          TextCustom(title: controller.title.value.tr, fontSize: 20, fontFamily: AppThemeData.bold),
-                                          spaceH(height: 2),
-                                          Row(children: [
-                                            GestureDetector(
-                                                onTap: () => Get.offAllNamed(Routes.DASHBOARD_SCREEN),
-                                                child: TextCustom(title: 'Dashboard'.tr, fontSize: 14, fontFamily: AppThemeData.medium, color: AppThemData.greyShade500)),
-                                            const TextCustom(title: ' / ', fontSize: 14, fontFamily: AppThemeData.medium, color: AppThemData.greyShade500),
-                                            TextCustom(
-                                                title: ' ${controller.title.value.tr} ', fontSize: 14, fontFamily: AppThemeData.medium, color: AppThemData.primary500)
-                                          ])
-                                        ]),
+                                        Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              TextCustom(
+                                                  title:
+                                                      controller.title.value.tr,
+                                                  fontSize: 20,
+                                                  fontFamily:
+                                                      AppThemeData.bold),
+                                              spaceH(height: 2),
+                                              Row(children: [
+                                                GestureDetector(
+                                                    onTap: () =>
+                                                        Get.offAllNamed(Routes
+                                                            .DASHBOARD_SCREEN),
+                                                    child: TextCustom(
+                                                        title: 'Dashboard'.tr,
+                                                        fontSize: 14,
+                                                        fontFamily:
+                                                            AppThemeData.medium,
+                                                        color: AppThemData
+                                                            .greyShade500)),
+                                                const TextCustom(
+                                                    title: ' / ',
+                                                    fontSize: 14,
+                                                    fontFamily:
+                                                        AppThemeData.medium,
+                                                    color: AppThemData
+                                                        .greyShade500),
+                                                TextCustom(
+                                                    title:
+                                                        ' ${controller.title.value.tr} ',
+                                                    fontSize: 14,
+                                                    fontFamily:
+                                                        AppThemeData.medium,
+                                                    color:
+                                                        AppThemData.primary500)
+                                              ])
+                                            ]),
                                         spaceH(),
                                         CustomButtonWidget(
-                                          width: MediaQuery.sizeOf(context).width * 0.7,
-                                          padding: const EdgeInsets.symmetric(horizontal: 22),
+                                          width:
+                                              MediaQuery.sizeOf(context).width *
+                                                  0.7,
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 22),
                                           buttonTitle: "+ Add Vehicle Type".tr,
                                           borderRadius: 10,
                                           onPress: () {
                                             controller.setDefaultData();
-                                            showDialog(context: context, builder: (context) => const VehicleTypeDialog());
+                                            showDialog(
+                                                context: context,
+                                                builder: (context) =>
+                                                    const VehicleTypeDialog());
                                           },
                                         ),
                                       ],
@@ -215,140 +283,318 @@ class VehicleTypeScreenView extends GetView<VehicleTypeScreenController> {
                                               child: Constant.loader(),
                                             )
                                           : controller.vehicleTypeList.isEmpty
-                                              ? TextCustom(title: "No Data available".tr)
+                                              ? TextCustom(
+                                                  title: "No Data available".tr)
                                               : DataTable(
                                                   horizontalMargin: 20,
                                                   columnSpacing: 30,
                                                   dataRowMaxHeight: 65,
                                                   headingRowHeight: 65,
                                                   border: TableBorder.all(
-                                                    color: themeChange.isDarkTheme() ? AppThemData.greyShade900 : AppThemData.greyShade100,
-                                                    borderRadius: BorderRadius.circular(12),
+                                                    color: themeChange
+                                                            .isDarkTheme()
+                                                        ? AppThemData
+                                                            .greyShade900
+                                                        : AppThemData
+                                                            .greyShade100,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            12),
                                                   ),
-                                                  headingRowColor: WidgetStateColor.resolveWith(
-                                                      (states) => themeChange.isDarkTheme() ? AppThemData.greyShade900 : AppThemData.greyShade100),
+                                                  headingRowColor: WidgetStateColor
+                                                      .resolveWith((states) =>
+                                                          themeChange
+                                                                  .isDarkTheme()
+                                                              ? AppThemData
+                                                                  .greyShade900
+                                                              : AppThemData
+                                                                  .greyShade100),
                                                   columns: [
-                                                    CommonUI.dataColumnWidget(context,
+                                                    CommonUI.dataColumnWidget(
+                                                        context,
                                                         columnTitle: "Title".tr,
-                                                        width: ResponsiveWidget.isMobile(context) ? 15 : MediaQuery.of(context).size.width * 0.08),
-                                                    CommonUI.dataColumnWidget(context,
-                                                        columnTitle: "Vehicle type Image".tr,
-                                                        width: ResponsiveWidget.isMobile(context) ? 120 : MediaQuery.of(context).size.width * 0.10),
-                                                    CommonUI.dataColumnWidget(context,
-                                                        columnTitle: "Minimum Charges".tr,
-                                                        width: ResponsiveWidget.isMobile(context) ? 120 : MediaQuery.of(context).size.width * 0.10),
-                                                    CommonUI.dataColumnWidget(context,
-                                                        columnTitle: "MiniCharges Within Km".tr,
-                                                        width: ResponsiveWidget.isMobile(context) ? 120 : MediaQuery.of(context).size.width * 0.10),
-                                                    CommonUI.dataColumnWidget(context,
-                                                        columnTitle: "Per Km".tr,
-                                                        width: ResponsiveWidget.isMobile(context) ? 120 : MediaQuery.of(context).size.width * 0.10),
-                                                    CommonUI.dataColumnWidget(context,
-                                                        columnTitle: "Active".tr,
-                                                        width: ResponsiveWidget.isMobile(context) ? 100 : MediaQuery.of(context).size.width * 0.03),
-                                                    CommonUI.dataColumnWidget(context,
-                                                        columnTitle: "Persons".tr,
-                                                        width: ResponsiveWidget.isMobile(context) ? 100 : MediaQuery.of(context).size.width * 0.03),
-                                                    CommonUI.dataColumnWidget(context,
-                                                        columnTitle: "Actions".tr,
-                                                        width: ResponsiveWidget.isMobile(context) ? 70 : MediaQuery.of(context).size.width * 0.08),
+                                                        width: ResponsiveWidget
+                                                                .isMobile(
+                                                                    context)
+                                                            ? 15
+                                                            : MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                0.08),
+                                                    CommonUI.dataColumnWidget(
+                                                        context,
+                                                        columnTitle:
+                                                            "Vehicle type Image"
+                                                                .tr,
+                                                        width: ResponsiveWidget
+                                                                .isMobile(
+                                                                    context)
+                                                            ? 120
+                                                            : MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                0.10),
+                                                    CommonUI.dataColumnWidget(
+                                                        context,
+                                                        columnTitle:
+                                                            "Minimum Charges"
+                                                                .tr,
+                                                        width: ResponsiveWidget
+                                                                .isMobile(
+                                                                    context)
+                                                            ? 120
+                                                            : MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                0.10),
+                                                    CommonUI.dataColumnWidget(
+                                                        context,
+                                                        columnTitle:
+                                                            "MiniCharges Within Km"
+                                                                .tr,
+                                                        width: ResponsiveWidget
+                                                                .isMobile(
+                                                                    context)
+                                                            ? 120
+                                                            : MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                0.10),
+                                                    CommonUI.dataColumnWidget(
+                                                        context,
+                                                        columnTitle:
+                                                            "Per Km".tr,
+                                                        width: ResponsiveWidget
+                                                                .isMobile(
+                                                                    context)
+                                                            ? 120
+                                                            : MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                0.10),
+                                                    CommonUI.dataColumnWidget(
+                                                        context,
+                                                        columnTitle:
+                                                            "Active".tr,
+                                                        width: ResponsiveWidget
+                                                                .isMobile(
+                                                                    context)
+                                                            ? 100
+                                                            : MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                0.03),
+                                                    CommonUI.dataColumnWidget(
+                                                        context,
+                                                        columnTitle:
+                                                            "Persons".tr,
+                                                        width: ResponsiveWidget
+                                                                .isMobile(
+                                                                    context)
+                                                            ? 100
+                                                            : MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                0.03),
+                                                    CommonUI.dataColumnWidget(
+                                                        context,
+                                                        columnTitle:
+                                                            "Actions".tr,
+                                                        width: ResponsiveWidget
+                                                                .isMobile(
+                                                                    context)
+                                                            ? 70
+                                                            : MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                0.08),
                                                   ],
-                                                  rows: controller.vehicleTypeList
-                                                      .map((vehicleTypeModel) => DataRow(cells: [
-                                                            DataCell(TextCustom(title: vehicleTypeModel.title.toString())),
-                                                            DataCell(
-                                                              Container(
-                                                                alignment: Alignment.center,
-                                                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                                                                child: NetworkImageWidget(
-                                                                  imageUrl: vehicleTypeModel.image,
-                                                                  borderRadius: 10,
-                                                                  fit: BoxFit.contain,
-                                                                  height: 40,
-                                                                  width: 100,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                            DataCell(TextCustom(title: vehicleTypeModel.charges.farMinimumCharges.toString())),
-                                                            DataCell(TextCustom(title: vehicleTypeModel.charges.fareMinimumChargesWithinKm.toString())),
-                                                            DataCell(TextCustom(title: vehicleTypeModel.charges.farePerKm.toString())),
-                                                            DataCell(
-                                                              Transform.scale(
-                                                                scale: 0.8,
-                                                                child: CupertinoSwitch(
-                                                                  activeColor: AppThemData.primary500,
-                                                                  value: vehicleTypeModel.isActive!,
-                                                                  onChanged: (value) async {
-                                                                    print('vehicle tyep status $value');
-                                                                    print('vehicle tyep  get ${vehicleTypeModel.isActive!}');
-                                                                    if (Constant.isDemo) {
-                                                                      DialogBox.demoDialogBox();
-                                                                    } else {
-                                                                      vehicleTypeModel.isActive = value;
-                                                                      await FireStoreUtils.updateVehicleType(vehicleTypeModel);
-                                                                      controller.getData();
-                                                                    }
-                                                                  },
-                                                                ),
-                                                              ),
-                                                            ),
-                                                            DataCell(TextCustom(title: vehicleTypeModel.persons.toString())),
-                                                            DataCell(
-                                                              Container(
-                                                                alignment: Alignment.center,
-                                                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                                                                child: Row(
-                                                                  mainAxisAlignment: MainAxisAlignment.start,
-                                                                  children: [
-                                                                    InkWell(
-                                                                      onTap: () {
-                                                                        controller.isEditing.value = true;
-                                                                        controller.editingId.value = vehicleTypeModel.id;
-                                                                        controller.imageURL.value = vehicleTypeModel.image;
-                                                                        controller.editingId.value = vehicleTypeModel.id;
-                                                                        controller.isEnable.value = vehicleTypeModel.isActive!;
-                                                                        controller.minimumChargeWithKm.value.text = vehicleTypeModel.charges.fareMinimumChargesWithinKm;
-                                                                        controller.minimumCharge.value.text = vehicleTypeModel.charges.farMinimumCharges;
-                                                                        controller.perKm.value.text = vehicleTypeModel.charges.farePerKm;
-                                                                        controller.vehicleTitle.value.text = vehicleTypeModel.title;
-                                                                        controller.person.value.text = vehicleTypeModel.persons;
-                                                                        controller.vehicleTypeImage.value.text = vehicleTypeModel.image;
-                                                                        showDialog(context: context, builder: (context) => const VehicleTypeDialog());
-                                                                      },
-                                                                      child: SvgPicture.asset(
-                                                                        "assets/icons/ic_edit.svg",
-                                                                        color: AppThemData.greyShade400,
-                                                                        height: 16,
-                                                                        width: 16,
-                                                                      ),
+                                                  rows: controller
+                                                      .vehicleTypeList
+                                                      .map(
+                                                          (vehicleTypeModel) =>
+                                                              DataRow(cells: [
+                                                                DataCell(TextCustom(
+                                                                    title: vehicleTypeModel
+                                                                        .title
+                                                                        .toString())),
+                                                                DataCell(
+                                                                  Container(
+                                                                    alignment:
+                                                                        Alignment
+                                                                            .center,
+                                                                    padding: const EdgeInsets
+                                                                        .symmetric(
+                                                                        horizontal:
+                                                                            8,
+                                                                        vertical:
+                                                                            8),
+                                                                    child:
+                                                                        NetworkImageWidget(
+                                                                      imageUrl:
+                                                                          vehicleTypeModel
+                                                                              .image,
+                                                                      borderRadius:
+                                                                          10,
+                                                                      fit: BoxFit
+                                                                          .contain,
+                                                                      height:
+                                                                          40,
+                                                                      width:
+                                                                          100,
                                                                     ),
-                                                                    spaceW(width: 20),
-                                                                    InkWell(
-                                                                      onTap: () async {
-                                                                        if (Constant.isDemo) {
-                                                                          DialogBox.demoDialogBox();
+                                                                  ),
+                                                                ),
+                                                                DataCell(TextCustom(
+                                                                    title: vehicleTypeModel
+                                                                        .charges
+                                                                        .farMinimumCharges
+                                                                        .toString())),
+                                                                DataCell(TextCustom(
+                                                                    title: vehicleTypeModel
+                                                                        .charges
+                                                                        .fareMinimumChargesWithinKm
+                                                                        .toString())),
+                                                                DataCell(TextCustom(
+                                                                    title: vehicleTypeModel
+                                                                        .charges
+                                                                        .farePerKm
+                                                                        .toString())),
+                                                                DataCell(
+                                                                  Transform
+                                                                      .scale(
+                                                                    scale: 0.8,
+                                                                    child:
+                                                                        CupertinoSwitch(
+                                                                      activeColor:
+                                                                          AppThemData
+                                                                              .primary500,
+                                                                      value: vehicleTypeModel
+                                                                          .isActive!,
+                                                                      onChanged:
+                                                                          (value) async {
+                                                                        print(
+                                                                            'vehicle tyep status $value');
+                                                                        print(
+                                                                            'vehicle tyep  get ${vehicleTypeModel.isActive!}');
+                                                                        if (Constant
+                                                                            .isDemo) {
+                                                                          DialogBox
+                                                                              .demoDialogBox();
                                                                         } else {
-                                                                          // controller.removeVehicleTypeModel(vehicleTypeModel);
-                                                                          // controller.getData();
-                                                                          bool confirmDelete = await DialogBox.showConfirmationDeleteDialog(context);
-                                                                          if (confirmDelete) {
-                                                                            await controller.removeVehicleTypeModel(vehicleTypeModel);
-                                                                            controller.getData();
-                                                                          }
+                                                                          vehicleTypeModel.isActive =
+                                                                              value;
+                                                                          await FireStoreUtils.updateVehicleType(
+                                                                              vehicleTypeModel);
+                                                                          controller
+                                                                              .getData();
                                                                         }
                                                                       },
-                                                                      child: SvgPicture.asset(
-                                                                        "assets/icons/ic_delete.svg",
-                                                                        color: AppThemData.greyShade400,
-                                                                        height: 16,
-                                                                        width: 16,
-                                                                      ),
                                                                     ),
-                                                                  ],
+                                                                  ),
                                                                 ),
-                                                              ),
-                                                            ),
-                                                          ]))
+                                                                DataCell(TextCustom(
+                                                                    title: vehicleTypeModel
+                                                                        .persons
+                                                                        .toString())),
+                                                                DataCell(
+                                                                  Container(
+                                                                    alignment:
+                                                                        Alignment
+                                                                            .center,
+                                                                    padding: const EdgeInsets
+                                                                        .symmetric(
+                                                                        horizontal:
+                                                                            8,
+                                                                        vertical:
+                                                                            8),
+                                                                    child: Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .start,
+                                                                      children: [
+                                                                        InkWell(
+                                                                          onTap:
+                                                                              () {
+                                                                            controller.isEditing.value =
+                                                                                true;
+                                                                            controller.editingId.value =
+                                                                                vehicleTypeModel.id;
+                                                                            controller.imageURL.value =
+                                                                                vehicleTypeModel.image;
+                                                                            controller.editingId.value =
+                                                                                vehicleTypeModel.id;
+                                                                            controller.isEnable.value =
+                                                                                vehicleTypeModel.isActive!;
+                                                                            controller.minimumChargeWithKm.value.text =
+                                                                                vehicleTypeModel.charges.fareMinimumChargesWithinKm;
+                                                                            controller.minimumCharge.value.text =
+                                                                                vehicleTypeModel.charges.farMinimumCharges;
+                                                                            controller.perKm.value.text =
+                                                                                vehicleTypeModel.charges.farePerKm;
+                                                                            controller.vehicleTitle.value.text =
+                                                                                vehicleTypeModel.title;
+                                                                            controller.person.value.text =
+                                                                                vehicleTypeModel.persons;
+                                                                            controller.vehicleTypeImage.value.text =
+                                                                                vehicleTypeModel.image;
+                                                                            showDialog(
+                                                                                context: context,
+                                                                                builder: (context) => const VehicleTypeDialog());
+                                                                          },
+                                                                          child:
+                                                                              SvgPicture.asset(
+                                                                            "assets/icons/ic_edit.svg",
+                                                                            color:
+                                                                                AppThemData.greyShade400,
+                                                                            height:
+                                                                                16,
+                                                                            width:
+                                                                                16,
+                                                                          ),
+                                                                        ),
+                                                                        spaceW(
+                                                                            width:
+                                                                                20),
+                                                                        InkWell(
+                                                                          onTap:
+                                                                              () async {
+                                                                            if (Constant.isDemo) {
+                                                                              DialogBox.demoDialogBox();
+                                                                            } else {
+                                                                              // controller.removeVehicleTypeModel(vehicleTypeModel);
+                                                                              // controller.getData();
+                                                                              bool confirmDelete = await DialogBox.showConfirmationDeleteDialog(context);
+                                                                              if (confirmDelete) {
+                                                                                await controller.removeVehicleTypeModel(vehicleTypeModel);
+                                                                                controller.getData();
+                                                                              }
+                                                                            }
+                                                                          },
+                                                                          child:
+                                                                              SvgPicture.asset(
+                                                                            "assets/icons/ic_delete.svg",
+                                                                            color:
+                                                                                AppThemData.greyShade400,
+                                                                            height:
+                                                                                16,
+                                                                            width:
+                                                                                16,
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ]))
                                                       .toList()),
                                     )),
                               )
@@ -407,7 +653,9 @@ class VehicleTypeDialog extends StatelessWidget {
                     height: 0.18.sh,
                     width: 0.30.sw,
                     decoration: BoxDecoration(
-                      color: themeChange.isDarkTheme() ? AppThemData.greyShade900 : AppThemData.greyShade100,
+                      color: themeChange.isDarkTheme()
+                          ? AppThemData.greyShade900
+                          : AppThemData.greyShade100,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Stack(
@@ -418,7 +666,9 @@ class VehicleTypeDialog extends StatelessWidget {
                             fit: BoxFit.contain,
                             height: 0.18.sh,
                             width: 0.30.sw,
-                            imageUrl: controller.imageFile.value.path.isEmpty ? controller.imageURL.value : controller.imageFile.value.path,
+                            imageUrl: controller.imageFile.value.path.isEmpty
+                                ? controller.imageURL.value
+                                : controller.imageFile.value.path,
                           ),
                         ),
                         Center(
@@ -428,10 +678,13 @@ class VehicleTypeDialog extends StatelessWidget {
                                 DialogBox.demoDialogBox();
                               } else {
                                 ImagePicker picker = ImagePicker();
-                                final img = await picker.pickImage(source: ImageSource.gallery, imageQuality: 80);
+                                final img = await picker.pickImage(
+                                    source: ImageSource.gallery,
+                                    imageQuality: 80);
                                 if (img != null) {
                                   File imageFile = File(img.path);
-                                  controller.vehicleTypeImage.value.text = img.name;
+                                  controller.vehicleTypeImage.value.text =
+                                      img.name;
                                   controller.imageFile.value = imageFile;
                                   controller.mimeType.value = "${img.mimeType}";
                                   controller.isImageUpdated.value = true;
@@ -453,7 +706,9 @@ class VehicleTypeDialog extends StatelessWidget {
                     height: 0.18.sh,
                     width: 0.30.sw,
                     decoration: BoxDecoration(
-                      color: themeChange.isDarkTheme() ? AppThemData.greyShade900 : AppThemData.greyShade100,
+                      color: themeChange.isDarkTheme()
+                          ? AppThemData.greyShade900
+                          : AppThemData.greyShade100,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Stack(
@@ -475,10 +730,13 @@ class VehicleTypeDialog extends StatelessWidget {
                                 DialogBox.demoDialogBox();
                               } else {
                                 ImagePicker picker = ImagePicker();
-                                final img = await picker.pickImage(source: ImageSource.gallery, imageQuality: 80);
+                                final img = await picker.pickImage(
+                                    source: ImageSource.gallery,
+                                    imageQuality: 80);
                                 if (img != null) {
                                   File imageFile = File(img.path);
-                                  controller.vehicleTypeImage.value.text = img.name;
+                                  controller.vehicleTypeImage.value.text =
+                                      img.name;
                                   controller.imageFile.value = imageFile;
                                   controller.mimeType.value = "${img.mimeType}";
                                   controller.isImageUpdated.value = true;
@@ -492,8 +750,12 @@ class VehicleTypeDialog extends StatelessWidget {
                                       Expanded(
                                         child: Text(
                                           'upload image'.tr,
-                                          style: const TextStyle(fontSize: 16, color: AppThemData.greyShade500, fontFamily: AppThemeData.medium),
-                                          textAlign: TextAlign.center, // Center the text within the Expanded widget
+                                          style: const TextStyle(
+                                              fontSize: 16,
+                                              color: AppThemData.greyShade500,
+                                              fontFamily: AppThemeData.medium),
+                                          textAlign: TextAlign
+                                              .center, // Center the text within the Expanded widget
                                         ),
                                       ),
                                       const SizedBox(
@@ -513,7 +775,10 @@ class VehicleTypeDialog extends StatelessWidget {
                   ),
             spaceH(height: 16),
             SizedBox(
-              child: CustomTextFormField(title: "Title".tr, hintText: "Enter Title".tr, controller: controller.vehicleTitle.value),
+              child: CustomTextFormField(
+                  title: "Title".tr,
+                  hintText: "Enter Title".tr,
+                  controller: controller.vehicleTitle.value),
             ),
             spaceH(),
             Row(
@@ -586,7 +851,9 @@ class VehicleTypeDialog extends StatelessWidget {
               children: [
                 CustomButtonWidget(
                   buttonTitle: "Close".tr,
-                  buttonColor: themeChange.isDarkTheme() ? AppThemData.greyShade900 : AppThemData.greyShade100,
+                  buttonColor: themeChange.isDarkTheme()
+                      ? AppThemData.greyShade900
+                      : AppThemData.greyShade100,
                   onPress: () {
                     controller.setDefaultData();
                     Navigator.pop(context);
@@ -594,7 +861,8 @@ class VehicleTypeDialog extends StatelessWidget {
                 ),
                 spaceW(),
                 CustomButtonWidget(
-                  buttonTitle: controller.isEditing.value ? "Edit".tr : "Save".tr,
+                  buttonTitle:
+                      controller.isEditing.value ? "Edit".tr : "Save".tr,
                   onPress: () {
                     if (Constant.isDemo) {
                       DialogBox.demoDialogBox();
@@ -602,11 +870,16 @@ class VehicleTypeDialog extends StatelessWidget {
                       if (controller.vehicleTitle.value.text.isNotEmpty &&
                           controller.vehicleTypeImage.value.text.isNotEmpty &&
                           controller.minimumCharge.value.text.isNotEmpty &&
-                          controller.minimumChargeWithKm.value.text.isNotEmpty &&
+                          controller
+                              .minimumChargeWithKm.value.text.isNotEmpty &&
                           controller.perKm.value.text.isNotEmpty &&
                           controller.person.value.text.isNotEmpty) {
-                        controller.isEditing.value ? controller.isEditing(true) : controller.isLoading(true);
-                        controller.isEditing.value ? controller.updateVehicleType() : controller.addVehicleTyep();
+                        controller.isEditing.value
+                            ? controller.isEditing(true)
+                            : controller.isLoading(true);
+                        controller.isEditing.value
+                            ? controller.updateVehicleType()
+                            : controller.addVehicleTyep();
 
                         Navigator.pop(context);
                       } else {
