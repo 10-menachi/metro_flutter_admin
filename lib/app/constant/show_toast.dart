@@ -1,6 +1,7 @@
 import 'package:admin/app/utils/app_colors.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'dart:developer' as developer;
 
 class ShowToastDialog {
   static showLoader(String message) {
@@ -18,7 +19,7 @@ class ShowToastDialog {
     bool log = false,
   }) {
     if (value!.isEmpty) {
-      print(value);
+      developer.log(value);
     } else {
       Fluttertoast.showToast(
           msg: value,

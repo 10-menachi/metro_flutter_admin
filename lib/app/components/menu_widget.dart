@@ -6,7 +6,6 @@ import 'package:admin/app/utils/app_colors.dart';
 import 'package:admin/app/utils/app_them_data.dart';
 import 'package:admin/app/utils/dark_theme_provider.dart';
 import 'package:admin/app/utils/responsive.dart';
-import 'package:admin/widget/global_widgets.dart';
 import 'package:admin/widget/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -47,7 +46,6 @@ class MenuWidget extends StatelessWidget {
                             Image.asset(
                               "assets/image/logo.png",
                               height: 45,
-                              color: AppThemData.primary500,
                             ),
                           ],
                         ),
@@ -364,7 +362,10 @@ class LogoutListItem extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: SvgPicture.asset(
                   icon!,
-                  color: iconColor,
+                  colorFilter: ColorFilter.mode(
+                    iconColor!,
+                    BlendMode.srcIn,
+                  ),
                   height: 16,
                   width: 16,
                 ),
@@ -508,11 +509,14 @@ class ExpansionTileItem extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: SvgPicture.asset(
               icon!,
-              color: isSelected == true
-                  ? AppThemData.primary500
+              colorFilter: isSelected == true
+                  ? const ColorFilter.mode(
+                      AppThemData.primary500, BlendMode.srcIn)
                   : themeChange.isDarkTheme()
-                      ? AppThemData.greyShade25
-                      : AppThemData.greyShade950,
+                      ? const ColorFilter.mode(
+                          AppThemData.greyShade25, BlendMode.srcIn)
+                      : const ColorFilter.mode(
+                          AppThemData.greyShade950, BlendMode.srcIn),
               height: 16,
               width: 16,
             ),

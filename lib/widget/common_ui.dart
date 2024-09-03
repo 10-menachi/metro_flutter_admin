@@ -110,7 +110,6 @@ class ProfilePopUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeChange = Provider.of<DarkThemeProvider>(context);
     return GetX(
         init: DashboardScreenController(),
         builder: (controller) {
@@ -139,7 +138,7 @@ class ProfilePopUp extends StatelessWidget {
                               fontFamily: AppThemeData.bold),
                           TextCustom(
                               title: controller.admin.value.name ?? 'Admin',
-                              fontSize: 15,
+                              fontSize: 12,
                               fontFamily: AppThemeData.bold,
                               maxLine: 1),
                         ]),
@@ -186,7 +185,6 @@ class CommonUI {
                         height: 45,
                         color: AppThemData.primary500,
                       ),
-                      
                     ],
                   ),
                 ),

@@ -35,19 +35,12 @@ class LoginPageView extends GetView<LoginPageController> {
                       Image.asset(
                         "assets/image/logo.png",
                         width: 225,
-                        color: AppThemData.primary500,
+                        height: 225,
                       ),
                     ],
                   ),
                 ),
                 30.height,
-                TextCustom(
-                  title: 'Unlock Your Admin \n Dashboard'.tr,
-                  fontSize: 25,
-                  maxLine: 2,
-                  fontFamily: AppThemeData.bold,
-                  // style: TextStyle(fontSize: 25, color: AppThemData.appColor, fontFamily: AppThemeData.bold, fontWeight: FontWeight.bold),
-                ),
                 const SizedBox(
                   height: 30,
                 ),
@@ -222,80 +215,6 @@ class LoginPageView extends GetView<LoginPageController> {
                   ),
                 ),
                 30.height,
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.7,
-                  child: Card(
-                    elevation: 10,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          TextCustom(
-                            title: "Credentials : ".tr,
-                            fontSize: 14,
-                            fontFamily: AppThemeData.medium,
-                            color: Colors.black,
-                          ),
-                          const SizedBox(height: 2),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Obx(
-                                () => Text(
-                                  "Email : ${controller.email.value}",
-                                  style: const TextStyle(
-                                      fontFamily: AppThemeData.medium,
-                                      fontSize: 14,
-                                      color: Colors.black),
-                                ),
-                              ),
-                              InkWell(
-                                  onTap: () async {
-                                    controller.emailController.text =
-                                        controller.email.value;
-                                    controller.passwordController.text =
-                                        controller.password.value;
-                                  },
-                                  child: const Icon(
-                                    Icons.copy,
-                                    size: 14,
-                                  ))
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Obx(
-                                () => Text(
-                                  "Password : ${controller.password.value}",
-                                  style: const TextStyle(
-                                      fontFamily: AppThemeData.medium,
-                                      fontSize: 14,
-                                      color: Colors.black),
-                                ),
-                              ),
-                              InkWell(
-                                  onTap: () async {
-                                    controller.emailController.text =
-                                        controller.email.value;
-                                    controller.passwordController.text =
-                                        controller.password.value;
-                                  },
-                                  child: const Icon(
-                                    Icons.copy,
-                                    size: 14,
-                                  ))
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
                 const SizedBox(
                   height: 20,
                 )
@@ -342,26 +261,13 @@ class LoginPageView extends GetView<LoginPageController> {
                         children: [
                           Image.asset(
                             "assets/image/logo.png",
-                            height: 50,
-                            color: AppThemData.primary500,
+                            width: 225,
+                            height: 225,
                           ),
                         ],
                       ),
                     ),
                     30.height,
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextCustom(
-                        title: 'Unlock Your Admin Dashboard'.tr,
-                        fontSize: 25,
-                        fontFamily: AppThemeData.bold,
-                        style: TextStyle(
-                            fontSize: 25,
-                            color: AppColors.appColor,
-                            fontFamily: AppThemeData.bold,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -538,82 +444,6 @@ class LoginPageView extends GetView<LoginPageController> {
                       ),
                     ),
                     30.height,
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.20,
-                      child: Card(
-                        elevation: 10,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              TextCustom(
-                                title: "Credentials : ".tr,
-                                fontSize: 14,
-                                fontFamily: AppThemeData.medium,
-                                color: Colors.black,
-                              ),
-                              const SizedBox(height: 2),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Obx(
-                                    () => Text(
-                                      "Email : ${controller.email.value}",
-                                      style: const TextStyle(
-                                          fontFamily: AppThemeData.medium,
-                                          fontSize: 14,
-                                          color: Colors.black),
-                                    ),
-                                  ),
-                                  InkWell(
-                                      onTap: () async {
-                                        controller.emailController.text =
-                                            controller.email.value;
-                                        controller.passwordController.text =
-                                            controller.password.value;
-                                      },
-                                      child: const Icon(
-                                        Icons.copy,
-                                        size: 14,
-                                      ))
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Obx(
-                                    () => Text(
-                                      "Password : ${controller.password.value}",
-                                      style: const TextStyle(
-                                          fontFamily: AppThemeData.medium,
-                                          fontSize: 14,
-                                          color: Colors.black),
-                                    ),
-                                  ),
-                                  InkWell(
-                                      onTap: () async {
-                                        controller.emailController.text =
-                                            controller.email.value;
-                                        controller.passwordController.text =
-                                            controller.password.value;
-                                      },
-                                      child: const Icon(
-                                        Icons.copy,
-                                        size: 14,
-                                      ))
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    )
                   ],
                 ),
               ),
@@ -663,14 +493,6 @@ class LoginPageView extends GetView<LoginPageController> {
                       ),
                     ),
                     30.height,
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextCustom(
-                        title: 'Unlock Your Admin Dashboard'.tr, fontSize: 16,
-                        fontFamily: AppThemeData.bold,
-                        // style: TextStyle(fontSize: 25, color: AppColors.appColor, fontFamily: AppThemeData.bold, fontWeight: FontWeight.bold),
-                      ),
-                    ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -681,6 +503,7 @@ class LoginPageView extends GetView<LoginPageController> {
                         TextCustom(
                           title: 'Email ID'.tr,
                           fontSize: 14,
+                          color: AppThemData.primary500,
                         ),
                         10.height,
                         SizedBox(

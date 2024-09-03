@@ -149,7 +149,6 @@ class _WebPaginationState extends State<WebPagination> {
 
   @override
   Widget build(BuildContext context) {
-    final themeChange = Provider.of<DarkThemeProvider>(context);
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -204,7 +203,6 @@ class _PageControlButtonState extends State<_PageControlButton> {
 
   @override
   Widget build(BuildContext context) {
-    final themeChange = Provider.of<DarkThemeProvider>(context);
     return InkWell(
         onTap: widget.enable ? widget.onTap : null,
         onHover: (b) {

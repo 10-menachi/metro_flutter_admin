@@ -81,10 +81,8 @@ class DashboardScreenController extends GetxController {
     bookingChartData = List.filled(12, ChartData("", 0));
     usersChartData = List.filled(12, ChartData("", 0));
     usersCircleChartData = List.filled(12, ChartDataCircle("", 0, Colors.amber));
-    late RxList<ChartDataCircle> chartData;
     getBookingData();
     isUserData = false.obs;
-    chartData = <ChartDataCircle>[].obs;
   }
 
   // tempMethod() async {

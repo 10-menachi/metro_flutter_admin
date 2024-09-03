@@ -10,7 +10,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 import '../../../../widget/common_ui.dart';
 import '../../../../widget/global_widgets.dart';

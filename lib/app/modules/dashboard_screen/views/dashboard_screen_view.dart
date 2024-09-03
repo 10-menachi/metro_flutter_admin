@@ -1,7 +1,6 @@
 import 'package:admin/app/components/network_image_widget.dart';
 import 'package:admin/app/constant/constants.dart';
 import 'package:admin/app/models/user_model.dart';
-import 'package:admin/app/modules/home/controllers/home_controller.dart';
 import 'package:admin/app/routes/app_pages.dart';
 import 'package:admin/app/utils/app_them_data.dart';
 import 'package:admin/app/utils/dark_theme_provider.dart';
@@ -29,7 +28,6 @@ class DashboardScreenView extends GetView<DashboardScreenController> {
   @override
   Widget build(BuildContext context) {
     final themeChange = Provider.of<DarkThemeProvider>(context);
-    HomeController homeController = Get.put(HomeController());
     return GetBuilder<DashboardScreenController>(
       init: DashboardScreenController(),
       builder: (controller) {
