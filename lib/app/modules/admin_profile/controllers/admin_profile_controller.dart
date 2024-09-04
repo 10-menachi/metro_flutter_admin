@@ -19,12 +19,14 @@ class AdminProfileController extends GetxController {
   final GlobalKey<FormState> changePasswordFromKey = GlobalKey<FormState>();
 
   Rx<TextEditingController> nameController = TextEditingController().obs;
-  Rx<TextEditingController> contactNumberController = TextEditingController().obs;
+  Rx<TextEditingController> contactNumberController =
+      TextEditingController().obs;
   Rx<TextEditingController> emailController = TextEditingController().obs;
   Rx<TextEditingController> imageController = TextEditingController().obs;
   Rx<TextEditingController> oldPasswordController = TextEditingController().obs;
   Rx<TextEditingController> newPasswordController = TextEditingController().obs;
-  Rx<TextEditingController> confirmPasswordController = TextEditingController().obs;
+  Rx<TextEditingController> confirmPasswordController =
+      TextEditingController().obs;
   RxInt selectedTabIndex = 0.obs;
 
   HomeController homeController = Get.put(HomeController());
@@ -56,17 +58,29 @@ class AdminProfileController extends GetxController {
     });
   }
 
-  pickPhoto() async {
+  Future<void> pickPhoto() async {
     uploading.value = true;
     ImagePicker picker = ImagePicker();
-    final img = await picker.pickImage(source: ImageSource.gallery, imageQuality: 80);
 
-    File imageFile = File(img!.path);
+    final XFile? img = await picker.pickImage(
+      source: ImageSource.gallery,
+      imageQuality: 80,
+    );
 
-    imageController.value.text = img.name;
-    imagePath.value = imageFile;
-    imagePickedFileBytes.value = await img.readAsBytes();
-    mimeType.value = "${img.mimeType}";
+    if (img != null) {
+      File imageFile =
+          File(img.path); // Ensure this path is valid for web or mobile
+      imagePath.value = imageFile;
+
+      imageController.value.text = img.name;
+      imagePickedFileBytes.value = await img.readAsBytes();
+      mimeType.value = img.mimeType ?? ''; // Handle case where mimeType is null
+
+      // Proceed with uploading to Firebase or other actions
+    } else {
+      log('No image selected.');
+    }
+
     uploading.value = false;
   }
 
@@ -89,19 +103,32 @@ class AdminProfileController extends GetxController {
   //   }).catchError((e) => log("-->$e"));
   // }
 
-
-setAdminData() async {
+  setAdminData() async {
     try {
       Constant.waitingLoader();
       if (imagePath.value.path.isNotEmpty) {
         try {
-          String? downloadUrl = await FireStoreUtils.uploadPic(
-              PickedFile(imagePath.value.path),
-              "admin",
-              "admin",
-              mimeType.value);
-          Constant.adminModel!.image = downloadUrl;
-          print(downloadUrl.toString());
+          Constant.waitingLoader();
+
+          if (imagePath.value.path.isNotEmpty) {
+            try {
+              // Use XFile instead of PickedFile
+              XFile imageFile = XFile(imagePath.value.path);
+              log("c1");
+              String? downloadUrl = await FireStoreUtils.uploadPic(
+                imageFile,
+                "admin",
+                "admin",
+                mimeType.value,
+              );
+
+              Constant.adminModel!.image = downloadUrl;
+              log(downloadUrl.toString());
+            } catch (e) {
+              print("--> Error uploading image: $e");
+              print("Error uploading image: $e");
+            }
+          }
         } catch (e) {
           print("--> Error uploading image: $e");
           print("Error uploading image: $e");
@@ -126,13 +153,12 @@ setAdminData() async {
     }
   }
 
-  
-  
   setAdminPassword() async {
     if (oldPasswordController.value.text != Constant.adminModel!.password) {
       ShowToast.errorToast("Old password is not correct".tr);
     } else {
-      if (newPasswordController.value.text != confirmPasswordController.value.text) {
+      if (newPasswordController.value.text !=
+          confirmPasswordController.value.text) {
         ShowToast.errorToast("Confirmation password does not match".tr);
       } else {
         Constant.waitingLoader();

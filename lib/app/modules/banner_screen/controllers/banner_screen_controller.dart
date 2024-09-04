@@ -63,44 +63,90 @@ class BannerScreenController extends GetxController {
     isOfferBanner.value = false;
   }
 
-  updateBanner(BuildContext context) async {
+  Future<void> updateBanner(BuildContext context) async {
     Navigator.pop(context);
-    isEditing = true.obs;
+    isEditing.value = true; // Use .value for Obx variables
     String docId = bannerModel.value.id!;
-    if (imageFile.value.path.isNotEmpty) {
-      String url = await FireStoreUtils.uploadPic(PickedFile(imageFile.value.path), "bannerImage", docId, mimeType.value);
-      log('image url in update  $url');
-      bannerModel.value.image = url;
-    }
-    bannerModel.value.bannerName = bannerName.value.text;
-    bannerModel.value.bannerDescription = bannerDescription.value.text;
-    bannerModel.value.isOfferBanner = isOfferBanner.value;
-    bannerModel.value.offerText = offerText.value.text;
-    await FireStoreUtils.updateBanner(bannerModel.value);
-    setDefaultData();
-    await getData();
-    isEditing = false.obs;
-  }
 
-  addBanner(BuildContext context) async {
-    if (imageFile.value.path.isNotEmpty) {
-      Navigator.pop(context);
-      isLoading = true.obs;
-      String docId = Constant.getRandomString(20);
-      String url = await FireStoreUtils.uploadPic(PickedFile(imageFile.value.path), "bannerImage", docId, mimeType.value);
-      log('image url in addBanner  $url');
-      bannerModel.value.id = docId;
-      bannerModel.value.image = url;
+    try {
+      // Check if the image file path is not empty
+      if (imageFile.value.path.isNotEmpty) {
+        // Use XFile instead of PickedFile
+        XFile imageFileX = XFile(imageFile.value.path);
+
+        // Upload image and get the URL
+        String? url = await FireStoreUtils.uploadPic(
+          imageFileX, // Pass XFile instead of PickedFile
+          "bannerImage",
+          docId,
+          mimeType.value,
+        );
+
+        log('Image URL in update: $url');
+        bannerModel.value.image = url;
+      }
+
+      // Update banner model properties
       bannerModel.value.bannerName = bannerName.value.text;
       bannerModel.value.bannerDescription = bannerDescription.value.text;
       bannerModel.value.isOfferBanner = isOfferBanner.value;
-
       bannerModel.value.offerText = offerText.value.text;
 
-      await FireStoreUtils.addBanner(bannerModel.value);
+      // Update banner data in Firestore
+      await FireStoreUtils.updateBanner(bannerModel.value);
       setDefaultData();
       await getData();
-      isLoading = false.obs;
+    } catch (e) {
+      // Handle errors
+      print("Error updating banner: $e");
+      ShowToastDialog.toast(
+          "An error occurred while updating the banner. Please try again.".tr);
+    } finally {
+      // Ensure editing state is updated
+      isEditing.value = false; // Use .value for Obx variables
+    }
+  }
+
+  Future<void> addBanner(BuildContext context) async {
+    Navigator.pop(context);
+
+    if (imageFile.value.path.isNotEmpty) {
+      isLoading.value = true; // Use .value for Obx variables
+      String docId = Constant.getRandomString(20);
+
+      try {
+        // Use XFile instead of PickedFile
+        XFile imageFileX = XFile(imageFile.value.path);
+
+        // Upload image and get the URL
+        String? url = await FireStoreUtils.uploadPic(
+          imageFileX, // Pass XFile instead of PickedFile
+          "bannerImage",
+          docId,
+          mimeType.value,
+        );
+
+        log('Image URL in addBanner: $url');
+        bannerModel.value.id = docId;
+        bannerModel.value.image = url;
+        bannerModel.value.bannerName = bannerName.value.text;
+        bannerModel.value.bannerDescription = bannerDescription.value.text;
+        bannerModel.value.isOfferBanner = isOfferBanner.value;
+        bannerModel.value.offerText = offerText.value.text;
+
+        // Add banner data to Firestore
+        await FireStoreUtils.addBanner(bannerModel.value);
+        setDefaultData();
+        await getData();
+      } catch (e) {
+        // Handle errors
+        print("Error adding banner: $e");
+        ShowToastDialog.toast(
+            "An error occurred while adding the banner. Please try again.".tr);
+      } finally {
+        // Ensure loading state is updated
+        isLoading.value = false; // Use .value for Obx variables
+      }
     } else {
       ShowToastDialog.toast("Please select a valid banner image".tr);
     }
@@ -108,7 +154,11 @@ class BannerScreenController extends GetxController {
 
   removeBanner(BannerModel bannerModel) async {
     isLoading = true.obs;
-    await FirebaseFirestore.instance.collection(CollectionName.banner).doc(bannerModel.id).delete().then((value) {
+    await FirebaseFirestore.instance
+        .collection(CollectionName.banner)
+        .doc(bannerModel.id)
+        .delete()
+        .then((value) {
       ShowToastDialog.toast("Banner deleted...!".tr);
     }).catchError((error) {
       ShowToastDialog.toast("Something went wrong".tr);
