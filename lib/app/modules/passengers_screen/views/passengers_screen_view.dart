@@ -1069,40 +1069,67 @@ class PassengersScreenView extends GetView<PassengersScreenController> {
                                     DialogBox.demoDialogBox();
                                   } else {
                                     Constant.waitingLoader();
-                                    if (controller
-                                        .imagePath.value.path.isNotEmpty) {
-                                      String? downloadUrl =
-                                          await FireStoreUtils.uploadPic(
-                                              PickedFile(controller
-                                                  .imagePath.value.path),
-                                              "profileImage",
-                                              controller.editingId.value,
-                                              controller.mimeType.value);
-                                      controller.userModel.value.profilePic =
-                                          downloadUrl;
-                                      log(downloadUrl.toString());
-                                    }
-                                    controller.userModel.value.id =
-                                        controller.editingId.value;
-                                    controller.userModel.value.fullName =
-                                        controller
-                                            .userNameController.value.text;
-                                    controller.userModel.value.gender =
-                                        controller.selectedGender.value == 1
-                                            ? "Male"
-                                            : "Female";
-                                    bool isSaved =
-                                        await FireStoreUtils.updateUsers(
-                                            controller.userModel.value);
-                                    if (isSaved) {
-                                      Get.back();
-                                      ShowToast.successToast(
-                                          "Users data updated".tr);
-                                    } else {
+
+                                    try {
+                                      // Check if the image path is not empty
+                                      if (controller
+                                          .imagePath.value.path.isNotEmpty) {
+                                        // Use XFile instead of PickedFile
+                                        XFile imageFileX = XFile(
+                                            controller.imagePath.value.path);
+
+                                        // Upload image and get the URL
+                                        String? downloadUrl =
+                                            await FireStoreUtils.uploadPic(
+                                          imageFileX, // Pass XFile instead of PickedFile
+                                          "profileImage",
+                                          controller.editingId.value,
+                                          controller.mimeType.value,
+                                        );
+
+                                        // Update profile picture URL
+                                        controller.userModel.value.profilePic =
+                                            downloadUrl;
+                                        log(downloadUrl.toString());
+                                      }
+
+                                      // Update user model properties
+                                      controller.userModel.value.id =
+                                          controller.editingId.value;
+                                      controller.userModel.value.fullName =
+                                          controller
+                                              .userNameController.value.text;
+                                      controller.userModel.value.gender =
+                                          controller.selectedGender.value == 1
+                                              ? "Male"
+                                              : "Female";
+
+                                      // Save updated user data
+                                      bool isSaved =
+                                          await FireStoreUtils.updateUsers(
+                                              controller.userModel.value);
+
+                                      if (isSaved) {
+                                        Get.back();
+                                        ShowToast.successToast(
+                                            "Users data updated".tr);
+                                      } else {
+                                        ShowToast.errorToast(
+                                            "Something went wrong, Please try later!"
+                                                .tr);
+                                        Get.back();
+                                      }
+                                    } catch (e) {
+                                      // Handle errors
+                                      print("Error during user update: $e");
                                       ShowToast.errorToast(
-                                          "Something went wrong, Please try later!"
+                                          "An error occurred. Please try again."
                                               .tr);
                                       Get.back();
+                                    } finally {
+                                      // Ensure loading state is updated
+                                      Constant
+                                          .waitingLoader(); // Ensure to stop loader
                                     }
                                   }
                                 }),

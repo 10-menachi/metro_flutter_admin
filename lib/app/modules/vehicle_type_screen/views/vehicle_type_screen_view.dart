@@ -878,7 +878,7 @@ class VehicleTypeDialog extends StatelessWidget {
                             : controller.isLoading(true);
                         controller.isEditing.value
                             ? controller.updateVehicleType()
-                            : controller.addVehicleTyep();
+                            : controller.addVehicleType();
 
                         Navigator.pop(context);
                       } else {

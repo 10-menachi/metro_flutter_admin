@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:admin/app/constant/collection_name.dart';
 import 'package:admin/app/constant/constants.dart';
 import 'package:admin/app/constant/show_toast.dart';
@@ -28,6 +30,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:image/image.dart' as img;
 
 class FireStoreUtils {
   static FirebaseFirestore fireStore = FirebaseFirestore.instance;
@@ -1218,30 +1221,63 @@ class FireStoreUtils {
     });
   }
 
-  static Future<String> uploadPic(PickedFile image, String fileName,
-      String filePath, String mimeType) async {
-    //Create a reference to the location you want to upload to in firebase
-    UploadTask uploadTask;
-    Reference ref =
-        FirebaseStorage.instance.ref().child(fileName).child(filePath);
+  static Future<String?> uploadPic(
+      XFile file, String folder, String fileName, String mimeType) async {
+    try {
+      log('c2: Starting upload process');
 
-    //Upload the file to firebase
-    uploadTask = ref.putData(
-        await image.readAsBytes(),
-        SettableMetadata(
-          contentType: mimeType,
-          customMetadata: {'picked-file-path': image.path},
-        ));
+      // Get a reference to Firebase Storage
+      final storageRef = FirebaseStorage.instance.ref();
 
-    String url = await uploadTask.then((taskSnapshot) async {
-      String url = await taskSnapshot.ref.getDownloadURL();
-      return url;
-    });
+      // Create a reference to the file location in Firebase Storage
+      final fileRef = storageRef.child('$folder/$fileName');
+      log('c3: File reference created');
 
-    return url;
+      // Convert file to bytes
+      final fileBytes = await file.readAsBytes();
+      log('File size: ${fileBytes.length} bytes');
+
+      // Check for null or empty mimeType
+      if (mimeType.isEmpty) {
+        log('mimeType is empty');
+        throw ArgumentError('Mime type is required');
+      }
+
+      // Create an upload task with file data and metadata
+      final uploadTask = fileRef.putData(
+        fileBytes,
+        SettableMetadata(contentType: mimeType),
+      );
+
+      // Monitor upload progress
+      uploadTask.snapshotEvents.listen((taskSnapshot) {
+        log('Progress: ${taskSnapshot.bytesTransferred / taskSnapshot.totalBytes * 100}%');
+      }, onError: (e) {
+        log('Upload progress error: $e');
+      });
+
+      log('c4: Upload task started');
+
+      // Wait for the upload task to complete
+      final snapshot = await uploadTask.whenComplete(() => {});
+      log('c4: Upload completed');
+
+      // Get the download URL of the uploaded file
+      final downloadUrl = await snapshot.ref.getDownloadURL();
+      log('c5: Download URL obtained');
+
+      return downloadUrl;
+    } catch (e) {
+      if (e is FirebaseException) {
+        log("Firebase error: ${e.message}");
+      } else if (e is ArgumentError) {
+        log("Argument error: ${e.message}");
+      } else {
+        log("Unknown error: $e");
+      }
+      return null;
+    }
   }
-
-  
 
   static Future<String> uploadMultiplePic(
       XFile image, String filePath, String fileName) async {

@@ -12,7 +12,6 @@ import '../../../constant/constants.dart';
 import '../../../constant/show_toast.dart';
 
 class VehicleTypeScreenController extends GetxController {
-
   Rx<TextEditingController> vehicleTitle = TextEditingController().obs;
   Rx<TextEditingController> minimumCharge = TextEditingController().obs;
   Rx<TextEditingController> minimumChargeWithKm = TextEditingController().obs;
@@ -65,40 +64,100 @@ class VehicleTypeScreenController extends GetxController {
     imageURL.value = '';
   }
 
-  updateVehicleType() async {
-    isLoading = true.obs;
+  Future<void> updateVehicleType() async {
+    isLoading.value = true; // Use .value for Obx variables
     String docId = editingId.value;
-    String url = await FireStoreUtils.uploadPic(PickedFile(imageFile.value.path), "vehicleTyepImage", docId, mimeType.value);
-    await FireStoreUtils.updateVehicleType(VehicleTypeModel(
-        id: docId,
-        image: url,
-        isActive: isEnable.value,
-        title: vehicleTitle.value.text,
-        charges: Charges(fareMinimumChargesWithinKm: minimumChargeWithKm.value.text, farMinimumCharges: minimumCharge.value.text, farePerKm: perKm.value.text),
-        persons: person.value.text));
-    await getData();
-    isLoading = false.obs;
+
+    try {
+      // Ensure that imageFile.value is an XFile instance and has a valid path
+      if (imageFile.value.path.isNotEmpty) {
+        // Use XFile instead of PickedFile
+        XFile imageFileX = XFile(imageFile.value.path);
+
+        // Upload image and get the URL
+        String? url = await FireStoreUtils.uploadPic(
+          imageFileX, // Pass XFile instead of PickedFile
+          "vehicleTypeImage", // Correct the typo "vehicleTyepImage" to "vehicleTypeImage"
+          docId,
+          mimeType.value,
+        );
+
+        // Update vehicle type data
+        await FireStoreUtils.updateVehicleType(
+          VehicleTypeModel(
+            id: docId,
+            image: url!,
+            isActive: isEnable.value,
+            title: vehicleTitle.value.text,
+            charges: Charges(
+              fareMinimumChargesWithinKm: minimumChargeWithKm.value.text,
+              farMinimumCharges: minimumCharge.value.text,
+              farePerKm: perKm.value.text,
+            ),
+            persons: person.value.text,
+          ),
+        );
+
+        // Fetch updated data
+        await getData();
+      }
+    } catch (e) {
+      print("Error updating vehicle type: $e");
+    } finally {
+      isLoading.value = false; // Ensure loading status is updated
+    }
   }
 
-  addVehicleTyep() async {
-    isLoading = true.obs;
+  Future<void> addVehicleType() async {
+    isLoading.value = true; // Use .value for Obx variables
     String docId = Constant.getRandomString(20);
-    String url = await FireStoreUtils.uploadPic(PickedFile(imageFile.value.path), "vehicleTyepImage", docId, mimeType.value);
 
-    FireStoreUtils.addVehicleType(VehicleTypeModel(
-        id: docId,
-        image: url,
-        isActive: isEnable.value,
-        title: vehicleTitle.value.text,
-        charges: Charges(fareMinimumChargesWithinKm: minimumChargeWithKm.value.text, farMinimumCharges: minimumCharge.value.text, farePerKm: perKm.value.text),
-        persons: person.value.text));
-    await getData();
-    isLoading = false.obs;
+    try {
+      if (imageFile.value.path.isNotEmpty) {
+        // Use XFile instead of PickedFile
+        XFile imageFileX = XFile(imageFile.value.path);
+
+        // Upload image and get the URL
+        String? url = await FireStoreUtils.uploadPic(
+          imageFileX, // Pass XFile instead of PickedFile
+          "vehicleTypeImage", // Correct the typo "vehicleTyepImage" to "vehicleTypeImage"
+          docId,
+          mimeType.value,
+        );
+
+        // Add vehicle type data
+        await FireStoreUtils.addVehicleType(
+          VehicleTypeModel(
+            id: docId,
+            image: url!,
+            isActive: isEnable.value,
+            title: vehicleTitle.value.text,
+            charges: Charges(
+              fareMinimumChargesWithinKm: minimumChargeWithKm.value.text,
+              farMinimumCharges: minimumCharge.value.text,
+              farePerKm: perKm.value.text,
+            ),
+            persons: person.value.text,
+          ),
+        );
+
+        // Fetch updated data
+        await getData();
+      }
+    } catch (e) {
+      print("Error adding vehicle type: $e");
+    } finally {
+      isLoading.value = false; // Ensure loading status is updated
+    }
   }
 
   removeVehicleTypeModel(VehicleTypeModel vehicleTypeModel) async {
     isLoading = true.obs;
-    await FirebaseFirestore.instance.collection(CollectionName.vehicleType).doc(vehicleTypeModel.id).delete().then((value) {
+    await FirebaseFirestore.instance
+        .collection(CollectionName.vehicleType)
+        .doc(vehicleTypeModel.id)
+        .delete()
+        .then((value) {
       ShowToastDialog.toast("VehicleType deleted...!".tr);
     }).catchError((error) {
       ShowToastDialog.toast("Something went wrong".tr);
