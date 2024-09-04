@@ -22,7 +22,7 @@ class AdminModel {
     data['name'] = name;
     data['email'] = email;
     data['password'] = password;
-    data['image'] = image ?? "";
+    data['image'] = image;
     data['contactNumber'] = contactNumber ?? "";
     data['isDemo'] = isDemo ?? false;
     return data;

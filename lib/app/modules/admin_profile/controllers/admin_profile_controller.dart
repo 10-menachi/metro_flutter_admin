@@ -70,25 +70,64 @@ class AdminProfileController extends GetxController {
     uploading.value = false;
   }
 
-  setAdminData() async {
-    Constant.waitingLoader();
-    if (imagePath.value.path.isNotEmpty) {
-      String? downloadUrl = await FireStoreUtils.uploadPic(PickedFile(imagePath.value.path), "admin", "admin", mimeType.value);
-      Constant.adminModel!.image = downloadUrl;
-      log(downloadUrl.toString());
-    }
-    Constant.adminModel!.email = emailController.value.text;
-    Constant.adminModel!.name = nameController.value.text;
-    Constant.adminModel!.contactNumber = contactNumberController.value.text;
+  // setAdminData() async {
+  //   Constant.waitingLoader();
+  //   if (imagePath.value.path.isNotEmpty) {
+  //     String? downloadUrl = await FireStoreUtils.uploadPic(PickedFile(imagePath.value.path), "admin", "admin", mimeType.value);
+  //     Constant.adminModel!.image = downloadUrl;
+  //     log(downloadUrl.toString());
+  //   }
+  //   Constant.adminModel!.email = emailController.value.text;
+  //   Constant.adminModel!.name = nameController.value.text;
+  //   Constant.adminModel!.contactNumber = contactNumberController.value.text;
 
-    await FireStoreUtils.setAdmin(Constant.adminModel!).then((value) async {
-      await FireStoreUtils.getAdmin();
-      // await homeController.getAdminData();
-      Get.back();
-      ShowToast.successToast("Profile updated successfully".tr);
-    }).catchError((e) => log("-->$e"));
+  //   await FireStoreUtils.setAdmin(Constant.adminModel!).then((value) async {
+  //     await FireStoreUtils.getAdmin();
+  //     // await homeController.getAdminData();
+  //     Get.back();
+  //     ShowToast.successToast("Profile updated successfully".tr);
+  //   }).catchError((e) => log("-->$e"));
+  // }
+
+
+setAdminData() async {
+    try {
+      Constant.waitingLoader();
+      if (imagePath.value.path.isNotEmpty) {
+        try {
+          String? downloadUrl = await FireStoreUtils.uploadPic(
+              PickedFile(imagePath.value.path),
+              "admin",
+              "admin",
+              mimeType.value);
+          Constant.adminModel!.image = downloadUrl;
+          print(downloadUrl.toString());
+        } catch (e) {
+          print("--> Error uploading image: $e");
+          print("Error uploading image: $e");
+        }
+      }
+      Constant.adminModel!.email = emailController.value.text;
+      Constant.adminModel!.name = nameController.value.text;
+      Constant.adminModel!.contactNumber = contactNumberController.value.text;
+
+      await FireStoreUtils.setAdmin(Constant.adminModel!).then((value) async {
+        await FireStoreUtils.getAdmin();
+        // await homeController.getAdminData();
+        Get.back();
+        print("Profile updated successfully");
+      }).catchError((e) {
+        print("--> Error updating profile: $e");
+        print("Error updating profile: $e");
+      });
+    } catch (e) {
+      print("--> Error updating profile: $e");
+      print("Error updating profile: $e");
+    }
   }
 
+  
+  
   setAdminPassword() async {
     if (oldPasswordController.value.text != Constant.adminModel!.password) {
       ShowToast.errorToast("Old password is not correct".tr);

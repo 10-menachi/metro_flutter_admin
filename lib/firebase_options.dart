@@ -47,31 +47,31 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBogR4oMz-TOcTLb3UOSFnosIcJeNf8GMY',
-    appId: '1:516978414394:web:29c25801dbbc942405b603',
-    messagingSenderId: '516978414394',
-    projectId: 'metroberrytaxi',
-    authDomain: 'metroberrytaxi.firebaseapp.com',
-    storageBucket: 'metroberrytaxi.appspot.com',
-    measurementId: 'G-HQ6T4V9JFW',
+    apiKey: 'AIzaSyB4aOxLRrvhTVBmdmMy4ZZawtzKPAtdG3Q',
+    appId: '1:394465491097:web:19a098cd60e9647fe1a008',
+    messagingSenderId: '394465491097',
+    projectId: 'metroberry-cbbd8',
+    authDomain: 'metroberry-cbbd8.firebaseapp.com',
+    storageBucket: 'metroberry-cbbd8.appspot.com',
+    measurementId: 'G-28ZV47GM66',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAX-rjlGJmeA1M_qZGrNvI_kzPPgxYci-4',
-    appId: '1:516978414394:android:700d4324cce625e105b603',
-    messagingSenderId: '516978414394',
-    projectId: 'metroberrytaxi',
-    storageBucket: 'metroberrytaxi.appspot.com',
+    apiKey: 'AIzaSyDrHaw5OtXLfChnPf8A6QHFbPyp76WjtYo',
+    appId: '1:394465491097:android:a60538658d1460b1e1a008',
+    messagingSenderId: '394465491097',
+    projectId: 'metroberry-cbbd8',
+    storageBucket: 'metroberry-cbbd8.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyC8kY_B6vSjrY0mFWgDxlmZKs00oUvpi0Q',
-    appId: '1:516978414394:ios:e67239a96936e0a905b603',
-    messagingSenderId: '516978414394',
-    projectId: 'metroberrytaxi',
-    storageBucket: 'metroberrytaxi.appspot.com',
-    androidClientId: '516978414394-qu56goc013h5kmpbojt42475no3nbrno.apps.googleusercontent.com',
-    iosClientId: '516978414394-nk2ka5pdoa5me1kcg8scplt4bolcgfsl.apps.googleusercontent.com',
+    apiKey: 'AIzaSyCCVu12VO7_NBTkyVdnE14r381kHDzYZKI',
+    appId: '1:394465491097:ios:37731d3b8e2d3f9ce1a008',
+    messagingSenderId: '394465491097',
+    projectId: 'metroberry-cbbd8',
+    storageBucket: 'metroberry-cbbd8.appspot.com',
+    androidClientId: '394465491097-5gkt7agea88d12t83d53v8ki3liilqhq.apps.googleusercontent.com',
+    iosClientId: '394465491097-j29k3gvidnlcio3t04sneobhbs6rtrr5.apps.googleusercontent.com',
     iosBundleId: 'com.mytaxi.admin',
   );
 

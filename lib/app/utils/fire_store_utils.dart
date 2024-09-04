@@ -66,26 +66,41 @@ class FireStoreUtils {
   }
 
   static getSettings() async {
-    await fireStore.collection(CollectionName.settings).doc("constant").get().then((value) {
+    await fireStore
+        .collection(CollectionName.settings)
+        .doc("constant")
+        .get()
+        .then((value) {
       if (value.exists) {
         Constant.appColor = value.data()!["appColor"];
         Constant.appName = value.data()!["appName"];
         Constant.distanceType = value.data()!["distanceType"] ?? "KM";
         Constant.googleMapKey = value.data()!["googleMapKey"] ?? "";
-        Constant.minimumAmountToDeposit = value.data()!["minimum_amount_deposit"];
-        Constant.minimumAmountToWithdrawal = value.data()!["minimum_amount_withdraw"];
-        Constant.notificationServerKey = value.data()!["notification_server_key"] ?? "";
+        Constant.minimumAmountToDeposit =
+            value.data()!["minimum_amount_deposit"];
+        Constant.minimumAmountToWithdrawal =
+            value.data()!["minimum_amount_withdraw"];
+        Constant.notificationServerKey =
+            value.data()!["notification_server_key"] ?? "";
       }
     });
 
-    await fireStore.collection(CollectionName.settings).doc("admin_commission").get().then((value) {
+    await fireStore
+        .collection(CollectionName.settings)
+        .doc("admin_commission")
+        .get()
+        .then((value) {
       Constant.adminCommission = AdminCommission.fromJson(value.data()!);
     });
   }
 
   static Future<CurrencyModel?> getCurrency() async {
     CurrencyModel? currencyModel;
-    await fireStore.collection(CollectionName.currencies).where("active", isEqualTo: true).get().then((value) {
+    await fireStore
+        .collection(CollectionName.currencies)
+        .where("active", isEqualTo: true)
+        .get()
+        .then((value) {
       if (value.docs.isNotEmpty) {
         currencyModel = CurrencyModel.fromJson(value.docs.first.data());
       }
@@ -94,26 +109,30 @@ class FireStoreUtils {
   }
 
   static Future<int> countUsers() async {
-    final CollectionReference<Map<String, dynamic>> userList = FirebaseFirestore.instance.collection(CollectionName.users);
+    final CollectionReference<Map<String, dynamic>> userList =
+        FirebaseFirestore.instance.collection(CollectionName.users);
     AggregateQuerySnapshot query = await userList.count().get();
     log('The number of users: ${query.count}');
     Constant.usersLength = query.count ?? 0;
     return query.count ?? 0;
   }
 
-  static Future<int> countSearchUsers(String searchQuery, String searchType) async {
-    final Query<Map<String, dynamic>> userList = FirebaseFirestore.instance.collection(CollectionName.users).where(
-          searchType,
-          isGreaterThanOrEqualTo: searchQuery,
-          isLessThan: "$searchQuery\uf8ff",
-        );
+  static Future<int> countSearchUsers(
+      String searchQuery, String searchType) async {
+    final Query<Map<String, dynamic>> userList =
+        FirebaseFirestore.instance.collection(CollectionName.users).where(
+              searchType,
+              isGreaterThanOrEqualTo: searchQuery,
+              isLessThan: "$searchQuery\uf8ff",
+            );
     AggregateQuerySnapshot query = await userList.count().get();
     log('The number of search users: ${query.count}');
     Constant.usersLength = query.count ?? 0;
     return query.count ?? 0;
   }
 
-  static Future<List<UserModel>> getUsers(int pageNumber, int pageSize, String searchQuery, String searchType) async {
+  static Future<List<UserModel>> getUsers(int pageNumber, int pageSize,
+      String searchQuery, String searchType) async {
     List<UserModel> userList = [];
     try {
       DocumentSnapshot? lastDocument;
@@ -175,13 +194,23 @@ class FireStoreUtils {
         }
       } else {
         if (pageNumber > 1) {
-          var documents = await fireStore.collection(CollectionName.users).orderBy('createdAt', descending: true).limit(pageSize * (pageNumber - 1)).get();
+          var documents = await fireStore
+              .collection(CollectionName.users)
+              .orderBy('createdAt', descending: true)
+              .limit(pageSize * (pageNumber - 1))
+              .get();
           if (documents.docs.isNotEmpty) {
             lastDocument = documents.docs.last;
           }
         }
         if (lastDocument != null) {
-          await fireStore.collection(CollectionName.users).orderBy('createdAt', descending: true).startAfterDocument(lastDocument).limit(pageSize).get().then((value) {
+          await fireStore
+              .collection(CollectionName.users)
+              .orderBy('createdAt', descending: true)
+              .startAfterDocument(lastDocument)
+              .limit(pageSize)
+              .get()
+              .then((value) {
             for (var element in value.docs) {
               UserModel userModel = UserModel.fromJson(element.data());
               userList.add(userModel);
@@ -190,7 +219,12 @@ class FireStoreUtils {
             log(error.toString());
           });
         } else {
-          await fireStore.collection(CollectionName.users).orderBy('createdAt', descending: true).limit(pageSize).get().then((value) {
+          await fireStore
+              .collection(CollectionName.users)
+              .orderBy('createdAt', descending: true)
+              .limit(pageSize)
+              .get()
+              .then((value) {
             for (var element in value.docs) {
               UserModel userModel = UserModel.fromJson(element.data());
               userList.add(userModel);
@@ -208,7 +242,12 @@ class FireStoreUtils {
 
   static Future<List<UserModel>> getRecentUsers() async {
     List<UserModel> usersModelList = [];
-    await fireStore.collection(CollectionName.users).orderBy('createdAt', descending: true).limit(5).get().then((value) {
+    await fireStore
+        .collection(CollectionName.users)
+        .orderBy('createdAt', descending: true)
+        .limit(5)
+        .get()
+        .then((value) {
       for (var element in value.docs) {
         UserModel userModel = UserModel.fromJson(element.data());
         usersModelList.add(userModel);
@@ -234,9 +273,14 @@ class FireStoreUtils {
 
   static Future<List<VerifyDriverModel>> getVerifyDriverModel() async {
     List<VerifyDriverModel> verifyDriverModelList = [];
-    await fireStore.collection(CollectionName.verifyDriver).orderBy('createAt', descending: true).get().then((value) {
+    await fireStore
+        .collection(CollectionName.verifyDriver)
+        .orderBy('createAt', descending: true)
+        .get()
+        .then((value) {
       for (var element in value.docs) {
-        VerifyDriverModel verifyDriverModel = VerifyDriverModel.fromJson(element.data());
+        VerifyDriverModel verifyDriverModel =
+            VerifyDriverModel.fromJson(element.data());
         verifyDriverModelList.add(verifyDriverModel);
       }
     }).catchError((error) {
@@ -246,25 +290,29 @@ class FireStoreUtils {
   }
 
   static Future<int> countDrivers() async {
-    final CollectionReference<Map<String, dynamic>> userList = FirebaseFirestore.instance.collection(CollectionName.drivers);
+    final CollectionReference<Map<String, dynamic>> userList =
+        FirebaseFirestore.instance.collection(CollectionName.drivers);
     AggregateQuerySnapshot query = await userList.count().get();
     Constant.driverLength = query.count ?? 0;
     return query.count ?? 0;
   }
 
-  static Future<int> countSearchDrivers(String searchQuery, String searchType) async {
-    final Query<Map<String, dynamic>> userList = FirebaseFirestore.instance.collection(CollectionName.drivers).where(
-          searchType,
-          isGreaterThanOrEqualTo: searchQuery,
-          isLessThan: "$searchQuery\uf8ff",
-        );
+  static Future<int> countSearchDrivers(
+      String searchQuery, String searchType) async {
+    final Query<Map<String, dynamic>> userList =
+        FirebaseFirestore.instance.collection(CollectionName.drivers).where(
+              searchType,
+              isGreaterThanOrEqualTo: searchQuery,
+              isLessThan: "$searchQuery\uf8ff",
+            );
     AggregateQuerySnapshot query = await userList.count().get();
     log('The number of search drivers: ${query.count}');
     Constant.driverLength = query.count ?? 0;
     return query.count ?? 0;
   }
 
-  static Future<List<DriverUserModel>> getDriver(int pageNumber, int pageSize, String searchQuery, String searchType) async {
+  static Future<List<DriverUserModel>> getDriver(int pageNumber, int pageSize,
+      String searchQuery, String searchType) async {
     List<DriverUserModel> userList = [];
     try {
       DocumentSnapshot? lastDocument;
@@ -298,7 +346,8 @@ class FireStoreUtils {
               .get()
               .then((value) {
             for (var element in value.docs) {
-              DriverUserModel driverModel = DriverUserModel.fromJson(element.data());
+              DriverUserModel driverModel =
+                  DriverUserModel.fromJson(element.data());
               userList.add(driverModel);
             }
           }).catchError((error) {
@@ -317,7 +366,8 @@ class FireStoreUtils {
               .get()
               .then((value) {
             for (var element in value.docs) {
-              DriverUserModel driverModel = DriverUserModel.fromJson(element.data());
+              DriverUserModel driverModel =
+                  DriverUserModel.fromJson(element.data());
               userList.add(driverModel);
             }
           }).catchError((error) {
@@ -326,24 +376,41 @@ class FireStoreUtils {
         }
       } else {
         if (pageNumber > 1) {
-          var documents = await fireStore.collection(CollectionName.drivers).orderBy('createdAt', descending: true).limit(pageSize * (pageNumber - 1)).get();
+          var documents = await fireStore
+              .collection(CollectionName.drivers)
+              .orderBy('createdAt', descending: true)
+              .limit(pageSize * (pageNumber - 1))
+              .get();
           if (documents.docs.isNotEmpty) {
             lastDocument = documents.docs.last;
           }
         }
         if (lastDocument != null) {
-          await fireStore.collection(CollectionName.drivers).orderBy('createdAt', descending: true).startAfterDocument(lastDocument).limit(pageSize).get().then((value) {
+          await fireStore
+              .collection(CollectionName.drivers)
+              .orderBy('createdAt', descending: true)
+              .startAfterDocument(lastDocument)
+              .limit(pageSize)
+              .get()
+              .then((value) {
             for (var element in value.docs) {
-              DriverUserModel driverModel = DriverUserModel.fromJson(element.data());
+              DriverUserModel driverModel =
+                  DriverUserModel.fromJson(element.data());
               userList.add(driverModel);
             }
           }).catchError((error) {
             log(error.toString());
           });
         } else {
-          await fireStore.collection(CollectionName.drivers).orderBy('createdAt', descending: true).limit(pageSize).get().then((value) {
+          await fireStore
+              .collection(CollectionName.drivers)
+              .orderBy('createdAt', descending: true)
+              .limit(pageSize)
+              .get()
+              .then((value) {
             for (var element in value.docs) {
-              DriverUserModel driverModel = DriverUserModel.fromJson(element.data());
+              DriverUserModel driverModel =
+                  DriverUserModel.fromJson(element.data());
               userList.add(driverModel);
             }
           }).catchError((error) {
@@ -359,9 +426,15 @@ class FireStoreUtils {
 
   static Future<List<DriverUserModel>> getRecentDriver() async {
     List<DriverUserModel> driverUserModelList = [];
-    await fireStore.collection(CollectionName.drivers).orderBy('createdAt', descending: true).limit(5).get().then((value) {
+    await fireStore
+        .collection(CollectionName.drivers)
+        .orderBy('createdAt', descending: true)
+        .limit(5)
+        .get()
+        .then((value) {
       for (var element in value.docs) {
-        DriverUserModel driverUserModel = DriverUserModel.fromJson(element.data());
+        DriverUserModel driverUserModel =
+            DriverUserModel.fromJson(element.data());
         driverUserModelList.add(driverUserModel);
       }
     }).catchError((error) {
@@ -371,7 +444,11 @@ class FireStoreUtils {
   }
 
   static Future<bool> updateDriver(DriverUserModel driverUserModel) async {
-    return FirebaseFirestore.instance.collection(CollectionName.drivers).doc(driverUserModel.id).update(driverUserModel.toJson()).then(
+    return FirebaseFirestore.instance
+        .collection(CollectionName.drivers)
+        .doc(driverUserModel.id)
+        .update(driverUserModel.toJson())
+        .then(
       (value) {
         return true;
       },
@@ -383,7 +460,11 @@ class FireStoreUtils {
   static Future<UserModel?> getUserByUserID(String id) async {
     UserModel? userModel;
 
-    await FirebaseFirestore.instance.collection(CollectionName.users).doc(id).get().then((value) {
+    await FirebaseFirestore.instance
+        .collection(CollectionName.users)
+        .doc(id)
+        .get()
+        .then((value) {
       if (value.exists) {
         userModel = UserModel.fromJson(value.data()!);
       } else {
@@ -398,7 +479,11 @@ class FireStoreUtils {
   static Future<DocumentsModel?> getDocumentByDocumentId(String id) async {
     DocumentsModel? documentModel;
 
-    await FirebaseFirestore.instance.collection(CollectionName.documents).doc(id).get().then((value) {
+    await FirebaseFirestore.instance
+        .collection(CollectionName.documents)
+        .doc(id)
+        .get()
+        .then((value) {
       if (value.exists) {
         documentModel = DocumentsModel.fromJson(value.data()!);
       }
@@ -411,7 +496,11 @@ class FireStoreUtils {
   static Future<DriverUserModel?> getDriverByDriverID(String id) async {
     DriverUserModel? driverUserModel;
     // driverUserModel
-    await FirebaseFirestore.instance.collection(CollectionName.drivers).doc(id).get().then((value) {
+    await FirebaseFirestore.instance
+        .collection(CollectionName.drivers)
+        .doc(id)
+        .get()
+        .then((value) {
       if (value.exists) {
         driverUserModel = DriverUserModel.fromJson(value.data()!);
       } else {
@@ -425,7 +514,11 @@ class FireStoreUtils {
 
   static Future<BrandModel?> getVehicleBrandByBrandId(String id) async {
     BrandModel? vehicleBrandModel;
-    await FirebaseFirestore.instance.collection(CollectionName.vehicleBrand).doc(id).get().then((value) {
+    await FirebaseFirestore.instance
+        .collection(CollectionName.vehicleBrand)
+        .doc(id)
+        .get()
+        .then((value) {
       if (value.exists) {
         vehicleBrandModel = BrandModel.fromJson(value.data()!);
       }
@@ -436,25 +529,37 @@ class FireStoreUtils {
   }
 
   static Future<int> countVehicleBrand() async {
-    final CollectionReference<Map<String, dynamic>> productList = FirebaseFirestore.instance.collection(CollectionName.vehicleBrand);
+    final CollectionReference<Map<String, dynamic>> productList =
+        FirebaseFirestore.instance.collection(CollectionName.vehicleBrand);
     AggregateQuerySnapshot query = await productList.count().get();
     log('The number of products: ${query.count}');
     Constant.vehicleBrandLength = query.count ?? 0;
     return query.count ?? 0;
   }
 
-  static Future<List<BrandModel>> getVehicleBrand(int pageNumber, int pageSize) async {
+  static Future<List<BrandModel>> getVehicleBrand(
+      int pageNumber, int pageSize) async {
     List<BrandModel> vehicleBrandModelList = [];
     try {
       DocumentSnapshot? lastDocument;
       if (pageNumber > 1) {
-        var documents = await fireStore.collection(CollectionName.vehicleBrand).orderBy("title").limit(pageSize * (pageNumber - 1)).get();
+        var documents = await fireStore
+            .collection(CollectionName.vehicleBrand)
+            .orderBy("title")
+            .limit(pageSize * (pageNumber - 1))
+            .get();
         if (documents.docs.isNotEmpty) {
           lastDocument = documents.docs.last;
         }
       }
       if (lastDocument != null) {
-        await fireStore.collection(CollectionName.vehicleBrand).orderBy("title").startAfterDocument(lastDocument).limit(pageSize).get().then((value) {
+        await fireStore
+            .collection(CollectionName.vehicleBrand)
+            .orderBy("title")
+            .startAfterDocument(lastDocument)
+            .limit(pageSize)
+            .get()
+            .then((value) {
           for (var element in value.docs) {
             BrandModel vehicleBrandModel = BrandModel.fromJson(element.data());
             vehicleBrandModelList.add(vehicleBrandModel);
@@ -463,7 +568,12 @@ class FireStoreUtils {
           log(error.toString());
         });
       } else {
-        await fireStore.collection(CollectionName.vehicleBrand).orderBy("title").limit(pageSize).get().then((value) {
+        await fireStore
+            .collection(CollectionName.vehicleBrand)
+            .orderBy("title")
+            .limit(pageSize)
+            .get()
+            .then((value) {
           for (var element in value.docs) {
             BrandModel vehicleBrandModel = BrandModel.fromJson(element.data());
             vehicleBrandModelList.add(vehicleBrandModel);
@@ -480,7 +590,11 @@ class FireStoreUtils {
 
   static Future<List<BrandModel>> getVehicleBrandAllData() async {
     List<BrandModel> vehicleBrandModelList = [];
-    await fireStore.collection(CollectionName.vehicleBrand).orderBy("title").get().then((value) {
+    await fireStore
+        .collection(CollectionName.vehicleBrand)
+        .orderBy("title")
+        .get()
+        .then((value) {
       for (var element in value.docs) {
         BrandModel vehicleBrandModel = BrandModel.fromJson(element.data());
         vehicleBrandModelList.add(vehicleBrandModel);
@@ -492,7 +606,11 @@ class FireStoreUtils {
   }
 
   static Future<bool> addVehicleBrand(BrandModel vehicleBrandModel) {
-    return fireStore.collection(CollectionName.vehicleBrand).doc(vehicleBrandModel.id).set(vehicleBrandModel.toJson()).then(
+    return fireStore
+        .collection(CollectionName.vehicleBrand)
+        .doc(vehicleBrandModel.id)
+        .set(vehicleBrandModel.toJson())
+        .then(
       (value) {
         ShowToastDialog.toast("Vehicle Brand Saved...!");
 
@@ -506,7 +624,11 @@ class FireStoreUtils {
   }
 
   static Future<bool> updateVehicleBrand(BrandModel vehicleBrandModel) {
-    return fireStore.collection(CollectionName.vehicleBrand).doc(vehicleBrandModel.id).update(vehicleBrandModel.toJson()).then(
+    return fireStore
+        .collection(CollectionName.vehicleBrand)
+        .doc(vehicleBrandModel.id)
+        .update(vehicleBrandModel.toJson())
+        .then(
       (value) {
         ShowToastDialog.toast("Vehicle Brand Saved...!");
 
@@ -520,37 +642,56 @@ class FireStoreUtils {
   }
 
   static Future<int> countVehicleModel() async {
-    final CollectionReference<Map<String, dynamic>> productList = FirebaseFirestore.instance.collection(CollectionName.vehicleModel);
+    final CollectionReference<Map<String, dynamic>> productList =
+        FirebaseFirestore.instance.collection(CollectionName.vehicleModel);
     AggregateQuerySnapshot query = await productList.count().get();
     log('The number of products: ${query.count}');
     Constant.vehicleModelLength = query.count ?? 0;
     return query.count ?? 0;
   }
 
-  static Future<List<ModelVehicleModel>> getVehicleModel(int pageNumber, int pageSize, String id) async {
+  static Future<List<ModelVehicleModel>> getVehicleModel(
+      int pageNumber, int pageSize, String id) async {
     List<ModelVehicleModel> modelVehicleModelList = [];
     try {
       if (id == "") {
         DocumentSnapshot? lastDocument;
         if (pageNumber > 1) {
-          var documents = await fireStore.collection(CollectionName.vehicleModel).orderBy("title").limit(pageSize * (pageNumber - 1)).get();
+          var documents = await fireStore
+              .collection(CollectionName.vehicleModel)
+              .orderBy("title")
+              .limit(pageSize * (pageNumber - 1))
+              .get();
           if (documents.docs.isNotEmpty) {
             lastDocument = documents.docs.last;
           }
         }
         if (lastDocument != null) {
-          await fireStore.collection(CollectionName.vehicleModel).orderBy("title").startAfterDocument(lastDocument).limit(pageSize).get().then((value) {
+          await fireStore
+              .collection(CollectionName.vehicleModel)
+              .orderBy("title")
+              .startAfterDocument(lastDocument)
+              .limit(pageSize)
+              .get()
+              .then((value) {
             for (var element in value.docs) {
-              ModelVehicleModel modelVehicleModel = ModelVehicleModel.fromJson(element.data());
+              ModelVehicleModel modelVehicleModel =
+                  ModelVehicleModel.fromJson(element.data());
               modelVehicleModelList.add(modelVehicleModel);
             }
           }).catchError((error) {
             log(error.toString());
           });
         } else {
-          await fireStore.collection(CollectionName.vehicleModel).orderBy("title").limit(pageSize).get().then((value) {
+          await fireStore
+              .collection(CollectionName.vehicleModel)
+              .orderBy("title")
+              .limit(pageSize)
+              .get()
+              .then((value) {
             for (var element in value.docs) {
-              ModelVehicleModel modelVehicleModel = ModelVehicleModel.fromJson(element.data());
+              ModelVehicleModel modelVehicleModel =
+                  ModelVehicleModel.fromJson(element.data());
               modelVehicleModelList.add(modelVehicleModel);
             }
           }).catchError((error) {
@@ -560,8 +701,12 @@ class FireStoreUtils {
       } else {
         DocumentSnapshot? lastDocument;
         if (pageNumber > 1) {
-          var documents =
-              await fireStore.collection(CollectionName.vehicleModel).where("brandId", isEqualTo: id).orderBy("title").limit(pageSize * (pageNumber - 1)).get();
+          var documents = await fireStore
+              .collection(CollectionName.vehicleModel)
+              .where("brandId", isEqualTo: id)
+              .orderBy("title")
+              .limit(pageSize * (pageNumber - 1))
+              .get();
           if (documents.docs.isNotEmpty) {
             lastDocument = documents.docs.last;
           }
@@ -576,16 +721,24 @@ class FireStoreUtils {
               .get()
               .then((value) {
             for (var element in value.docs) {
-              ModelVehicleModel modelVehicleModel = ModelVehicleModel.fromJson(element.data());
+              ModelVehicleModel modelVehicleModel =
+                  ModelVehicleModel.fromJson(element.data());
               modelVehicleModelList.add(modelVehicleModel);
             }
           }).catchError((error) {
             log(error.toString());
           });
         } else {
-          await fireStore.collection(CollectionName.vehicleModel).where("brandId", isEqualTo: id).orderBy("title").limit(pageSize).get().then((value) {
+          await fireStore
+              .collection(CollectionName.vehicleModel)
+              .where("brandId", isEqualTo: id)
+              .orderBy("title")
+              .limit(pageSize)
+              .get()
+              .then((value) {
             for (var element in value.docs) {
-              ModelVehicleModel modelVehicleModel = ModelVehicleModel.fromJson(element.data());
+              ModelVehicleModel modelVehicleModel =
+                  ModelVehicleModel.fromJson(element.data());
               modelVehicleModelList.add(modelVehicleModel);
             }
           }).catchError((error) {
@@ -600,7 +753,11 @@ class FireStoreUtils {
   }
 
   static Future<bool> addVehicleModel(ModelVehicleModel modelVehicleModel) {
-    return fireStore.collection(CollectionName.vehicleModel).doc(modelVehicleModel.id).set(modelVehicleModel.toJson()).then(
+    return fireStore
+        .collection(CollectionName.vehicleModel)
+        .doc(modelVehicleModel.id)
+        .set(modelVehicleModel.toJson())
+        .then(
       (value) {
         ShowToastDialog.toast("Model Saved...!");
 
@@ -614,7 +771,11 @@ class FireStoreUtils {
   }
 
   static Future<bool> updateVehicleModel(ModelVehicleModel modelVehicleModel) {
-    return fireStore.collection(CollectionName.vehicleModel).doc(modelVehicleModel.id).update(modelVehicleModel.toJson()).then(
+    return fireStore
+        .collection(CollectionName.vehicleModel)
+        .doc(modelVehicleModel.id)
+        .update(modelVehicleModel.toJson())
+        .then(
       (value) {
         ShowToastDialog.toast("Model Updated...!");
 
@@ -629,7 +790,11 @@ class FireStoreUtils {
 
   static Future<AdminModel?> getAdmin() async {
     AdminModel? adminModel;
-    await FirebaseFirestore.instance.collection(CollectionName.admin).doc("admin").get().then((value) {
+    await FirebaseFirestore.instance
+        .collection(CollectionName.admin)
+        .doc("admin")
+        .get()
+        .then((value) {
       if (value.exists) {
         adminModel = AdminModel.fromJson(value.data()!);
         Constant.adminModel = AdminModel.fromJson(value.data()!);
@@ -642,7 +807,11 @@ class FireStoreUtils {
   }
 
   static Future<bool> setAdmin(AdminModel adminModel) {
-    return FirebaseFirestore.instance.collection(CollectionName.admin).doc("admin").set(adminModel.toJson()).then(
+    return FirebaseFirestore.instance
+        .collection(CollectionName.admin)
+        .doc("admin")
+        .set(adminModel.toJson())
+        .then(
       (value) {
         return true;
       },
@@ -653,7 +822,9 @@ class FireStoreUtils {
 
   static Future<List<LanguageModel>> getLanguage() async {
     List<LanguageModel> languageModelList = [];
-    QuerySnapshot snap = await FirebaseFirestore.instance.collection(CollectionName.languages).get();
+    QuerySnapshot snap = await FirebaseFirestore.instance
+        .collection(CollectionName.languages)
+        .get();
     for (var document in snap.docs) {
       Map<String, dynamic>? data = document.data() as Map<String, dynamic>?;
       if (data != null) {
@@ -666,7 +837,11 @@ class FireStoreUtils {
   }
 
   static Future<bool> addLanguage(LanguageModel languageModel) {
-    return fireStore.collection(CollectionName.languages).doc(languageModel.id).set(languageModel.toJson()).then(
+    return fireStore
+        .collection(CollectionName.languages)
+        .doc(languageModel.id)
+        .set(languageModel.toJson())
+        .then(
       (value) {
         ShowToastDialog.toast("Saved...!");
 
@@ -680,7 +855,11 @@ class FireStoreUtils {
   }
 
   static Future<bool> updateLanguage(LanguageModel languageModel) {
-    return fireStore.collection(CollectionName.languages).doc(languageModel.id).update(languageModel.toJson()).then(
+    return fireStore
+        .collection(CollectionName.languages)
+        .doc(languageModel.id)
+        .update(languageModel.toJson())
+        .then(
       (value) {
         ShowToastDialog.toast("Language Updated...!");
 
@@ -695,7 +874,11 @@ class FireStoreUtils {
 
   static Future<PaymentModel?> getPayment() async {
     PaymentModel? paymentModel;
-    await FirebaseFirestore.instance.collection(CollectionName.settings).doc("payment").get().then((value) {
+    await FirebaseFirestore.instance
+        .collection(CollectionName.settings)
+        .doc("payment")
+        .get()
+        .then((value) {
       if (value.exists) {
         Constant.paymentModel = PaymentModel.fromJson(value.data()!);
         paymentModel = PaymentModel.fromJson(value.data()!);
@@ -708,7 +891,11 @@ class FireStoreUtils {
   }
 
   static Future<bool> setPayment(PaymentModel paymentModel) {
-    return FirebaseFirestore.instance.collection(CollectionName.settings).doc("payment").update(paymentModel.toJson()).then(
+    return FirebaseFirestore.instance
+        .collection(CollectionName.settings)
+        .doc("payment")
+        .update(paymentModel.toJson())
+        .then(
       (value) {
         ShowToastDialog.toast("Saved...!");
 
@@ -723,7 +910,11 @@ class FireStoreUtils {
 
   static Future<ConstantModel?> getGeneralSetting() async {
     ConstantModel? constantModel;
-    await FirebaseFirestore.instance.collection(CollectionName.settings).doc("constant").get().then((value) {
+    await FirebaseFirestore.instance
+        .collection(CollectionName.settings)
+        .doc("constant")
+        .get()
+        .then((value) {
       if (value.exists) {
         Constant.constantModel = ConstantModel.fromJson(value.data()!);
         constantModel = ConstantModel.fromJson(value.data()!);
@@ -737,7 +928,11 @@ class FireStoreUtils {
 
   static Future<GlobalValueModel?> getGlobalValueSetting() async {
     GlobalValueModel? globalValueModel;
-    await FirebaseFirestore.instance.collection(CollectionName.settings).doc("globalValue").get().then((value) {
+    await FirebaseFirestore.instance
+        .collection(CollectionName.settings)
+        .doc("globalValue")
+        .get()
+        .then((value) {
       if (value.exists) {
         Constant.constantModel = ConstantModel.fromJson(value.data()!);
         globalValueModel = GlobalValueModel.fromJson(value.data()!);
@@ -750,7 +945,11 @@ class FireStoreUtils {
   }
 
   static Future<bool> setGlobalValueSetting(GlobalValueModel globalValueModel) {
-    return FirebaseFirestore.instance.collection(CollectionName.settings).doc("globalValue").set(globalValueModel.toJson()).then(
+    return FirebaseFirestore.instance
+        .collection(CollectionName.settings)
+        .doc("globalValue")
+        .set(globalValueModel.toJson())
+        .then(
       (value) {
         return true;
       },
@@ -761,7 +960,11 @@ class FireStoreUtils {
   }
 
   static Future<bool> setGeneralSetting(ConstantModel constantModel) {
-    return FirebaseFirestore.instance.collection(CollectionName.settings).doc("constant").set(constantModel.toJson()).then(
+    return FirebaseFirestore.instance
+        .collection(CollectionName.settings)
+        .doc("constant")
+        .set(constantModel.toJson())
+        .then(
       (value) {
         return true;
       },
@@ -785,7 +988,11 @@ class FireStoreUtils {
   }
 
   static Future<bool> addTaxes(TaxModel taxModel) {
-    return FirebaseFirestore.instance.collection(CollectionName.countryTax).doc(taxModel.id).set(taxModel.toJson()).then(
+    return FirebaseFirestore.instance
+        .collection(CollectionName.countryTax)
+        .doc(taxModel.id)
+        .set(taxModel.toJson())
+        .then(
       (value) {
         ShowToastDialog.toast("Country Tax Saved...!");
         return true;
@@ -799,7 +1006,10 @@ class FireStoreUtils {
 
   static Future<bool> addCancelingReason(List<String> reasonList) async {
     try {
-      await FirebaseFirestore.instance.collection(CollectionName.settings).doc("canceling_reason").set(<String, List<String>>{"reasons": reasonList});
+      await FirebaseFirestore.instance
+          .collection(CollectionName.settings)
+          .doc("canceling_reason")
+          .set(<String, List<String>>{"reasons": reasonList});
       ShowToastDialog.toast("Canceling Reason Saved...!");
       return true;
     } catch (error) {
@@ -813,7 +1023,11 @@ class FireStoreUtils {
     final List<String> reasonList = [];
 
     try {
-      await FirebaseFirestore.instance.collection(CollectionName.settings).doc("canceling_reason").get().then((value) {
+      await FirebaseFirestore.instance
+          .collection(CollectionName.settings)
+          .doc("canceling_reason")
+          .get()
+          .then((value) {
         if (value.exists) {
           final List<dynamic> data = value.data()?["reasons"] ?? [];
           reasonList.addAll(data.map((element) => element.toString()));
@@ -828,7 +1042,11 @@ class FireStoreUtils {
   }
 
   static Future<bool> updateTax(TaxModel taxModel) {
-    return FirebaseFirestore.instance.collection(CollectionName.countryTax).doc(taxModel.id).update(taxModel.toJson()).then(
+    return FirebaseFirestore.instance
+        .collection(CollectionName.countryTax)
+        .doc(taxModel.id)
+        .update(taxModel.toJson())
+        .then(
       (value) {
         ShowToastDialog.toast("Country Tax Updated...!");
 
@@ -842,7 +1060,11 @@ class FireStoreUtils {
   }
 
   static Future<bool> addCurrency(CurrencyModel currencyModel) {
-    return FirebaseFirestore.instance.collection(CollectionName.currencies).doc(currencyModel.id).set(currencyModel.toJson()).then(
+    return FirebaseFirestore.instance
+        .collection(CollectionName.currencies)
+        .doc(currencyModel.id)
+        .set(currencyModel.toJson())
+        .then(
       (value) {
         return true;
       },
@@ -852,7 +1074,11 @@ class FireStoreUtils {
   }
 
   static Future<bool> updateCurrency(CurrencyModel currencyModel) {
-    return FirebaseFirestore.instance.collection(CollectionName.currencies).doc(currencyModel.id).update(currencyModel.toJson()).then(
+    return FirebaseFirestore.instance
+        .collection(CollectionName.currencies)
+        .doc(currencyModel.id)
+        .update(currencyModel.toJson())
+        .then(
       (value) {
         return true;
       },
@@ -863,7 +1089,9 @@ class FireStoreUtils {
 
   static Future<List<CurrencyModel>> getCurrencyList() async {
     List<CurrencyModel> currencyModelList = [];
-    QuerySnapshot snap = await FirebaseFirestore.instance.collection(CollectionName.currencies).get();
+    QuerySnapshot snap = await FirebaseFirestore.instance
+        .collection(CollectionName.currencies)
+        .get();
     for (var document in snap.docs) {
       Map<String, dynamic>? data = document.data() as Map<String, dynamic>?;
       if (data != null) {
@@ -874,7 +1102,11 @@ class FireStoreUtils {
   }
 
   static Future<bool> setContactusSetting(ContactUsModel contactUsModel) {
-    return FirebaseFirestore.instance.collection(CollectionName.settings).doc("contact_us").set(contactUsModel.toJson()).then(
+    return FirebaseFirestore.instance
+        .collection(CollectionName.settings)
+        .doc("contact_us")
+        .set(contactUsModel.toJson())
+        .then(
       (value) {
         return true;
       },
@@ -885,7 +1117,11 @@ class FireStoreUtils {
 
   static Future<ContactUsModel?> getContactusSetting() async {
     ContactUsModel? contactUsModel;
-    await FirebaseFirestore.instance.collection(CollectionName.settings).doc("contact_us").get().then((value) {
+    await FirebaseFirestore.instance
+        .collection(CollectionName.settings)
+        .doc("contact_us")
+        .get()
+        .then((value) {
       if (value.exists) {
         contactUsModel = ContactUsModel.fromJson(value.data()!);
       }
@@ -898,7 +1134,11 @@ class FireStoreUtils {
 
   static Future<AdminCommission?> getAdminCommission() async {
     AdminCommission? adminCommissionModel;
-    await FirebaseFirestore.instance.collection(CollectionName.settings).doc("admin_commission").get().then((value) {
+    await FirebaseFirestore.instance
+        .collection(CollectionName.settings)
+        .doc("admin_commission")
+        .get()
+        .then((value) {
       if (value.exists) {
         adminCommissionModel = AdminCommission.fromJson(value.data()!);
       }
@@ -910,7 +1150,11 @@ class FireStoreUtils {
   }
 
   static Future<bool> setAdminCommission(AdminCommission adminCommissionModel) {
-    return FirebaseFirestore.instance.collection(CollectionName.settings).doc("admin_commission").set(adminCommissionModel.toJson()).then(
+    return FirebaseFirestore.instance
+        .collection(CollectionName.settings)
+        .doc("admin_commission")
+        .set(adminCommissionModel.toJson())
+        .then(
       (value) {
         return true;
       },
@@ -920,7 +1164,11 @@ class FireStoreUtils {
   }
 
   static Future<bool> addBanner(BannerModel bannerModel) {
-    return FirebaseFirestore.instance.collection(CollectionName.banner).doc(bannerModel.id).set(bannerModel.toJson()).then(
+    return FirebaseFirestore.instance
+        .collection(CollectionName.banner)
+        .doc(bannerModel.id)
+        .set(bannerModel.toJson())
+        .then(
       (value) {
         return true;
       },
@@ -930,7 +1178,11 @@ class FireStoreUtils {
   }
 
   static Future<bool> updateBanner(BannerModel bannerModel) {
-    return FirebaseFirestore.instance.collection(CollectionName.banner).doc(bannerModel.id).update(bannerModel.toJson()).then(
+    return FirebaseFirestore.instance
+        .collection(CollectionName.banner)
+        .doc(bannerModel.id)
+        .update(bannerModel.toJson())
+        .then(
       (value) {
         return true;
       },
@@ -941,7 +1193,9 @@ class FireStoreUtils {
 
   static Future<List<BannerModel>> getBanner() async {
     List<BannerModel> bannerModel = [];
-    QuerySnapshot snap = await FirebaseFirestore.instance.collection(CollectionName.banner).get();
+    QuerySnapshot snap = await FirebaseFirestore.instance
+        .collection(CollectionName.banner)
+        .get();
     for (var document in snap.docs) {
       Map<String, dynamic>? data = document.data() as Map<String, dynamic>?;
       if (data != null) {
@@ -952,7 +1206,11 @@ class FireStoreUtils {
   }
 
   static Future<bool> removeBanner(String docId, String url) {
-    return FirebaseFirestore.instance.collection(CollectionName.banner).doc(docId).delete().then((value) async {
+    return FirebaseFirestore.instance
+        .collection(CollectionName.banner)
+        .doc(docId)
+        .delete()
+        .then((value) async {
       await FirebaseStorage.instance.refFromURL(url).delete().then((value) {});
       return true;
     }).catchError((error) {
@@ -960,10 +1218,12 @@ class FireStoreUtils {
     });
   }
 
-  static Future<String> uploadPic(PickedFile image, String fileName, String filePath, String mimeType) async {
+  static Future<String> uploadPic(PickedFile image, String fileName,
+      String filePath, String mimeType) async {
     //Create a reference to the location you want to upload to in firebase
     UploadTask uploadTask;
-    Reference ref = FirebaseStorage.instance.ref().child(fileName).child(filePath);
+    Reference ref =
+        FirebaseStorage.instance.ref().child(fileName).child(filePath);
 
     //Upload the file to firebase
     uploadTask = ref.putData(
@@ -981,7 +1241,10 @@ class FireStoreUtils {
     return url;
   }
 
-  static Future<String> uploadMultiplePic(XFile image, String filePath, String fileName) async {
+  
+
+  static Future<String> uploadMultiplePic(
+      XFile image, String filePath, String fileName) async {
     Reference ref = FirebaseStorage.instance.ref().child('$filePath/$fileName');
     UploadTask uploadTask;
     uploadTask = ref.putData(
@@ -990,7 +1253,8 @@ class FireStoreUtils {
           contentType: "image/png",
           customMetadata: {'picked-file-path': image.path},
         ));
-    var downloadUrl = await (await uploadTask.whenComplete(() {})).ref.getDownloadURL();
+    var downloadUrl =
+        await (await uploadTask.whenComplete(() {})).ref.getDownloadURL();
     return downloadUrl.toString();
   }
 
@@ -1009,7 +1273,11 @@ class FireStoreUtils {
   }
 
   static Future<bool> addDocument(DocumentsModel documentModel) {
-    return FirebaseFirestore.instance.collection(CollectionName.documents).doc(documentModel.id).set(documentModel.toJson()).then((value) {
+    return FirebaseFirestore.instance
+        .collection(CollectionName.documents)
+        .doc(documentModel.id)
+        .set(documentModel.toJson())
+        .then((value) {
       ShowToastDialog.toast("Save Document...!");
 
       return true;
@@ -1019,7 +1287,11 @@ class FireStoreUtils {
   }
 
   static Future<bool> addVehicleType(VehicleTypeModel vehicleTypeModel) {
-    return FirebaseFirestore.instance.collection(CollectionName.vehicleType).doc(vehicleTypeModel.id).set(vehicleTypeModel.toJson()).then((value) {
+    return FirebaseFirestore.instance
+        .collection(CollectionName.vehicleType)
+        .doc(vehicleTypeModel.id)
+        .set(vehicleTypeModel.toJson())
+        .then((value) {
       ShowToastDialog.toast("Save VehicleType...!");
 
       return true;
@@ -1028,13 +1300,18 @@ class FireStoreUtils {
     });
   }
 
-  static Future<List<BookingModel>> getBookingByDriverId(String? status, String? driverId) async {
+  static Future<List<BookingModel>> getBookingByDriverId(
+      String? status, String? driverId) async {
     List<BookingModel> bookingModelList = [];
     try {
       QuerySnapshot querySnapshot;
 
       if (status == 'All') {
-        querySnapshot = await fireStore.collection(CollectionName.bookings).orderBy('createAt', descending: true).where('driverId', isEqualTo: driverId).get();
+        querySnapshot = await fireStore
+            .collection(CollectionName.bookings)
+            .orderBy('createAt', descending: true)
+            .where('driverId', isEqualTo: driverId)
+            .get();
       } else {
         querySnapshot = await fireStore
             .collection(CollectionName.bookings)
@@ -1044,7 +1321,8 @@ class FireStoreUtils {
             .get();
       }
       for (var element in querySnapshot.docs) {
-        BookingModel bookingModel = BookingModel.fromJson(element.data() as Map<String, dynamic>);
+        BookingModel bookingModel =
+            BookingModel.fromJson(element.data() as Map<String, dynamic>);
         bookingModelList.add(bookingModel);
       }
     } catch (error) {
@@ -1057,7 +1335,8 @@ class FireStoreUtils {
     List<VehicleTypeModel> vehicleTypeList = [];
     await fireStore.collection(CollectionName.vehicleType).get().then((value) {
       for (var element in value.docs) {
-        VehicleTypeModel couponModel = VehicleTypeModel.fromJson(element.data());
+        VehicleTypeModel couponModel =
+            VehicleTypeModel.fromJson(element.data());
 
         vehicleTypeList.add(couponModel);
       }
@@ -1067,19 +1346,26 @@ class FireStoreUtils {
     return vehicleTypeList;
   }
 
-  static Future<List<WithdrawModel>> getPayoutRequest({String status = "All"}) async {
+  static Future<List<WithdrawModel>> getPayoutRequest(
+      {String status = "All"}) async {
     List<WithdrawModel> payoutRequestList = [];
     try {
       QuerySnapshot querySnapshot;
 
       if (status == "All") {
-        querySnapshot = await FirebaseFirestore.instance.collection(CollectionName.withDrawHistory).get();
+        querySnapshot = await FirebaseFirestore.instance
+            .collection(CollectionName.withDrawHistory)
+            .get();
       } else {
-        querySnapshot = await FirebaseFirestore.instance.collection(CollectionName.withDrawHistory).where('paymentStatus', isEqualTo: status).get();
+        querySnapshot = await FirebaseFirestore.instance
+            .collection(CollectionName.withDrawHistory)
+            .where('paymentStatus', isEqualTo: status)
+            .get();
       }
 
       for (var element in querySnapshot.docs) {
-        WithdrawModel payoutRequest = WithdrawModel.fromJson(element.data() as Map<String, dynamic>);
+        WithdrawModel payoutRequest =
+            WithdrawModel.fromJson(element.data() as Map<String, dynamic>);
         payoutRequestList.add(payoutRequest);
       }
     } catch (error) {
@@ -1090,17 +1376,22 @@ class FireStoreUtils {
   }
 
   static Future<int> countBooking() async {
-    final CollectionReference<Map<String, dynamic>> bookingList = FirebaseFirestore.instance.collection(CollectionName.bookings);
+    final CollectionReference<Map<String, dynamic>> bookingList =
+        FirebaseFirestore.instance.collection(CollectionName.bookings);
     AggregateQuerySnapshot query = await bookingList.count().get();
     log('The number of Booking: ${query.count}');
     Constant.bookingLength = query.count ?? 0;
     return query.count ?? 0;
   }
 
-  static Future<int> countStatusWiseBooking(String? status, DateTimeRange? dateTimeRange) async {
+  static Future<int> countStatusWiseBooking(
+      String? status, DateTimeRange? dateTimeRange) async {
     if (status == 'All') {
-      final Query<Map<String, dynamic>> bookingList =
-          FirebaseFirestore.instance.collection(CollectionName.bookings).where('createAt', isGreaterThanOrEqualTo: dateTimeRange!.start, isLessThan: dateTimeRange.end);
+      final Query<Map<String, dynamic>> bookingList = FirebaseFirestore.instance
+          .collection(CollectionName.bookings)
+          .where('createAt',
+              isGreaterThanOrEqualTo: dateTimeRange!.start,
+              isLessThan: dateTimeRange.end);
       AggregateQuerySnapshot query = await bookingList.count().get();
       log('The number of StatusWise Booking: ${query.count}');
       Constant.bookingLength = query.count ?? 0;
@@ -1109,7 +1400,9 @@ class FireStoreUtils {
       final Query<Map<String, dynamic>> bookingList = FirebaseFirestore.instance
           .collection(CollectionName.bookings)
           .where('bookingStatus', isEqualTo: status)
-          .where('createAt', isGreaterThanOrEqualTo: dateTimeRange!.start, isLessThan: dateTimeRange.end);
+          .where('createAt',
+              isGreaterThanOrEqualTo: dateTimeRange!.start,
+              isLessThan: dateTimeRange.end);
       AggregateQuerySnapshot query = await bookingList.count().get();
       log('The number of StatusWise Booking: ${query.count}');
       Constant.bookingLength = query.count ?? 0;
@@ -1117,7 +1410,8 @@ class FireStoreUtils {
     }
   }
 
-  static Future<List<BookingModel>> getBooking(int pageNumber, int pageSize, String? status, DateTimeRange? dateTimeRange) async {
+  static Future<List<BookingModel>> getBooking(int pageNumber, int pageSize,
+      String? status, DateTimeRange? dateTimeRange) async {
     List<BookingModel> bookingList = [];
     try {
       if (status == 'All') {
@@ -1125,7 +1419,9 @@ class FireStoreUtils {
         if (pageNumber > 1) {
           var documents = await fireStore
               .collection(CollectionName.bookings)
-              .where('createAt', isGreaterThanOrEqualTo: dateTimeRange!.start, isLessThanOrEqualTo: dateTimeRange.end)
+              .where('createAt',
+                  isGreaterThanOrEqualTo: dateTimeRange!.start,
+                  isLessThanOrEqualTo: dateTimeRange.end)
               .orderBy('createAt', descending: true)
               .limit(pageSize * (pageNumber - 1))
               .get();
@@ -1136,7 +1432,9 @@ class FireStoreUtils {
         if (lastDocument != null) {
           await fireStore
               .collection(CollectionName.bookings)
-              .where('createAt', isGreaterThanOrEqualTo: dateTimeRange!.start, isLessThanOrEqualTo: dateTimeRange.end)
+              .where('createAt',
+                  isGreaterThanOrEqualTo: dateTimeRange!.start,
+                  isLessThanOrEqualTo: dateTimeRange.end)
               .orderBy('createAt', descending: true)
               .startAfterDocument(lastDocument)
               .limit(pageSize)
@@ -1152,7 +1450,9 @@ class FireStoreUtils {
         } else {
           await fireStore
               .collection(CollectionName.bookings)
-              .where('createAt', isGreaterThanOrEqualTo: dateTimeRange!.start, isLessThanOrEqualTo: dateTimeRange.end)
+              .where('createAt',
+                  isGreaterThanOrEqualTo: dateTimeRange!.start,
+                  isLessThanOrEqualTo: dateTimeRange.end)
               .orderBy('createAt', descending: true)
               .limit(pageSize)
               .get()
@@ -1171,7 +1471,9 @@ class FireStoreUtils {
           var documents = await fireStore
               .collection(CollectionName.bookings)
               .where('bookingStatus', isEqualTo: status)
-              .where('createAt', isGreaterThanOrEqualTo: dateTimeRange!.start, isLessThanOrEqualTo: dateTimeRange.end)
+              .where('createAt',
+                  isGreaterThanOrEqualTo: dateTimeRange!.start,
+                  isLessThanOrEqualTo: dateTimeRange.end)
               .orderBy('createAt', descending: true)
               .limit(pageSize * (pageNumber - 1))
               .get();
@@ -1183,7 +1485,9 @@ class FireStoreUtils {
           await fireStore
               .collection(CollectionName.bookings)
               .where('bookingStatus', isEqualTo: status)
-              .where('createAt', isGreaterThanOrEqualTo: dateTimeRange!.start, isLessThanOrEqualTo: dateTimeRange.end)
+              .where('createAt',
+                  isGreaterThanOrEqualTo: dateTimeRange!.start,
+                  isLessThanOrEqualTo: dateTimeRange.end)
               .orderBy('createAt', descending: true)
               .startAfterDocument(lastDocument)
               .limit(pageSize)
@@ -1200,7 +1504,9 @@ class FireStoreUtils {
           await fireStore
               .collection(CollectionName.bookings)
               .where('bookingStatus', isEqualTo: status)
-              .where('createAt', isGreaterThanOrEqualTo: dateTimeRange!.start, isLessThanOrEqualTo: dateTimeRange.end)
+              .where('createAt',
+                  isGreaterThanOrEqualTo: dateTimeRange!.start,
+                  isLessThanOrEqualTo: dateTimeRange.end)
               .orderBy('createAt', descending: true)
               .limit(pageSize)
               .get()
@@ -1224,9 +1530,13 @@ class FireStoreUtils {
     List<BookingModel> bookingModelList = [];
     try {
       QuerySnapshot querySnapshot;
-      querySnapshot = await fireStore.collection(CollectionName.bookings).orderBy('createAt', descending: true).get();
+      querySnapshot = await fireStore
+          .collection(CollectionName.bookings)
+          .orderBy('createAt', descending: true)
+          .get();
       for (var element in querySnapshot.docs) {
-        BookingModel bookingModel = BookingModel.fromJson(element.data() as Map<String, dynamic>);
+        BookingModel bookingModel =
+            BookingModel.fromJson(element.data() as Map<String, dynamic>);
         bookingModelList.add(bookingModel);
       }
     } catch (error) {
@@ -1236,13 +1546,18 @@ class FireStoreUtils {
     return bookingModelList;
   }
 
-  static Future<List<BookingModel>> getBookingByUserId(String? status, String? userId) async {
+  static Future<List<BookingModel>> getBookingByUserId(
+      String? status, String? userId) async {
     List<BookingModel> bookingModelList = [];
     try {
       QuerySnapshot querySnapshot;
 
       if (status == 'All') {
-        querySnapshot = await fireStore.collection(CollectionName.bookings).orderBy('createAt', descending: true).where('customerId', isEqualTo: userId).get();
+        querySnapshot = await fireStore
+            .collection(CollectionName.bookings)
+            .orderBy('createAt', descending: true)
+            .where('customerId', isEqualTo: userId)
+            .get();
       } else {
         querySnapshot = await fireStore
             .collection(CollectionName.bookings)
@@ -1252,7 +1567,8 @@ class FireStoreUtils {
             .get();
       }
       for (var element in querySnapshot.docs) {
-        BookingModel bookingModel = BookingModel.fromJson(element.data() as Map<String, dynamic>);
+        BookingModel bookingModel =
+            BookingModel.fromJson(element.data() as Map<String, dynamic>);
         bookingModelList.add(bookingModel);
       }
     } catch (error) {
@@ -1264,7 +1580,11 @@ class FireStoreUtils {
   static Future<bool> updatePayoutRequest(WithdrawModel payoutRequestModel) {
     // return true;
     // static Future<bool> updatePayoutRequest(WithdrawModel payoutRequestModel) {
-    return FirebaseFirestore.instance.collection(CollectionName.withDrawHistory).doc(payoutRequestModel.id).update(payoutRequestModel.toJson()).then((value) {
+    return FirebaseFirestore.instance
+        .collection(CollectionName.withDrawHistory)
+        .doc(payoutRequestModel.id)
+        .update(payoutRequestModel.toJson())
+        .then((value) {
       ShowToastDialog.toast("Save Payout Request...!");
 
       return true;
@@ -1300,7 +1620,11 @@ class FireStoreUtils {
   // }
 
   static Future<bool> updateVehicleType(VehicleTypeModel vehicleTypeModel) {
-    return FirebaseFirestore.instance.collection(CollectionName.vehicleType).doc(vehicleTypeModel.id).update(vehicleTypeModel.toJson()).then((value) {
+    return FirebaseFirestore.instance
+        .collection(CollectionName.vehicleType)
+        .doc(vehicleTypeModel.id)
+        .update(vehicleTypeModel.toJson())
+        .then((value) {
       ShowToastDialog.toast("Save VehicleType...!");
 
       return true;
@@ -1324,7 +1648,11 @@ class FireStoreUtils {
   }
 
   static Future<bool> addCoupon(CouponModel couponModel) {
-    return FirebaseFirestore.instance.collection(CollectionName.coupon).doc(couponModel.id).set(couponModel.toJson()).then((value) {
+    return FirebaseFirestore.instance
+        .collection(CollectionName.coupon)
+        .doc(couponModel.id)
+        .set(couponModel.toJson())
+        .then((value) {
       ShowToastDialog.toast("Save Coupon...!");
       return true;
     }).catchError((error) {
@@ -1333,7 +1661,11 @@ class FireStoreUtils {
   }
 
   static Future<bool> updateCoupon(CouponModel couponModel) {
-    return FirebaseFirestore.instance.collection(CollectionName.coupon).doc(couponModel.id).update(couponModel.toJson()).then((value) {
+    return FirebaseFirestore.instance
+        .collection(CollectionName.coupon)
+        .doc(couponModel.id)
+        .update(couponModel.toJson())
+        .then((value) {
       ShowToastDialog.toast("Save Coupon...!");
 
       return true;
@@ -1343,7 +1675,11 @@ class FireStoreUtils {
   }
 
   static Future<bool> updateDocument(DocumentsModel documentModel) {
-    return FirebaseFirestore.instance.collection(CollectionName.documents).doc(documentModel.id).update(documentModel.toJson()).then((value) {
+    return FirebaseFirestore.instance
+        .collection(CollectionName.documents)
+        .doc(documentModel.id)
+        .update(documentModel.toJson())
+        .then((value) {
       ShowToastDialog.toast("Save Document...!");
 
       return true;
@@ -1352,9 +1688,14 @@ class FireStoreUtils {
     });
   }
 
-  static Future<bool?> setWalletTransaction(WalletTransactionModel walletTransactionModel) async {
+  static Future<bool?> setWalletTransaction(
+      WalletTransactionModel walletTransactionModel) async {
     bool isAdded = false;
-    await FirebaseFirestore.instance.collection(CollectionName.walletTransaction).doc(walletTransactionModel.id).set(walletTransactionModel.toJson()).then((value) {
+    await FirebaseFirestore.instance
+        .collection(CollectionName.walletTransaction)
+        .doc(walletTransactionModel.id)
+        .set(walletTransactionModel.toJson())
+        .then((value) {
       isAdded = true;
     }).catchError((error) {
       log("Failed to update user: $error");
@@ -1363,12 +1704,16 @@ class FireStoreUtils {
     return isAdded;
   }
 
-  static Future<bool?> updateUserWallet({required String amount, required String userId}) async {
+  static Future<bool?> updateUserWallet(
+      {required String amount, required String userId}) async {
     bool isAdded = false;
     await getUserByUserID(userId).then((value) async {
       if (value != null) {
         UserModel userModel = value;
-        userModel.walletAmount = (double.parse(userModel.walletAmount.toString()) + double.parse(amount)).toString();
+        userModel.walletAmount =
+            (double.parse(userModel.walletAmount.toString()) +
+                    double.parse(amount))
+                .toString();
         await updateUsers(userModel).then((value) {
           isAdded = value;
         });
@@ -1377,12 +1722,16 @@ class FireStoreUtils {
     return isAdded;
   }
 
-  static Future<bool?> updateDriverWallet({required String amount, required String userId}) async {
+  static Future<bool?> updateDriverWallet(
+      {required String amount, required String userId}) async {
     bool isAdded = false;
     await getDriverByDriverID(userId).then((value) async {
       if (value != null) {
         DriverUserModel userModel = value;
-        userModel.walletAmount = (double.parse(userModel.walletAmount.toString()) + double.parse(amount)).toString();
+        userModel.walletAmount =
+            (double.parse(userModel.walletAmount.toString()) +
+                    double.parse(amount))
+                .toString();
         await updateDriver(userModel).then((value) {
           isAdded = value;
         });
@@ -1394,7 +1743,11 @@ class FireStoreUtils {
   static Future<UserModel?> getCustomerByCustomerID(String id) async {
     UserModel? userModel;
 
-    await FirebaseFirestore.instance.collection(CollectionName.users).doc(id).get().then((value) {
+    await FirebaseFirestore.instance
+        .collection(CollectionName.users)
+        .doc(id)
+        .get()
+        .then((value) {
       if (value.exists) {
         userModel = UserModel.fromJson(value.data()!);
       } else {
@@ -1407,7 +1760,11 @@ class FireStoreUtils {
   }
 
   static Future<bool> updateUsers(UserModel userModel) {
-    return FirebaseFirestore.instance.collection(CollectionName.users).doc(userModel.id).update(userModel.toJson()).then(
+    return FirebaseFirestore.instance
+        .collection(CollectionName.users)
+        .doc(userModel.id)
+        .update(userModel.toJson())
+        .then(
       (value) {
         return true;
       },
@@ -1417,8 +1774,13 @@ class FireStoreUtils {
     });
   }
 
-  static Future<bool> updateVerifyDocuments(VerifyDriverModel verifyDriverModel, driverID) {
-    return FirebaseFirestore.instance.collection(CollectionName.verifyDriver).doc(driverID).update(verifyDriverModel.toJson()).then(
+  static Future<bool> updateVerifyDocuments(
+      VerifyDriverModel verifyDriverModel, driverID) {
+    return FirebaseFirestore.instance
+        .collection(CollectionName.verifyDriver)
+        .doc(driverID)
+        .update(verifyDriverModel.toJson())
+        .then(
       (value) {
         return true;
       },
@@ -1427,7 +1789,8 @@ class FireStoreUtils {
     });
   }
 
-  static Future<List<WalletTransactionModel>?> getWalletTransactionOfUser(String? userid) async {
+  static Future<List<WalletTransactionModel>?> getWalletTransactionOfUser(
+      String? userid) async {
     List<WalletTransactionModel> walletTransactionModelList = [];
 
     await fireStore
@@ -1438,7 +1801,8 @@ class FireStoreUtils {
         .get()
         .then((value) {
       for (var element in value.docs) {
-        WalletTransactionModel walletTransactionModel = WalletTransactionModel.fromJson(element.data());
+        WalletTransactionModel walletTransactionModel =
+            WalletTransactionModel.fromJson(element.data());
         walletTransactionModelList.add(walletTransactionModel);
       }
     }).catchError((error) {
