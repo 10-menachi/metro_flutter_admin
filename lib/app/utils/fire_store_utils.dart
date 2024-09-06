@@ -100,15 +100,20 @@ class FireStoreUtils {
 
   static Future<CurrencyModel?> getCurrency() async {
     CurrencyModel? currencyModel;
-    await fireStore
-        .collection(CollectionName.currencies)
-        .where("active", isEqualTo: true)
-        .get()
-        .then((value) {
-      if (value.docs.isNotEmpty) {
-        currencyModel = CurrencyModel.fromJson(value.docs.first.data());
-      }
-    });
+    await fireStore.collection(CollectionName.currencies).get().then(
+      (value) {
+        if (value.docs.isNotEmpty) {
+          for (var doc in value.docs) {
+            if (doc.data()["active"] == true) {
+              print('Document: ${doc.data()['active']}');
+              currencyModel = CurrencyModel.fromJson(
+                value.docs.first.data(),
+              );
+            }
+          }
+        }
+      },
+    );
     return currencyModel;
   }
 
