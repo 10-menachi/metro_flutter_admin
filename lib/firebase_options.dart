@@ -25,15 +25,9 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -47,13 +41,13 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyB4aOxLRrvhTVBmdmMy4ZZawtzKPAtdG3Q',
-    appId: '1:394465491097:web:19a098cd60e9647fe1a008',
-    messagingSenderId: '394465491097',
-    projectId: 'metroberry-cbbd8',
-    authDomain: 'metroberry-cbbd8.firebaseapp.com',
-    storageBucket: 'metroberry-cbbd8.appspot.com',
-    measurementId: 'G-28ZV47GM66',
+    apiKey: 'AIzaSyDsO3KRv-cWcpZbAif6PRohlinm72m5BQI',
+    appId: '1:107316073750:web:f257e4fc5863011608ac37',
+    messagingSenderId: '107316073750',
+    projectId: 'metrotaxi-782a6',
+    authDomain: 'metrotaxi-782a6.firebaseapp.com',
+    storageBucket: 'metrotaxi-782a6.appspot.com',
+    measurementId: 'G-F6SBWFVXZD',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
@@ -73,6 +67,27 @@ class DefaultFirebaseOptions {
     androidClientId: '394465491097-5gkt7agea88d12t83d53v8ki3liilqhq.apps.googleusercontent.com',
     iosClientId: '394465491097-j29k3gvidnlcio3t04sneobhbs6rtrr5.apps.googleusercontent.com',
     iosBundleId: 'com.mytaxi.admin',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyDvMCKDNnORaG3lfyhF0l04KI3MmyAqLHg',
+    appId: '1:107316073750:ios:7c9180e14998782208ac37',
+    messagingSenderId: '107316073750',
+    projectId: 'metrotaxi-782a6',
+    storageBucket: 'metrotaxi-782a6.appspot.com',
+    androidClientId: '107316073750-fnou107ufc1v6vambv9b6khu5fbdub4e.apps.googleusercontent.com',
+    iosClientId: '107316073750-5h6fbu1g13ve2755kdge6v5rgak8uhd8.apps.googleusercontent.com',
+    iosBundleId: 'com.admin.app',
+  );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyDsO3KRv-cWcpZbAif6PRohlinm72m5BQI',
+    appId: '1:107316073750:web:e0a4ac614d718ec108ac37',
+    messagingSenderId: '107316073750',
+    projectId: 'metrotaxi-782a6',
+    authDomain: 'metrotaxi-782a6.firebaseapp.com',
+    storageBucket: 'metrotaxi-782a6.appspot.com',
+    measurementId: 'G-DFMWBKQ5N1',
   );
 
 }
