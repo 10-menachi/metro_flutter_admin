@@ -462,7 +462,7 @@ class DriverDetailScreenView extends StatelessWidget {
                                                                       .medium,
                                                             ),
                                                             spaceH(height: 7),
-                                                            FittedBox(
+                                                            Container(
                                                               child: Text(
                                                                 Constant.amountShow(
                                                                     amount: controller

@@ -72,7 +72,6 @@ class AdminProfileController extends GetxController {
           File(img.path); // Ensure this path is valid for web or mobile
       imagePath.value = imageFile;
 
-      imageController.value.text = img.name;
       imagePickedFileBytes.value = await img.readAsBytes();
       mimeType.value = img.mimeType ?? ''; // Handle case where mimeType is null
 
@@ -103,44 +102,44 @@ class AdminProfileController extends GetxController {
   //   }).catchError((e) => log("-->$e"));
   // }
 
-  setAdminData() async {
+  setAdminData(dynamic adminProfileController) async {
     try {
-      Constant.waitingLoader();
+      // Check if image path is not empty
       if (imagePath.value.path.isNotEmpty) {
         try {
           Constant.waitingLoader();
 
-          if (imagePath.value.path.isNotEmpty) {
-            try {
-              // Use XFile instead of PickedFile
-              XFile imageFile = XFile(imagePath.value.path);
-              log("c1");
-              String? downloadUrl = await FireStoreUtils.uploadPic(
-                imageFile,
-                "admin",
-                "admin",
-                mimeType.value,
-              );
+          // Use XFile instead of PickedFile
+          XFile imageFile = XFile(imagePath.value.path);
+          String? downloadUrl = await FireStoreUtils.uploadPic(
+            imageFile,
+            "admin",
+            "admin",
+            mimeType.value,
+          );
 
-              Constant.adminModel!.image = downloadUrl;
-              log(downloadUrl.toString());
-            } catch (e) {
-              print("--> Error uploading image: $e");
-              print("Error uploading image: $e");
-            }
+          if (downloadUrl != null) {
+            // Save the download URL to the controller
+            imageController.value.text = downloadUrl;
+            log("Image URL: $downloadUrl");
+          } else {
+            print("Failed to obtain download URL.");
           }
         } catch (e) {
           print("--> Error uploading image: $e");
           print("Error uploading image: $e");
         }
       }
+
+      // Update other admin data
       Constant.adminModel!.email = emailController.value.text;
       Constant.adminModel!.name = nameController.value.text;
       Constant.adminModel!.contactNumber = contactNumberController.value.text;
+      Constant.adminModel!.image = imageController.value.text;
 
+      // Save admin data to Firestore
       await FireStoreUtils.setAdmin(Constant.adminModel!).then((value) async {
         await FireStoreUtils.getAdmin();
-        // await homeController.getAdminData();
         Get.back();
         print("Profile updated successfully");
       }).catchError((e) {
