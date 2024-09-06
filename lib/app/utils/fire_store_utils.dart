@@ -24,6 +24,7 @@ import 'package:admin/app/models/user_model.dart';
 import 'package:admin/app/models/vehicle_type_model.dart';
 import 'package:admin/app/models/verify_driver_model.dart';
 import 'package:admin/app/models/wallet_transaction_model.dart';
+import 'package:admin/app/modules/admin_profile/controllers/admin_profile_controller.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -806,6 +807,7 @@ class FireStoreUtils {
       if (value.exists) {
         adminModel = AdminModel.fromJson(value.data()!);
         Constant.adminModel = AdminModel.fromJson(value.data()!);
+        log(Constant.adminModel!.image.toString());
       }
     }).catchError((error) {
       log("Failed to update user: $error");
@@ -1229,18 +1231,14 @@ class FireStoreUtils {
   static Future<String?> uploadPic(
       XFile file, String folder, String fileName, String mimeType) async {
     try {
-      log('c2: Starting upload process');
-
       // Get a reference to Firebase Storage
       final storageRef = FirebaseStorage.instance.ref();
 
       // Create a reference to the file location in Firebase Storage
       final fileRef = storageRef.child('$folder/$fileName');
-      log('c3: File reference created');
 
       // Convert file to bytes
       final fileBytes = await file.readAsBytes();
-      log('File size: ${fileBytes.length} bytes');
 
       // Check for null or empty mimeType
       if (mimeType.isEmpty) {
@@ -1261,15 +1259,11 @@ class FireStoreUtils {
         log('Upload progress error: $e');
       });
 
-      log('c4: Upload task started');
-
       // Wait for the upload task to complete
       final snapshot = await uploadTask.whenComplete(() => {});
-      log('c4: Upload completed');
 
       // Get the download URL of the uploaded file
       final downloadUrl = await snapshot.ref.getDownloadURL();
-      log('c5: Download URL obtained');
 
       return downloadUrl;
     } catch (e) {

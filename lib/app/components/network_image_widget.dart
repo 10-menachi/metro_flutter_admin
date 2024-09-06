@@ -40,7 +40,8 @@ class NetworkImageWidget extends StatelessWidget {
           width: width ?? ScreenSize.width(15, context),
           imageUrl: imageUrl,
           color: color,
-          progressIndicatorBuilder: (context, url, downloadProgress) => const Center(
+          progressIndicatorBuilder: (context, url, downloadProgress) =>
+              const Center(
             child: CircularProgressIndicator(color: Colors.black),
           ),
           errorWidget: (context, url, error) =>

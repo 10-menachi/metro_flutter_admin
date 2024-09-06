@@ -12,6 +12,7 @@ import 'package:admin/app/utils/dark_theme_provider.dart';
 import 'package:admin/widget/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 
 class ProfileWidget extends StatelessWidget {
@@ -22,11 +23,14 @@ class ProfileWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeChange = Provider.of<DarkThemeProvider>(context);
+    log(Constant.adminModel!.image.toString() + "asasdasd");
     return Container(
       padding: const EdgeInsets.all(30),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        color:  themeChange.isDarkTheme() ? AppThemData.primaryBlack : AppThemData.primaryWhite,
+        color: themeChange.isDarkTheme()
+            ? AppThemData.primaryBlack
+            : AppThemData.primaryWhite,
       ),
       child: Form(
         key: adminProfileController.profileFromKey,
@@ -36,104 +40,107 @@ class ProfileWidget extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                TextCustom(title: adminProfileController.profileTitle.value, fontSize: 20, fontFamily: AppThemeData.bold),
+                TextCustom(
+                    title: adminProfileController.profileTitle.value,
+                    fontSize: 20,
+                    fontFamily: AppThemeData.bold),
               ],
             ),
             Obx(
-                  () =>
-                  Row(
-                    children: [
-                      // adminProfileController.imagePath.value.path.isEmpty
-                      //     ? NetworkImageWidget(
-                      //         borderRadius: 60,
-                      //         imageUrl: Constant.adminModel!.image.toString(),
-                      //         height: 100,
-                      //         width: 100,
-                      //       )
-                      //     : adminProfileController.uploading.value
-                      //         ? const Center(child:  Constant.loader())
-                      //         : ClipRRect(
-                      //             borderRadius: BorderRadius.circular(60),
-                      //             child: Image.memory(
-                      //               adminProfileController.imagePickedFileBytes.value,
-                      //               height: 100,
-                      //               width: 100,
-                      //             ),
-                      //           ),
-                      adminProfileController.imagePath.value.path.isEmpty
-                          ? SizedBox(
-                        height: 100,
-                        width: 100,
-                        child: Stack(
-                          children: [
-                            NetworkImageWidget(
-                              borderRadius: 60,
-                              imageUrl: adminProfileController.imageController.value.text.toString(),
-                              height: 100,
-                              width: 100,
-                            ),
-                            Align(
-                              alignment: AlignmentDirectional.bottomEnd,
-                              child: InkWell(
-                                onTap: () {
-                                  adminProfileController.pickPhoto();
-                                },
-                                child: const SizedBox(
-                                    height: 30,
-                                    width: 30,
-                                    // decoration: BoxDecoration(shape: BoxShape.circle, color: AppColors.violet200),
-                                    child: Icon(
-                                      Icons.edit,
-                                      size: 20,
-                                       color: AppThemData.greyShade500 ,
-                                    )),
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                          : adminProfileController.uploading.value
-                          ? Center(child: Constant.loader())
-                          : SizedBox(
-                        height: 100,
-                        width: 100,
-                        child: Stack(
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(60),
-                              child: Image.memory(
-                                adminProfileController.imagePickedFileBytes.value,
+              () => Row(
+                children: [
+                  // adminProfileController.imagePath.value.path.isEmpty
+                  //     ? NetworkImageWidget(
+                  //         borderRadius: 60,
+                  //         imageUrl: Constant.adminModel!.image.toString(),
+                  //         height: 100,
+                  //         width: 100,
+                  //       )
+                  //     : adminProfileController.uploading.value
+                  //         ? const Center(child:  Constant.loader())
+                  //         : ClipRRect(
+                  //             borderRadius: BorderRadius.circular(60),
+                  //             child: Image.memory(
+                  //               adminProfileController.imagePickedFileBytes.value,
+                  //               height: 100,
+                  //               width: 100,
+                  //             ),
+                  //           ),
+                  adminProfileController.imagePath.value.path.isEmpty
+                      ? SizedBox(
+                          height: 100,
+                          width: 100,
+                          child: Stack(
+                            children: [
+                              NetworkImageWidget(
+                                borderRadius: 60,
+                                imageUrl: Constant.adminModel!.image.toString(),
                                 height: 100,
                                 width: 100,
                               ),
-                            ),
-                            Align(
-                              alignment: AlignmentDirectional.bottomEnd,
-                              child: InkWell(
-                                onTap: () {
-                                  adminProfileController.pickPhoto();
-                                },
-                                child: const SizedBox(
-                                    height: 30,
-                                    width: 30,
-                                    // decoration: BoxDecoration(shape: BoxShape.circle, color: AppColors.violet200),
-                                    child: Icon(
-                                      Icons.edit,
-                                      size: 20,
-                                    )),
+                              Align(
+                                alignment: AlignmentDirectional.bottomEnd,
+                                child: InkWell(
+                                  onTap: () {
+                                    adminProfileController.pickPhoto();
+                                  },
+                                  child: const SizedBox(
+                                      height: 30,
+                                      width: 30,
+                                      // decoration: BoxDecoration(shape: BoxShape.circle, color: AppColors.violet200),
+                                      child: Icon(
+                                        Icons.edit,
+                                        size: 20,
+                                        color: AppThemData.greyShade500,
+                                      )),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      : adminProfileController.uploading.value
+                          ? Center(child: Constant.loader())
+                          : SizedBox(
+                              height: 100,
+                              width: 100,
+                              child: Stack(
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(60),
+                                    child: Image.memory(
+                                      adminProfileController
+                                          .imagePickedFileBytes.value,
+                                      height: 100,
+                                      width: 100,
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: AlignmentDirectional.bottomEnd,
+                                    child: InkWell(
+                                      onTap: () {
+                                        adminProfileController.pickPhoto();
+                                      },
+                                      child: const SizedBox(
+                                          height: 30,
+                                          width: 30,
+                                          // decoration: BoxDecoration(shape: BoxShape.circle, color: AppColors.violet200),
+                                          child: Icon(
+                                            Icons.edit,
+                                            size: 20,
+                                          )),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                          ],
-                        ),
-                      ),
 
-                      const SizedBox(width: 20),
-                      TextCustom(
-                        title: "${Constant.adminModel!.name}",
-                        // style: const TextStyle(fontSize: 16, color: AppColors.darkGrey10, fontFamily: AppThemeData.medium),
-                      )
-                    ],
-                  ),
+                  const SizedBox(width: 20),
+                  TextCustom(
+                    title: "${Constant.adminModel!.name}",
+                    // style: const TextStyle(fontSize: 16, color: AppColors.darkGrey10, fontFamily: AppThemeData.medium),
+                  )
+                ],
+              ),
             ),
             const SizedBox(height: 40),
             Row(
@@ -142,7 +149,9 @@ class ProfileWidget extends StatelessWidget {
                   child: CustomTextFormField(
                     title: "Name *".tr,
                     hintText: "Enter admin name".tr,
-                    validator: (value) => value != null && value.isNotEmpty ? null : 'admin name required'.tr,
+                    validator: (value) => value != null && value.isNotEmpty
+                        ? null
+                        : 'admin name required'.tr,
                     controller: adminProfileController.nameController.value,
                   ),
                 ),
@@ -151,8 +160,11 @@ class ProfileWidget extends StatelessWidget {
                   child: CustomTextFormField(
                     title: "Contact Number *".tr,
                     hintText: "Enter admin number".tr,
-                    validator: (value) => value != null && value.isNotEmpty ? null : 'contact number required'.tr,
-                    controller: adminProfileController.contactNumberController.value,
+                    validator: (value) => value != null && value.isNotEmpty
+                        ? null
+                        : 'contact number required'.tr,
+                    controller:
+                        adminProfileController.contactNumberController.value,
                   ),
                 ),
               ],
@@ -205,8 +217,10 @@ class ProfileWidget extends StatelessWidget {
                     if (Constant.isDemo) {
                       DialogBox.demoDialogBox();
                     } else {
-                      if (adminProfileController.profileFromKey.currentState!.validate()) {
-                        await adminProfileController.setAdminData();
+                      if (adminProfileController.profileFromKey.currentState!
+                          .validate()) {
+                        await adminProfileController
+                            .setAdminData(adminProfileController);
                       }
                     }
                   },
